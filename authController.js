@@ -1,0 +1,1 @@
+const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key'; // بهتر است مقدار پیش‌فرض فقط برای توسعه باشد 

@@ -1,0 +1,667 @@
+<!--
+=========================================================
+* معرفی سخت‌افزار pplus - نسخه حرفه‌ای و مدرن
+=========================================================
+-->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>سخت‌افزار pplus</title>
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css?family=Vazirmatn:400,700&display=swap" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- CSS Files -->
+  <link href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <style>
+    body { 
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      font-family: 'Vazirmatn', sans-serif;
+      min-height: 100vh;
+      padding: 2rem 0;
+    }
+    .main-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%);
+      color: #fff;
+      border-radius: 2rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 20px 60px 0 rgba(94,114,228,0.3);
+      padding: 4rem 3rem 3rem 3rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('../assets/img/curved-images/curved14.jpg') center/cover;
+      opacity: 0.08;
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-icon {
+      width: 120px;
+      height: 120px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .hero-icon i {
+      font-size: 3rem;
+      color: #5e72e4;
+    }
+    .hero-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .hero-description {
+      font-size: 1.2rem;
+      opacity: 0.95;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+    .hero-img {
+      width: 220px;
+      border-radius: 1.5rem;
+      margin: 2rem auto 0 auto;
+      box-shadow: 0 8px 32px rgba(94,114,228,0.13);
+      display: block;
+      border: 4px solid #fff;
+    }
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.97);
+      border-radius: 1.5rem;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.1);
+      border: 1px solid rgba(94,114,228,0.08);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      text-align: right;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #5e72e4, #825ee4);
+    }
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 60px 0 rgba(31,38,135,0.15);
+    }
+    .feature-icon {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(135deg, #f8f9ff 0%, #f1f3ff 100%);
+      border-radius: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.2rem;
+      border: 2px solid #5e72e4;
+    }
+    .feature-icon i {
+      font-size: 2rem;
+      color: #5e72e4;
+    }
+    .feature-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #344767;
+      margin-bottom: 0.7rem;
+    }
+    .feature-description {
+      font-size: 1rem;
+      color: #67748e;
+      line-height: 1.6;
+      margin: 0;
+    }
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #5e72e4 0%, #825ee4 100%);
+      color: white;
+      border-radius: 2rem;
+      padding: 3rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('../assets/img/curved-images/curved11.jpg') center/cover;
+      opacity: 0.1;
+    }
+    .cta-content {
+      position: relative;
+      z-index: 2;
+    }
+    .cta-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+    }
+    .cta-description {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 1rem;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    .cta-button:hover {
+      background: rgba(255,255,255,0.3);
+      border-color: rgba(255,255,255,0.5);
+      transform: translateY(-2px);
+      color: white;
+    }
+    /* Responsive */
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 0 1rem;
+      }
+      .hero-section {
+        padding: 2rem 1.5rem;
+      }
+      .hero-title {
+        font-size: 1.5rem;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .feature-card {
+        padding: 2rem 1.2rem;
+      }
+    }
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .hero-section,
+    .feature-card,
+    .cta-section {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    .feature-card {
+      animation-delay: calc(var(--animation-order) * 0.1s);
+    }
+    /* Info Sections */
+    .info-section {
+      background: rgba(255,255,255,0.97);
+      border-radius: 1.5rem;
+      padding: 3rem 2.5rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.1);
+      border: 1px solid rgba(94,114,228,0.08);
+      transition: all 0.3s ease;
+    }
+    .info-section:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px 0 rgba(31,38,135,0.15);
+    }
+    .info-title {
+      color: #5e72e4;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+    }
+    .info-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #5e72e4, #825ee4);
+      border-radius: 2px;
+    }
+    .info-content {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #67748e;
+      text-align: justify;
+    }
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+    }
+    .info-list li {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(94,114,228,0.1);
+      position: relative;
+      padding-right: 2rem;
+    }
+    .info-list li:last-child {
+      border-bottom: none;
+    }
+    .info-list li::before {
+      content: '✓';
+      position: absolute;
+      right: 0;
+      top: 0.8rem;
+      color: #5e72e4;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
+    .tech-item {
+      background: linear-gradient(135deg, #f8f9ff 0%, #f1f3ff 100%);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid rgba(94,114,228,0.1);
+    }
+    .tech-item i {
+      font-size: 2.5rem;
+      color: #5e72e4;
+      margin-bottom: 1rem;
+    }
+    .tech-item h4 {
+      color: #344767;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .tech-item p {
+      color: #67748e;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+    .connection-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    .connection-card {
+      background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
+      border-radius: 1rem;
+      padding: 2rem;
+      border: 1px solid rgba(94,114,228,0.1);
+      box-shadow: 0 4px 20px 0 rgba(94,114,228,0.1);
+    }
+    .connection-card h4 {
+      color: #5e72e4;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .connection-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .connection-card li {
+      padding: 0.5rem 0;
+      color: #67748e;
+      position: relative;
+      padding-right: 1.5rem;
+    }
+    .connection-card li::before {
+      content: '•';
+      position: absolute;
+      right: 0;
+      color: #5e72e4;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+      <div class="hero-content">
+        <div class="hero-icon">
+          <i class="fas fa-microchip"></i>
+        </div>
+        <h1 class="hero-title">سخت‌افزار حضور و غیاب pplus</h1>
+        <p class="hero-description">
+          سخت‌افزار pplus یک دستگاه حضور و غیاب هوشمند و مدرن است که با بهره‌گیری از جدیدترین فناوری‌ها، امنیت و دقت ثبت تردد را تضمین می‌کند و به راحتی با نرم‌افزار مدیریت منابع انسانی یکپارچه می‌شود.
+        </p>
+        <img src="../assets/img/devices.jpg" alt="دستگاه حضور و غیاب" class="hero-img" onerror="this.style.display='none'">
+      </div>
+    </div>
+    <!-- Features Grid -->
+    <div class="features-grid">
+      <div class="feature-card" style="--animation-order: 1;">
+        <div class="feature-icon">
+          <i class="fas fa-tachometer-alt"></i>
+        </div>
+        <h3 class="feature-title">پردازنده سریع و کم‌مصرف</h3>
+        <p class="feature-description">عملکرد سریع و پردازش همزمان چند کاربر با مصرف انرژی پایین و پایداری بالا.</p>
+      </div>
+      <div class="feature-card" style="--animation-order: 2;">
+        <div class="feature-icon">
+          <i class="fas fa-fingerprint"></i>
+        </div>
+        <h3 class="feature-title">پشتیبانی از اثرانگشت، کارت و رمز عبور</h3>
+        <p class="feature-description">امنیت چندلایه با امکان شناسایی کاربران از طریق اثرانگشت، کارت و رمز عبور.</p>
+      </div>
+      <div class="feature-card" style="--animation-order: 3;">
+        <div class="feature-icon">
+          <i class="fas fa-network-wired"></i>
+        </div>
+        <h3 class="feature-title">ارتباط شبکه‌ای (LAN/WiFi)</h3>
+        <p class="feature-description">اتصال آسان به شبکه و نرم‌افزار مدیریت برای انتقال داده‌های تردد به صورت لحظه‌ای.</p>
+      </div>
+      <div class="feature-card" style="--animation-order: 4;">
+        <div class="feature-icon">
+          <i class="fas fa-tv"></i>
+        </div>
+        <h3 class="feature-title">صفحه نمایش لمسی رنگی</h3>
+        <p class="feature-description">رابط کاربری فارسی و لمسی برای سهولت استفاده و نمایش اطلاعات به صورت رنگی و واضح.</p>
+      </div>
+      <div class="feature-card" style="--animation-order: 5;">
+        <div class="feature-icon">
+          <i class="fas fa-database"></i>
+        </div>
+        <h3 class="feature-title">ذخیره‌سازی ایمن داده‌ها</h3>
+        <p class="feature-description">ذخیره‌سازی مطمئن اطلاعات تردد و پشتیبان‌گیری خودکار برای جلوگیری از از دست رفتن داده‌ها.</p>
+      </div>
+      <div class="feature-card" style="--animation-order: 6;">
+        <div class="feature-icon">
+          <i class="fas fa-sync-alt"></i>
+        </div>
+        <h3 class="feature-title">به‌روزرسانی نرم‌افزاری از راه دور</h3>
+        <p class="feature-description">امکان دریافت و نصب به‌روزرسانی‌های نرم‌افزاری بدون نیاز به حضور فیزیکی.</p>
+      </div>
+      <!-- <div class="feature-card" style="--animation-order: 7;"> -->
+        <!-- <div class="feature-icon"> -->
+          <!-- <i class="fas fa-industry"></i> -->
+        <!-- </div> -->
+        <!-- <h3 class="feature-title">طراحی مقاوم و صنعتی</h3> -->
+        <!-- <p class="feature-description">مناسب برای محیط‌های صنعتی و اداری با بدنه مقاوم و طراحی مدرن.</p> -->
+      <!-- </div> -->
+    </div>
+    <!-- CTA Section -->
+    <div class="cta-section">
+      <div class="cta-content">
+        <h2 class="cta-title">
+          <i class="fas fa-link me-2"></i>
+          یکپارچگی کامل با نرم‌افزار pplus
+        </h2>
+        <p class="cta-description">
+          سخت‌افزار pplus به راحتی با سیستم حضور و غیاب و مدیریت منابع انسانی یکپارچه می‌شود و مدیریت تردد را هوشمند و ساده می‌کند.
+        </p>
+        <a href="../pages/about-system.html" class="cta-button">
+          <i class="fas fa-info-circle"></i>
+          درباره سیستم بیشتر بدانید
+        </a>
+      </div>
+    </div>
+
+    <!-- Technology Section -->
+    <div class="info-section">
+      <h2 class="info-title">
+        <i class="fas fa-cogs me-2"></i>
+        تکنولوژی‌های استفاده شده
+      </h2>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <i class="fas fa-fingerprint"></i>
+          <h4>زیست‌سنجی پیشرفته</h4>
+          <p>الگوریتم‌های تشخیص اثرانگشت با دقت 99.9% و سرعت پردازش بالا</p>
+        </div>
+        <div class="tech-item">
+          <i class="fas fa-microchip"></i>
+          <h4>پردازنده ARM</h4>
+          <p>پردازنده ARM Cortex-A7 با فرکانس 1.2GHz و مصرف انرژی بهینه</p>
+        </div>
+        <div class="tech-item">
+          <i class="fas fa-memory"></i>
+          <h4>حافظه Flash</h4>
+          <p>حافظه Flash 8GB برای ذخیره‌سازی 100,000 اثرانگشت و 1,000,000 رکورد تردد</p>
+        </div>
+        <div class="tech-item">
+          <i class="fas fa-network-wired"></i>
+          <h4>ارتباط شبکه‌ای</h4>
+          <p>پشتیبانی از TCP/IP، HTTP، HTTPS و پروتکل‌های امنیتی SSL/TLS</p>
+        </div>
+        <div class="tech-item">
+          <i class="fas fa-shield-alt"></i>
+          <h4>امنیت چندلایه</h4>
+          <p>رمزگذاری AES-256، احراز هویت دو مرحله‌ای و محافظت در برابر حملات</p>
+        </div>
+        <div class="tech-item">
+          <i class="fas fa-mobile-alt"></i>
+          <h4>رابط کاربری لمسی</h4>
+          <p>صفحه نمایش لمسی 3.5 اینچی با رزولوشن 320×480 و رابط کاربری فارسی</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Setup and Installation Section -->
+    <div class="info-section">
+      <h2 class="info-title">
+        <i class="fas fa-tools me-2"></i>
+        نحوه راه‌اندازی و نصب
+      </h2>
+      <div class="info-content">
+        <h4 style="color: #5e72e4; margin-bottom: 1rem;">مراحل راه‌اندازی سخت‌افزار ZKTeco:</h4>
+        <ol style="padding-right: 1.5rem; line-height: 2;">
+          <li><strong>باز کردن جعبه و بررسی محتویات:</strong> دستگاه، کابل برق، کابل شبکه، راهنمای کاربری و نرم‌افزار</li>
+          <li><strong>اتصال فیزیکی:</strong> اتصال کابل برق و کابل شبکه به دستگاه</li>
+          <li><strong>تنظیمات اولیه:</strong> تنظیم زبان، تاریخ و زمان، و آدرس IP دستگاه</li>
+          <li><strong>تنظیمات شبکه:</strong> پیکربندی آدرس IP، Subnet Mask و Gateway</li>
+          <li><strong>تنظیمات امنیتی:</strong> تعریف رمز عبور مدیر و تنظیمات دسترسی</li>
+          <li><strong>تست عملکرد:</strong> بررسی عملکرد سنسور اثرانگشت و صفحه نمایش</li>
+        </ol>
+        
+        <h4 style="color: #5e72e4; margin: 2rem 0 1rem 0;">نحوه استفاده از سیستم:</h4>
+        <ul class="info-list">
+          <li>ثبت اثرانگشت کاربران جدید در دستگاه</li>
+          <li>تعریف کارت‌های دسترسی برای کاربران</li>
+          <li>تنظیم برنامه‌های کاری و شیفت‌ها</li>
+          <li>تعریف سطوح دسترسی مختلف</li>
+          <li>تنظیم اعلان‌ها و هشدارها</li>
+          <li>پیکربندی گزارش‌گیری خودکار</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Connection Methods Section -->
+    <div class="info-section">
+      <h2 class="info-title">
+        <i class="fas fa-plug me-2"></i>
+        روش‌های اتصال به سخت‌افزار
+      </h2>
+      <div class="connection-methods">
+        <div class="connection-card">
+          <h4><i class="fas fa-network-wired me-2"></i>اتصال شبکه (LAN)</h4>
+          <ul>
+            <li>اتصال مستقیم با کابل شبکه Cat5/Cat6</li>
+            <li>پیکربندی آدرس IP ثابت یا DHCP</li>
+            <li>پورت شبکه 10/100 Mbps</li>
+            <li>پشتیبانی از پروتکل TCP/IP</li>
+            <li>امکان اتصال تا 254 دستگاه در یک شبکه</li>
+          </ul>
+        </div>
+        <div class="connection-card">
+          <h4><i class="fas fa-wifi me-2"></i>اتصال بی‌سیم (WiFi)</h4>
+          <ul>
+            <li>پشتیبانی از WiFi 802.11 b/g/n</li>
+            <li>امکان اتصال به شبکه‌های WiFi موجود</li>
+            <li>امنیت WPA/WPA2/WPA3</li>
+            <li>تنظیمات آسان از طریق صفحه لمسی</li>
+            <li>امکان تغییر شبکه بدون اتصال فیزیکی</li>
+          </ul>
+        </div>
+        <div class="connection-card">
+          <h4><i class="fas fa-usb me-2"></i>اتصال USB</h4>
+          <ul>
+            <li>اتصال مستقیم با کابل USB</li>
+            <li>انتقال داده‌ها به صورت دستی</li>
+            <li>به‌روزرسانی نرم‌افزار دستگاه</li>
+            <li>پشتیبان‌گیری از تنظیمات</li>
+            <li>امکان اتصال به کامپیوتر برای مدیریت</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data Collection Section -->
+    <div class="info-section">
+      <h2 class="info-title">
+        <i class="fas fa-database me-2"></i>
+        نحوه جمع‌آوری اطلاعات تردد
+      </h2>
+      <div class="info-content">
+        <h4 style="color: #5e72e4; margin-bottom: 1rem;">فرآیند جمع‌آوری داده‌ها:</h4>
+        <p>دستگاه حضور و غیاب ZKTeco به صورت خودکار و لحظه‌ای اطلاعات تردد را جمع‌آوری می‌کند:</p>
+        
+        <ul class="info-list">
+          <li><strong>ثبت ورود:</strong> هنگام قرار دادن انگشت یا کارت، زمان دقیق ورود ثبت می‌شود</li>
+          <li><strong>ثبت خروج:</strong> در زمان خروج، رکورد جدیدی با نوع "خروج" ایجاد می‌شود</li>
+          <li><strong>ذخیره‌سازی محلی:</strong> داده‌ها در حافظه داخلی دستگاه ذخیره می‌شوند</li>
+          <li><strong>انتقال خودکار:</strong> داده‌ها به صورت خودکار به سرور مرکزی ارسال می‌شوند</li>
+          <li><strong>پشتیبان‌گیری:</strong> در صورت قطعی شبکه، داده‌ها در دستگاه ذخیره و بعداً ارسال می‌شوند</li>
+        </ul>
+
+        <h4 style="color: #5e72e4; margin: 2rem 0 1rem 0;">نوع داده‌های جمع‌آوری شده:</h4>
+        <ul class="info-list">
+          <li>شناسه کاربر (User ID)</li>
+          <li>نام و نام خانوادگی</li>
+          <li>تاریخ و زمان دقیق تردد</li>
+          <li>نوع تردد (ورود/خروج)</li>
+          <li>روش احراز هویت (اثرانگشت/کارت/رمز)</li>
+          <li>آدرس IP دستگاه</li>
+          <li>وضعیت اتصال شبکه</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Purpose Section -->
+    <div class="info-section">
+      <h2 class="info-title">
+        <i class="fas fa-bullseye me-2"></i>
+        هدف از جمع‌آوری اطلاعات تردد
+      </h2>
+      <div class="info-content">
+        <h4 style="color: #5e72e4; margin-bottom: 1rem;">اهداف اصلی سیستم حضور و غیاب:</h4>
+        
+        <div class="tech-grid">
+          <div class="tech-item">
+            <i class="fas fa-clock"></i>
+            <h4>مدیریت زمان</h4>
+            <p>کنترل دقیق ساعات کاری و محاسبه خودکار اضافه‌کاری</p>
+          </div>
+          <div class="tech-item">
+            <i class="fas fa-chart-line"></i>
+            <h4>تحلیل عملکرد</h4>
+            <p>بررسی الگوهای حضور و غیاب برای بهبود بهره‌وری</p>
+          </div>
+          <div class="tech-item">
+            <i class="fas fa-shield-alt"></i>
+            <h4>امنیت و کنترل</h4>
+            <p>کنترل دسترسی و جلوگیری از ورود افراد غیرمجاز</p>
+          </div>
+          <div class="tech-item">
+            <i class="fas fa-calculator"></i>
+            <h4>محاسبه حقوق</h4>
+            <p>محاسبه خودکار حقوق بر اساس ساعات کاری واقعی</p>
+          </div>
+          <div class="tech-item">
+            <i class="fas fa-file-alt"></i>
+            <h4>گزارش‌گیری</h4>
+            <p>تهیه گزارش‌های تحلیلی برای تصمیم‌گیری مدیریتی</p>
+          </div>
+          <div class="tech-item">
+            <i class="fas fa-users"></i>
+            <h4>مدیریت منابع انسانی</h4>
+            <p>بهینه‌سازی تخصیص نیروی انسانی و برنامه‌ریزی شیفت‌ها</p>
+          </div>
+        </div>
+
+        <h4 style="color: #5e72e4; margin: 2rem 0 1rem 0;">مزایای استفاده از سیستم:</h4>
+        <ul class="info-list">
+          <li>کاهش خطاهای انسانی در ثبت حضور و غیاب</li>
+          <li>صرفه‌جویی در زمان و هزینه‌های مدیریتی</li>
+          <li>افزایش دقت در محاسبه حقوق و مزایا</li>
+          <li>بهبود نظم و انضباط کاری</li>
+          <li>امکان نظارت از راه دور و مدیریت متمرکز</li>
+          <li>پشتیبانی از قوانین کار و مقررات سازمانی</li>
+    </ul>
+      </div>
+    </div>
+  </div>
+  <!-- Core JS Files -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/argon-dashboard.js"></script>
+</body>
+</html> 

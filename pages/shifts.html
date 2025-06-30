@@ -1,0 +1,756 @@
+<!--
+=========================================================
+* مدیریت شیفت‌ها - Argon Dashboard Style
+=========================================================
+-->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>مدیریت شیفت‌ها - سیستم حضور و غیاب</title>
+  <link href="https://fonts.googleapis.com/css?family=Vazirmatn:400,700&display=swap" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <link href="../assets/css/argon-dashboard.custom-sidebar.css" rel="stylesheet" />
+  <style>
+    body { font-family: 'Vazirmatn', sans-serif; }
+    .card, .modal-content {
+      border-radius: 1rem !important;
+      box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.08);
+    }
+    .card-header, .modal-header {
+      background: linear-gradient(90deg, #f8fafc 60%, #e9ecef 100%);
+      border-radius: 1rem 1rem 0 0 !important;
+      border-bottom: 1px solid #ececec;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .card-body, .modal-body {
+      background: #fff;
+      border-radius: 0 0 1rem 1rem !important;
+      padding: 1.5rem;
+    }
+    .btn-primary, .btn-success, .btn-outline-primary, .btn-outline-secondary, .btn-secondary {
+      border-radius: 0.5rem;
+      font-weight: 500;
+      box-shadow: 0 2px 8px 0 rgba(94, 114, 228, 0.08);
+      transition: all 0.2s;
+    }
+    .btn-primary:hover, .btn-success:hover, .btn-outline-primary:hover, .btn-outline-secondary:hover, .btn-secondary:hover {
+      filter: brightness(0.95);
+      box-shadow: 0 4px 16px 0 rgba(94, 114, 228, 0.12);
+    }
+    .form-control, .form-select {
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+    }
+    .table {
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 2px 8px 0 rgba(34, 41, 47, 0.04);
+    }
+    .table th, .table td {
+      vertical-align: middle;
+      font-size: 0.98rem;
+    }
+    .modal-header .btn-close {
+      margin: 0;
+      padding: 0.5rem 0.75rem;
+      background: #f8fafc;
+      border-radius: 0.5rem;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .modal-header .btn-close:hover {
+      opacity: 1;
+    }
+    @media (max-width: 768px) {
+      .card-body, .modal-body {
+        padding: 1rem;
+      }
+      .modal-dialog {
+        margin: 1rem auto;
+      }
+    }
+    .sidenav {
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      border: 1px solid #f8f9fa;
+      transition: all 0.2s ease;
+    }
+    .sidenav-header {
+      background: #f8f9fa;
+      border-bottom: 1px solid #e9ecef;
+      padding: 1.25rem 1rem;
+      margin: -1rem -1rem 1rem -1rem;
+    }
+    .sidenav-header .navbar-brand {
+      color: #495057 !important;
+      font-weight: 600;
+    }
+    .nav-item {
+      margin: 0.125rem 0;
+    }
+    .nav-link {
+      border-radius: 0.5rem;
+      margin: 0 0.25rem;
+      padding: 0.75rem 1rem;
+      transition: all 0.2s ease;
+      color: #6c757d !important;
+      font-weight: 500;
+    }
+    .nav-link:hover {
+      background: #f8f9fa;
+      color: #495057 !important;
+      transform: none;
+    }
+    .nav-link.active {
+      background: #e9ecef;
+      color: #212529 !important;
+      font-weight: 600;
+    }
+    .icon-shape {
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 0.375rem;
+      background: #f8f9fa;
+      color: #6c757d;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-link:hover .icon-shape {
+      background: #e9ecef;
+      color: #495057;
+    }
+    .nav-link.active .icon-shape {
+      background: #dee2e6;
+      color: #212529;
+    }
+    .nav-link-text {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .nav-link.active .nav-link-text {
+      font-weight: 600;
+    }
+    /* رنگ‌های آیکون‌ها */
+    .nav-link .icon-shape i.fa-tachometer-alt {
+      color: #17a2b8 !important;
+    }
+    .nav-link .icon-shape i.fa-users {
+      color: #28a745 !important;
+    }
+    .nav-link .icon-shape i.fa-clock {
+      color: #ffc107 !important;
+    }
+    .nav-link .icon-shape i.fa-calendar-times {
+      color: #dc3545 !important;
+    }
+    .nav-link .icon-shape i.fa-chart-bar {
+      color: #6f42c1 !important;
+    }
+    .nav-link .icon-shape i.fa-bell {
+      color: #fd7e14 !important;
+    }
+    .nav-link .icon-shape i.fa-cog {
+      color: #6c757d !important;
+    }
+    /* حالت hover */
+    .nav-link:hover .icon-shape i.fa-tachometer-alt {
+      color: #138496 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-users {
+      color: #1e7e34 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-clock {
+      color: #e0a800 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-calendar-times {
+      color: #c82333 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-chart-bar {
+      color: #5a32a3 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-bell {
+      color: #e8690b !important;
+    }
+    .nav-link:hover .icon-shape i.fa-cog {
+      color: #545b62 !important;
+    }
+    /* حالت active */
+    .nav-link.active .icon-shape i.fa-tachometer-alt {
+      color: #0f6674 !important;
+    }
+    .nav-link.active .icon-shape i.fa-users {
+      color: #155724 !important;
+    }
+    .nav-link.active .icon-shape i.fa-clock {
+      color: #b8860b !important;
+    }
+    .nav-link.active .icon-shape i.fa-calendar-times {
+      color: #a71e2a !important;
+    }
+    .nav-link.active .icon-shape i.fa-chart-bar {
+      color: #4a1d96 !important;
+    }
+    .nav-link.active .icon-shape i.fa-bell {
+      color: #d63384 !important;
+    }
+    .nav-link.active .icon-shape i.fa-cog {
+      color: #495057 !important;
+    }
+  </style>
+</head>
+
+<body class="g-sidenav-show rtl bg-gray-100">
+  <div class="min-height-300 bg-dark position-absolute w-100"></div>
+  <!-- دکمه خروج از حساب -->
+  <button id="logoutBtn" class="btn btn-danger" style="position: fixed; top: 20px; left: 20px; z-index: 9999;">خروج</button>
+  <div id="sidebar-container"></div>
+  
+  <!-- Load sidebar manager -->
+  <script src="../assets/js/sidebar-manager.js"></script>
+  
+  <main class="main-content position-relative border-radius-lg">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 ">
+            <li class="breadcrumb-item text-sm ps-2"><a class="opacity-5 text-white" href="dashboard.html">صفحات</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">مدیریت شیفت‌ها</li>
+          </ol>
+          <h6 class="font-weight-bolder text-white mb-0">مدیریت شیفت‌ها</h6>
+        </nav>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <div class="d-flex justify-content-between align-items-center">
+                <h6>تعریف شیفت‌های جدید</h6>
+                <button class="btn btn-primary" onclick="showAddShiftModal()">افزودن شیفت جدید</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>نام شیفت</th>
+                      <th>ساعت شروع</th>
+                      <th>ساعت پایان</th>
+                      <th>ساعات کاری</th>
+                      <th>رنگ</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody id="shiftsTable">
+                    <!-- شیفت‌ها اینجا نمایش داده می‌شوند -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <div class="d-flex justify-content-between align-items-center">
+                <h6>تخصیص شیفت به کارمندان</h6>
+                <button class="btn btn-success" onclick="showAssignShiftModal()">تخصیص شیفت</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>نام کارمند</th>
+                      <th>شناسه</th>
+                      <th>شیفت فعلی</th>
+                      <th>ساعات کاری</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody id="employeeShiftsTable">
+                    <!-- کارمندان و شیفت‌هایشان اینجا نمایش داده می‌شوند -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Shift Modal -->
+    <div class="modal fade" id="addShiftModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">افزودن شیفت جدید</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form id="addShiftForm">
+              <div class="form-group mb-3">
+                <label>نام شیفت *</label>
+                <input type="text" class="form-control" id="shiftName" required>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label>ساعت شروع *</label>
+                    <input type="time" class="form-control" id="shiftStart" required>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group mb-3">
+                    <label>ساعت پایان *</label>
+                    <input type="time" class="form-control" id="shiftEnd" required>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mb-3">
+                <label>رنگ شیفت</label>
+                <input type="color" class="form-control" id="shiftColor" value="#5e72e4">
+              </div>
+              <div class="d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+                <button type="submit" class="btn btn-primary">افزودن شیفت</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Assign Shift Modal -->
+    <div class="modal fade" id="assignShiftModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">تخصیص شیفت به کارمند</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form id="assignForm">
+              <div class="mb-3">
+                <label class="form-label">کاربر</label>
+                <select class="form-select" id="user_id" required></select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">شیفت</label>
+                <select class="form-select" id="shift_id" required></select>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">تاریخ شروع تخصیص</label>
+                  <input type="date" class="form-control" id="start_date" />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">تاریخ پایان تخصیص</label>
+                  <input type="date" class="form-control" id="end_date" />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">ثبت تخصیص</button>
+              <div id="formMsg" class="mt-2"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- جدول نمایش تخصیص شیفت‌ها -->
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header pb-0"><h6>لیست تخصیص شیفت‌ها</h6></div>
+          <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+              <table class="table align-items-center mb-0" id="assignmentsTable">
+                <thead>
+                  <tr>
+                    <th>نام کاربر</th>
+                    <th>نام شیفت</th>
+                    <th>ساعت شروع</th>
+                    <th>ساعت پایان</th>
+                    <th>بازه تخصیص</th>
+                    <th>وضعیت</th>
+                  </tr>
+                </thead>
+                <tbody id="assignmentsBody"></tbody>
+              </table>
+            </div>
+            <div id="assignMsg" class="mt-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer pt-3">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6 mb-lg-0 mb-4">
+            <div class="copyright text-center text-sm text-muted text-lg-end">
+              © <script>document.write(new Date().getFullYear())</script>,
+              ساخته شده با <i class="fa fa-heart"></i> برای سیستم حضور و غیاب
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Core JS Files -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+  <script src="../assets/js/subscription-system.js"></script>
+  <script>
+    // محافظت از صفحه: اگر توکن نبود، به صفحه ورود منتقل شود
+    if (!localStorage.getItem('token')) {
+      window.location.href = 'login.html';
+    }
+
+    let allUsers = [];
+    let allShifts = [];
+    let currentShiftCount = 0;
+
+    // Load data on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      loadShifts();
+      loadUsers();
+      loadEmployeeShifts();
+      updateUIForSubscription();
+    });
+
+    // Add shift form submission
+    document.getElementById('addShiftForm').addEventListener('submit', function(e) {
+      if (!checkLimit('shift', currentShiftCount)) {
+        alert('سقف تعداد شیفت‌ها در سطح اشتراک فعلی پر شده است.');
+        e.preventDefault();
+        return;
+      }
+      e.preventDefault();
+      addShift();
+    });
+
+    // Assign shift form submission
+    document.getElementById('assignForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      await assignShift();
+    });
+
+    function showAddShiftModal() {
+      if (!checkLimit('shift', currentShiftCount)) {
+        alert('سقف تعداد شیفت‌ها در سطح اشتراک فعلی پر شده است. برای ارتقا با پشتیبانی تماس بگیرید.');
+        return;
+      }
+      var myModal = new bootstrap.Modal(document.getElementById('addShiftModal'));
+      myModal.show();
+    }
+
+    function showAssignShiftModal() {
+      populateEmployeeSelect();
+      populateShiftSelect();
+      var myModal = new bootstrap.Modal(document.getElementById('assignShiftModal'));
+      myModal.show();
+    }
+
+    async function addShift() {
+      const name = document.getElementById('shiftName').value;
+      const start = document.getElementById('shiftStart').value;
+      const end = document.getElementById('shiftEnd').value;
+      const color = document.getElementById('shiftColor').value;
+
+      if (!name || !start || !end) {
+        alert('لطفاً تمام فیلدهای ضروری را پر کنید.');
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:3001/api/shifts', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name,
+            start_time: start,
+            end_time: end,
+            color: color || '#007bff'
+          })
+        });
+
+        const result = await response.json();
+        
+        if (result.success) {
+          document.getElementById('addShiftForm').reset();
+          var myModal = bootstrap.Modal.getInstance(document.getElementById('addShiftModal'));
+          myModal.hide();
+          loadShifts();
+          alert(result.message);
+        } else {
+          alert('خطا در ایجاد شیفت: ' + result.error);
+        }
+      } catch (error) {
+        console.error('Error adding shift:', error);
+        alert('خطا در ارتباط با سرور');
+      }
+    }
+
+    function calculateWorkHours(start, end) {
+      const startTime = new Date(`2000-01-01T${start}`);
+      const endTime = new Date(`2000-01-01T${end}`);
+      const diffMs = endTime - startTime;
+      const diffHours = diffMs / (1000 * 60 * 60);
+      return Math.abs(diffHours);
+    }
+
+    async function loadShifts() {
+      try {
+        const response = await fetch('http://localhost:3001/api/shifts');
+        const data = await response.json();
+        allShifts = data.data || [];
+        currentShiftCount = allShifts.length;
+        
+        const tbody = document.getElementById('shiftsTable');
+        tbody.innerHTML = '';
+
+        if (allShifts.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">هیچ شیفتی تعریف نشده است.</td></tr>';
+          return;
+        }
+
+        allShifts.forEach((shift) => {
+          const row = `
+            <tr>
+              <td>${shift.name}</td>
+              <td>${shift.start_time}</td>
+              <td>${shift.end_time}</td>
+              <td>${shift.work_hours} ساعت</td>
+              <td>
+                <div class="d-flex align-items-center">
+                  <div class="color-preview me-2" style="width: 20px; height: 20px; background-color: ${shift.color}; border-radius: 4px;"></div>
+                  ${shift.color}
+                </div>
+              </td>
+              <td>
+                <button class="btn btn-sm btn-danger" onclick="deleteShift(${shift.id})">حذف</button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+
+        // Lock add shift button if limit reached
+        const addBtn = document.querySelector('button[onclick="showAddShiftModal()"]');
+        if (addBtn) {
+          if (!checkLimit('shift', currentShiftCount)) {
+            addBtn.disabled = true;
+            addBtn.classList.add('locked-feature');
+            if (!addBtn.querySelector('.fa-lock')) {
+              const lockIcon = document.createElement('i');
+              lockIcon.className = 'fa fa-lock ms-1';
+              addBtn.appendChild(lockIcon);
+            }
+            addBtn.title = 'سقف تعداد شیفت‌ها در سطح اشتراک فعلی پر شده است.';
+          } else {
+            addBtn.disabled = false;
+            addBtn.classList.remove('locked-feature');
+            const lock = addBtn.querySelector('.fa-lock');
+            if (lock) lock.remove();
+            addBtn.title = '';
+          }
+        }
+      } catch (error) {
+        console.error('Failed to load shifts:', error);
+        alert('خطا در بارگذاری شیفت‌ها');
+      }
+    }
+
+    async function deleteShift(shiftId) {
+      if (confirm('آیا از حذف این شیفت اطمینان دارید؟')) {
+        try {
+          const response = await fetch(`http://localhost:3001/api/shifts/${shiftId}`, {
+            method: 'DELETE'
+          });
+          
+          if (response.ok) {
+            loadShifts();
+            alert('شیفت با موفقیت حذف شد.');
+          } else {
+            alert('خطا در حذف شیفت');
+          }
+        } catch (error) {
+          console.error('Error deleting shift:', error);
+          alert('خطا در ارتباط با سرور');
+        }
+      }
+    }
+
+    async function loadUsers() {
+      try {
+        const response = await fetch('http://localhost:3001/api/data?page=1&limit=1000');
+        const data = await response.json();
+        allUsers = data.users.data || [];
+      } catch (error) {
+        console.error('Failed to load users:', error);
+      }
+    }
+
+    function populateEmployeeSelect() {
+      const select = document.getElementById('user_id');
+      select.innerHTML = '<option value="">انتخاب کنید</option>';
+      
+      allUsers.forEach(user => {
+        const option = document.createElement('option');
+        option.value = user.userId;
+        option.textContent = `${user.name} (${user.userId})`;
+        select.appendChild(option);
+      });
+    }
+
+    function populateShiftSelect() {
+      const select = document.getElementById('shift_id');
+      select.innerHTML = '<option value="">انتخاب کنید</option>';
+      
+      allShifts.forEach(shift => {
+        const option = document.createElement('option');
+        option.value = shift.id;
+        option.textContent = `${shift.name} (${shift.start_time} - ${shift.end_time})`;
+        select.appendChild(option);
+      });
+    }
+
+    async function assignShift() {
+      const userId = document.getElementById('user_id').value;
+      const shiftId = document.getElementById('shift_id').value;
+      const start_date = document.getElementById('start_date').value;
+      const end_date = document.getElementById('end_date').value;
+
+      if (!userId || !shiftId) {
+        alert('لطفاً کارمند و شیفت را انتخاب کنید.');
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:3001/api/shift-assignments', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: userId,
+            shift_id: parseInt(shiftId),
+            start_date,
+            end_date
+          })
+        });
+
+        const result = await response.json();
+        
+        if (result.success) {
+          document.getElementById('assignForm').reset();
+          var myModal = bootstrap.Modal.getInstance(document.getElementById('assignShiftModal'));
+          myModal.hide();
+          loadEmployeeShifts();
+          alert(result.message);
+        } else {
+          alert('خطا در تخصیص شیفت: ' + result.error);
+        }
+      } catch (error) {
+        console.error('Error assigning shift:', error);
+        alert('خطا در ارتباط با سرور');
+      }
+    }
+
+    async function loadEmployeeShifts() {
+      try {
+        const response = await fetch('http://localhost:3001/api/shift-assignments');
+        const data = await response.json();
+        const assignments = data.data || [];
+        
+        const tbody = document.getElementById('employeeShiftsTable');
+        tbody.innerHTML = '';
+
+        if (assignments.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="5" class="text-center text-muted">هیچ شیفتی تخصیص داده نشده است.</td></tr>';
+          return;
+        }
+
+        assignments.forEach((assignment) => {
+          const row = `
+            <tr>
+              <td>${assignment.user_name}</td>
+              <td>${assignment.user_id}</td>
+              <td>
+                <span class="badge" style="background-color: ${assignment.color}">${assignment.shift_name}</span>
+              </td>
+              <td>${assignment.start_time} - ${assignment.end_time}</td>
+              <td>
+                <button class="btn btn-sm btn-warning" onclick="changeShift('${assignment.user_id}')">تغییر</button>
+                <button class="btn btn-sm btn-danger" onclick="removeAssignment(${assignment.id})">حذف</button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+      } catch (error) {
+        console.error('Failed to load shift assignments:', error);
+        alert('خطا در بارگذاری تخصیص شیفت‌ها');
+      }
+    }
+
+    function changeShift(userId) {
+      document.getElementById('user_id').value = userId;
+      showAssignShiftModal();
+    }
+
+    async function removeAssignment(assignmentId) {
+      if (confirm('آیا از حذف این تخصیص اطمینان دارید؟')) {
+        try {
+          const response = await fetch(`http://localhost:3001/api/shift-assignments/${assignmentId}`, {
+            method: 'DELETE'
+          });
+          
+          if (response.ok) {
+            loadEmployeeShifts();
+            alert('تخصیص با موفقیت حذف شد.');
+          } else {
+            alert('خطا در حذف تخصیص');
+          }
+        } catch (error) {
+          console.error('Error removing assignment:', error);
+          alert('خطا در ارتباط با سرور');
+        }
+      }
+    }
+
+    document.getElementById('logoutBtn').onclick = function() {
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+    };
+  </script>
+</body>
+</html> 

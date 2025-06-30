@@ -1,0 +1,535 @@
+<!--
+=========================================================
+* معرفی شرکت نواتیک (Novatech) - نسخه حرفه‌ای و مدرن
+=========================================================
+-->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>شرکت نواتیک</title>
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css?family=Vazirmatn:400,700&display=swap" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <!-- CSS Files -->
+  <link href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <style>
+    body { 
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      font-family: 'Vazirmatn', sans-serif;
+      min-height: 100vh;
+    }
+    
+    /* Header Section */
+    .hero-header {
+      background: linear-gradient(87deg, #5e72e4 0, #825ee4 100%);
+      color: #fff;
+      border-radius: 2rem;
+      margin: 2rem auto;
+      max-width: 1200px;
+      box-shadow: 0 20px 60px 0 rgba(94,114,228,0.3);
+      padding: 4rem 3rem;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    
+    .hero-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('../assets/img/curved-images/curved6.jpg') center/cover;
+      opacity: 0.1;
+      z-index: 1;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-header .logo {
+      width: 100px;
+      height: 100px;
+      border-radius: 1.5rem;
+      background: rgba(255,255,255,0.95);
+      padding: 1rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .hero-header .logo:hover {
+      transform: scale(1.05);
+    }
+    
+    .hero-header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .hero-header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+    
+    /* Main Container */
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    /* Section Cards */
+    .section-card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 2rem;
+      box-shadow: 0 8px 32px 0 rgba(31,38,135,0.1);
+      padding: 3rem 2.5rem;
+      margin-bottom: 3rem;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .section-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 60px 0 rgba(31,38,135,0.15);
+    }
+    
+    .section-title {
+      text-align: center;
+      color: #5e72e4;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #5e72e4, #825ee4);
+      border-radius: 2px;
+    }
+    
+    /* Services Grid */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .service-card {
+      background: linear-gradient(135deg, #f8f9ff 0%, #f1f3ff 100%);
+      border-radius: 1.5rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 20px 0 rgba(94,114,228,0.1);
+      border: 1px solid rgba(94,114,228,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #5e72e4, #825ee4);
+    }
+    
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px 0 rgba(94,114,228,0.2);
+    }
+    
+    .service-card i {
+      font-size: 3rem;
+      color: #5e72e4;
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .service-card:hover i {
+      transform: scale(1.1);
+    }
+    
+    .service-card h5 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin: 1rem 0;
+      color: #344767;
+    }
+    
+    .service-card p {
+      font-size: 1rem;
+      color: #67748e;
+      line-height: 1.6;
+      margin: 0;
+    }
+    
+    /* Team Section */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .team-card {
+      background: linear-gradient(135deg, #fff 0%, #f8f9ff 100%);
+      border-radius: 1.5rem;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 20px 0 rgba(94,114,228,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .team-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px 0 rgba(94,114,228,0.15);
+    }
+    
+    .team-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      border: 4px solid #5e72e4;
+      box-shadow: 0 4px 20px rgba(94,114,228,0.2);
+    }
+    
+    .team-card h6 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 1rem 0 0.5rem 0;
+      color: #5e72e4;
+    }
+    
+    .team-card span {
+      font-size: 1rem;
+      color: #67748e;
+      font-weight: 500;
+    }
+    
+    /* Contact CTA */
+    .contact-cta {
+      text-align: center;
+      background: linear-gradient(135deg, #5e72e4 0%, #825ee4 100%);
+      color: white;
+      border-radius: 2rem;
+      padding: 3rem 2rem;
+      margin: 3rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .contact-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('../assets/img/curved-images/curved11.jpg') center/cover;
+      opacity: 0.1;
+    }
+    
+    .contact-content {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .contact-cta h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    
+    .contact-cta p {
+      font-size: 1.1rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 1rem;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+    
+    .cta-button:hover {
+      background: rgba(255,255,255,0.3);
+      border-color: rgba(255,255,255,0.5);
+      transform: translateY(-2px);
+      color: white;
+    }
+    
+    .contact-info {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-header {
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+      }
+      
+      .hero-header h1 {
+        font-size: 2rem;
+      }
+      
+      .section-card {
+        padding: 2rem 1.5rem;
+        margin: 1rem;
+      }
+      
+      .services-grid,
+      .team-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .contact-info {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+    
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .section-card {
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    
+    .service-card,
+    .team-card {
+      animation: fadeInUp 0.6s ease forwards;
+      animation-delay: calc(var(--animation-order) * 0.1s);
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Header -->
+  <div class="hero-header">
+    <div class="hero-content">
+      <img src="../assets/img/logo-ct.png" class="logo" alt="Novatech logo">
+      <h1>شرکت نواتیک (Novatech)</h1>
+      <p>پیشرو در راهکارهای هوشمند حضور و غیاب، اتوماسیون و مدیریت منابع انسانی با بیش از ۱۰ سال تجربه در حوزه فناوری اطلاعات</p>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <!-- About Section -->
+    <div class="section-card">
+      <h2 class="section-title">
+        <i class="fas fa-bullseye me-2"></i>
+        درباره شرکت
+      </h2>
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p class="lead" style="font-size: 1.2rem; line-height: 1.8; color: #67748e;">
+            شرکت نواتیک با سال‌ها تجربه در حوزه فناوری اطلاعات و اتوماسیون، ارائه‌دهنده راهکارهای نوین در زمینه سیستم‌های حضور و غیاب، کنترل تردد و مدیریت منابع انسانی است. هدف ما ارتقاء بهره‌وری سازمان‌ها و افزایش امنیت و سهولت در مدیریت تردد پرسنل است.
+          </p>
+          <div class="row mt-4">
+            <div class="col-md-4">
+              <div class="text-center">
+                <i class="fas fa-users" style="font-size: 2rem; color: #5e72e4; margin-bottom: 1rem;"></i>
+                <h5>+۵۰۰ مشتری</h5>
+                <p>سازمان‌های مختلف</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="text-center">
+                <i class="fas fa-clock" style="font-size: 2rem; color: #5e72e4; margin-bottom: 1rem;"></i>
+                <h5>۱۰+ سال تجربه</h5>
+                <p>در حوزه فناوری</p>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="text-center">
+                <i class="fas fa-award" style="font-size: 2rem; color: #5e72e4; margin-bottom: 1rem;"></i>
+                <h5>۱۰۰% رضایت</h5>
+                <p>مشتریان ما</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Section -->
+    <div class="section-card">
+      <h2 class="section-title">
+        <i class="fas fa-cogs me-2"></i>
+        خدمات و محصولات
+      </h2>
+      <div class="services-grid">
+        <div class="service-card" style="--animation-order: 1;">
+          <i class="fas fa-microchip"></i>
+          <h5>سخت‌افزار حضور و غیاب</h5>
+          <p>تولید و ارائه دستگاه‌های حضور و غیاب هوشمند با پشتیبانی از اثرانگشت، کارت و رمز عبور با بالاترین سطح امنیت و دقت.</p>
+        </div>
+        <div class="service-card" style="--animation-order: 2;">
+          <i class="fas fa-laptop-code"></i>
+          <h5>نرم‌افزار مدیریت منابع انسانی</h5>
+          <p>توسعه نرم‌افزارهای تحت وب و موبایل برای مدیریت کاربران، شیفت‌ها و گزارش‌گیری پیشرفته با رابط کاربری مدرن.</p>
+        </div>
+        <div class="service-card" style="--animation-order: 3;">
+          <i class="fas fa-headset"></i>
+          <h5>پشتیبانی و آموزش</h5>
+          <p>ارائه خدمات پشتیبانی تخصصی ۲۴/۷ و آموزش کامل به مشتریان و کاربران سیستم با بالاترین کیفیت.</p>
+        </div>
+        <div class="service-card" style="--animation-order: 4;">
+          <i class="fas fa-project-diagram"></i>
+          <h5>مشاوره و پروژه‌های سفارشی</h5>
+          <p>مشاوره تخصصی و پیاده‌سازی پروژه‌های خاص برای سازمان‌ها و شرکت‌های بزرگ با راهکارهای منحصر به فرد.</p>
+        </div>
+        <div class="service-card" style="--animation-order: 5;">
+          <i class="fas fa-cloud"></i>
+          <h5>راهکارهای ابری</h5>
+          <p>ارائه خدمات ابری و راهکارهای مبتنی بر کلود برای دسترسی آسان و امن از هر مکان و در هر زمان.</p>
+        </div>
+        <div class="service-card" style="--animation-order: 6;">
+          <i class="fas fa-mobile-alt"></i>
+          <h5>اپلیکیشن موبایل</h5>
+          <p>توسعه اپلیکیشن‌های موبایل برای مدیریت حضور و غیاب، گزارش‌گیری و اطلاع‌رسانی هوشمند.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Section -->
+    <div class="section-card">
+      <h2 class="section-title">
+        <i class="fas fa-users me-2"></i>
+        تیم متخصص ما
+      </h2>
+      <div class="team-grid">
+        <div class="team-card" style="--animation-order: 1;">
+          <img src="../assets/img/team-1.jpg" alt="علی رضایی">
+          <h6>علی رضایی</h6>
+          <span>مدیرعامل و بنیان‌گذار</span>
+        </div>
+        <div class="team-card" style="--animation-order: 2;">
+          <img src="../assets/img/team-2.jpg" alt="مریم محمدی">
+          <h6>مریم محمدی</h6>
+          <span>مدیر فنی و توسعه</span>
+        </div>
+        <div class="team-card" style="--animation-order: 3;">
+          <img src="../assets/img/team-3.jpg" alt="سعید کریمی">
+          <h6>سعید کریمی</h6>
+          <span>مدیر پشتیبانی و آموزش</span>
+        </div>
+        <div class="team-card" style="--animation-order: 4;">
+          <img src="../assets/img/team-4.jpg" alt="نگار موسوی">
+          <h6>نگار موسوی</h6>
+          <span>توسعه‌دهنده ارشد</span>
+        </div>
+        <div class="team-card" style="--animation-order: 5;">
+          <img src="../assets/img/team-1.jpg" alt="احمد نوری">
+          <h6>احمد نوری</h6>
+          <span>مدیر فروش و بازاریابی</span>
+        </div>
+        <div class="team-card" style="--animation-order: 6;">
+          <img src="../assets/img/team-2.jpg" alt="فاطمه احمدی">
+          <h6>فاطمه احمدی</h6>
+          <span>متخصص امنیت سایبری</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact CTA -->
+    <div class="contact-cta">
+      <div class="contact-content">
+        <h2>
+          <i class="fas fa-phone-volume me-2"></i>
+          آماده همکاری با شما هستیم
+        </h2>
+        <p>برای مشاوره رایگان، خرید محصولات یا دریافت پشتیبانی تخصصی با ما تماس بگیرید</p>
+        <a href="mailto:info@novatech.ir" class="cta-button">
+          <i class="fas fa-envelope-open-text"></i>
+          ارسال ایمیل
+        </a>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>تهران، خیابان فناوری، ساختمان نواتیک</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <span>۰۲۱-۱۲۳۴۵۶۷۸</span>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <span>info@novatech.ir</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core JS Files -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/argon-dashboard.js"></script>
+</body>
+</html> 

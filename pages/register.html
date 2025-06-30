@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ثبت‌نام در سیستم حضور و غیاب</title>
+  <link rel="stylesheet" href="../assets/css/argon-dashboard.min.css">
+  <style>
+    body { background: #f8f9fa; }
+    .auth-card { max-width: 400px; margin: 60px auto; box-shadow: 0 0 20px #0001; border-radius: 16px; }
+    .logo { width: 80px; margin-bottom: 16px; }
+  </style>
+</head>
+<body>
+  <div class="card auth-card p-4">
+    <div class="text-center">
+      <img src="../assets/img/logo-ct.png" class="logo" alt="لوگو">
+      <h4 class="mb-2">ثبت‌نام کاربر جدید</h4>
+    </div>
+    <form id="registerForm">
+      <div class="mb-3">
+        <label class="form-label">نام کامل</label>
+        <input type="text" class="form-control" id="name" required autofocus>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">رمز عبور</label>
+        <input type="password" class="form-control" id="password" required>
+      </div>
+      <button type="submit" class="btn btn-success w-100">ثبت‌نام</button>
+    </form>
+    <div class="text-center mt-3">
+      <span>حساب کاربری دارید؟</span>
+      <a href="login.html">ورود</a>
+    </div>
+    <div id="registerError" class="alert alert-danger mt-3 d-none"></div>
+    <div id="registerSuccess" class="alert alert-success mt-3 d-none"></div>
+  </div>
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const password = document.getElementById('password').value;
+      const errorDiv = document.getElementById('registerError');
+      const successDiv = document.getElementById('registerSuccess');
+      errorDiv.classList.add('d-none');
+      successDiv.classList.add('d-none');
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, password })
+        });
+        const data = await res.json();
+        if (res.ok) {
+          successDiv.textContent = `ثبت‌نام با موفقیت انجام شد. شناسه کاربری شما: ${data.user_id}`;
+          successDiv.classList.remove('d-none');
+          setTimeout(() => { window.location.href = 'login.html'; }, 3000);
+        } else {
+          errorDiv.textContent = data.error || 'ثبت‌نام ناموفق بود.';
+          errorDiv.classList.remove('d-none');
+        }
+      } catch (err) {
+        errorDiv.textContent = 'خطا در ارتباط با سرور.';
+        errorDiv.classList.remove('d-none');
+      }
+    });
+  </script>
+</body>
+</html> 

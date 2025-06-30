@@ -1,0 +1,1823 @@
+<!--
+=========================================================
+* مدیریت کاربران - Argon Dashboard Style
+=========================================================
+-->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>مدیریت کاربران - سیستم حضور و غیاب</title>
+  <link href="https://fonts.googleapis.com/css?family=Vazirmatn:400,700&display=swap" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <link href="../assets/css/argon-dashboard.custom-sidebar.css" rel="stylesheet" />
+  <style>
+    body { font-family: 'Vazirmatn', sans-serif; }
+    
+    /* Clean Card Design */
+    .card {
+      border-radius: 1rem !important;
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+      border: 1px solid rgba(0, 0, 0, 0.125);
+    }
+    
+    .card-header {
+      background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
+      color: #495057;
+      border-radius: 1rem 1rem 0 0 !important;
+      border-bottom: 1px solid #dee2e6;
+      padding: 1rem 1.5rem;
+    }
+    
+    .card-header h6 {
+      color: #495057;
+      font-weight: 600;
+      margin: 0;
+    }
+    
+    .card-body {
+      background: #fff;
+      border-radius: 0 0 1rem 1rem !important;
+      padding: 0;
+    }
+    
+    /* User Avatar */
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 0.875rem;
+    }
+    
+    /* Clean Button Styles */
+    .btn {
+      border-radius: 0.5rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      border: none;
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+    
+    .btn-sm {
+      padding: 0.375rem 0.75rem;
+      font-size: 0.8rem;
+      border-radius: 0.375rem;
+    }
+    
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+    }
+    
+    .btn-success {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    }
+    
+    .btn-info {
+      background: linear-gradient(135deg, #17a2b8 0%, #6f42c1 100%);
+    }
+    
+    .btn-warning {
+      background: linear-gradient(135deg, #ffc107 0%, #fd7e14 100%);
+      color: #212529;
+    }
+    
+    .btn-outline-primary {
+      border: 1px solid #5e72e4;
+      color: #5e72e4;
+      background: transparent;
+    }
+    
+    .btn-outline-primary:hover {
+      background: #5e72e4;
+      color: white;
+    }
+    
+    .btn-outline-secondary {
+      border: 1px solid #6c757d;
+      color: #6c757d;
+      background: transparent;
+    }
+    
+    .btn-outline-secondary:hover {
+      background: #6c757d;
+      color: white;
+    }
+    
+    .btn-outline-info {
+      border: 1px solid #11cdef;
+      color: #11cdef;
+      background: transparent;
+    }
+    
+    .btn-outline-info:hover {
+      background: #11cdef;
+      color: white;
+    }
+    
+    /* Clean Form Controls */
+    .form-control, .form-select {
+      border-radius: 0.5rem;
+      border: 1px solid #e9ecef;
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      transition: all 0.2s ease;
+    }
+    
+    .form-control-sm, .form-select-sm {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.8rem;
+      border-radius: 0.375rem;
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: #5e72e4;
+      box-shadow: 0 0 0 0.2rem rgba(94, 114, 228, 0.25);
+    }
+    
+    /* Remove default dropdown arrows */
+    .form-select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background-image: none !important;
+    }
+    
+    .form-select::-ms-expand {
+      display: none;
+    }
+    
+    /* Input Group Styling */
+    .input-group-text {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      color: #6c757d;
+      font-size: 0.875rem;
+    }
+    
+    .input-group .form-control {
+      border-left: none;
+    }
+    
+    .input-group .input-group-text {
+      border-right: none;
+    }
+    
+    /* Clean Table Design */
+    .table {
+      margin: 0;
+      background: white;
+    }
+    
+    .table th {
+      background: #f8f9fa;
+      border-bottom: 2px solid #dee2e6;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: #6c757d;
+      padding: 1rem 0.75rem;
+    }
+    
+    .table td {
+      padding: 1rem 0.75rem;
+      vertical-align: middle;
+      border-bottom: 1px solid #f8f9fa;
+      font-size: 0.875rem;
+    }
+    
+    .table tbody tr:hover {
+      background-color: #f8f9fa;
+    }
+    
+    /* Filter Section */
+    .bg-light {
+      background: #f8f9fa !important;
+      border-bottom: 1px solid #e9ecef;
+    }
+    
+    /* Badge Styling */
+    .badge {
+      font-size: 0.75rem;
+      padding: 0.375rem 0.75rem;
+      border-radius: 0.375rem;
+    }
+    
+    .badge.bg-primary {
+      background: linear-gradient(135deg, #5e72e4 0%, #825ee4 100%) !important;
+    }
+    
+    .badge.bg-danger {
+      background: linear-gradient(135deg, #f5365c 0%, #f56036 100%) !important;
+    }
+    
+    /* Modal Styling */
+    .modal-content {
+      border-radius: 1rem;
+      border: none;
+      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+    }
+    
+    .modal-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 1rem 1rem 0 0;
+      border-bottom: none;
+      padding: 1.5rem;
+    }
+    
+    .modal-header .btn-close {
+      filter: invert(1);
+      opacity: 0.8;
+    }
+    
+    .modal-body {
+      padding: 1.5rem;
+    }
+    
+    .modal-footer {
+      border-top: 1px solid #e9ecef;
+      padding: 1rem 1.5rem;
+    }
+    
+    /* Pagination Styling */
+    .pagination-container {
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%) !important;
+      border-top: 1px solid #dee2e6;
+      border-radius: 0 0 1rem 1rem;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+    
+    .btn-group .btn {
+      border-radius: 0.375rem;
+      margin: 0 0.0625rem;
+      font-size: 0.75rem;
+      padding: 0.375rem 0.5rem;
+      transition: all 0.2s ease;
+      min-width: 2rem;
+    }
+    
+    .btn-group .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.15);
+    }
+    
+    .btn-group .btn:first-child {
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+    }
+    
+    .btn-group .btn:last-child {
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+    }
+    
+    /* Compact Form Select */
+    .pagination-container .form-select {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.375rem;
+      border: 1px solid #dee2e6;
+      background: white;
+      min-width: 60px;
+    }
+    
+    .pagination-container .form-select:focus {
+      border-color: #5e72e4;
+      box-shadow: 0 0 0 0.15rem rgba(94, 114, 228, 0.25);
+    }
+    
+    /* Text Styling */
+    .pagination-container .text-muted {
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    
+    /* Responsive Pagination */
+    @media (max-width: 768px) {
+      .pagination-container {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem;
+      }
+      
+      .pagination-container .btn-group .btn {
+        padding: 0.25rem 0.375rem;
+        font-size: 0.7rem;
+        min-width: 1.75rem;
+      }
+      
+      .pagination-container .badge {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+      }
+      
+      .pagination-container .text-muted {
+        font-size: 0.75rem;
+      }
+    }
+    
+    /* Loading States */
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    
+    /* Animation for Advanced Filters */
+    #advancedFilters {
+      transition: all 0.3s ease;
+    }
+    
+    /* Clean Spacing */
+    .gap-1 { gap: 0.25rem !important; }
+    .gap-2 { gap: 0.5rem !important; }
+    
+    .g-2 > * {
+      padding: 0.25rem;
+    }
+    
+    /* Enhanced Shadow Styles */
+    .shadow-sm {
+      box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    }
+    
+    .shadow-sm:hover {
+      box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15) !important;
+      transition: box-shadow 0.2s ease;
+    }
+    
+    /* Enhanced Button Group */
+    .btn-group .btn {
+      border-radius: 0.375rem;
+      margin: 0 0.125rem;
+      font-size: 0.8rem;
+      padding: 0.375rem 0.75rem;
+      transition: all 0.2s ease;
+    }
+    
+    .btn-group .btn:hover {
+      transform: translateY(-1px);
+    }
+    
+    .btn-group .btn:first-child {
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
+    }
+    
+    .btn-group .btn:last-child {
+      border-top-right-radius: 0.5rem;
+      border-bottom-right-radius: 0.5rem;
+    }
+    
+    /* Enhanced Form Controls with Shadows */
+    .form-control.shadow-sm, .form-select.shadow-sm {
+      border: 1px solid #e9ecef;
+      transition: all 0.2s ease;
+    }
+    
+    .form-control.shadow-sm:focus, .form-select.shadow-sm:focus {
+      border-color: #5e72e4;
+      box-shadow: 0 0 0 0.2rem rgba(94, 114, 228, 0.25), 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    }
+    
+    /* Input Group with Enhanced Shadows */
+    .input-group.shadow-sm {
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+    
+    .input-group.shadow-sm .input-group-text {
+      border: none;
+      background: #f8f9fa;
+    }
+    
+    .input-group.shadow-sm .form-control {
+      border: none;
+      box-shadow: none;
+    }
+    
+    .input-group.shadow-sm:focus-within {
+      box-shadow: 0 0 0 0.2rem rgba(94, 114, 228, 0.25), 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+    }
+    
+    /* Compact Modal Styling */
+    .modal-lg {
+      max-width: 800px;
+    }
+    
+    .modal-body {
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+    
+    .modal-body .form-group {
+      margin-bottom: 0.75rem;
+    }
+    
+    .modal-body .form-label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+    }
+    
+    .modal-body .form-control-sm, .modal-body .form-select-sm {
+      padding: 0.375rem 0.75rem;
+      font-size: 0.875rem;
+    }
+    
+    .modal-body textarea.form-control-sm {
+      resize: vertical;
+      min-height: 60px;
+    }
+    
+    /* Device Selection Styling */
+    #deviceSelectContainer {
+      max-height: 120px;
+      overflow-y: auto;
+      border: 1px solid #dee2e6;
+      border-radius: 0.375rem;
+      padding: 0.5rem;
+      background: #f8f9fa;
+    }
+    
+    #deviceSelectContainer label {
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+      padding: 0.25rem 0.5rem;
+      background: white;
+      border: 1px solid #dee2e6;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    #deviceSelectContainer label:hover {
+      background: #e9ecef;
+      border-color: #adb5bd;
+    }
+    
+    #deviceSelectContainer input[type="checkbox"] {
+      margin-left: 0.5rem;
+    }
+    
+    /* Compact Form Check */
+    .form-check {
+      margin-bottom: 0;
+    }
+    
+    .form-check-input {
+      margin-top: 0.125rem;
+    }
+    
+    .form-check-label {
+      font-size: 0.875rem;
+      margin-bottom: 0;
+    }
+    
+    /* Responsive Modal */
+    @media (max-width: 768px) {
+      .modal-lg {
+        max-width: 95%;
+        margin: 1rem auto;
+      }
+      
+      .modal-body {
+        max-height: 60vh;
+        padding: 1rem;
+      }
+      
+      .modal-body .row {
+        margin: 0;
+      }
+      
+      .modal-body .col-md-6 {
+        padding: 0 0.25rem;
+      }
+    }
+    
+    /* RTL Support */
+    body {
+      direction: rtl;
+      text-align: right;
+    }
+    
+    /* Custom scrollbar for RTL */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+    
+    /* Compact Modal Styling */
+    .modal-dialog.modal-md {
+      max-width: 500px;
+    }
+    
+    .modal-content {
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .modal-header {
+      border-bottom: 1px solid #e9ecef;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 12px 12px 0 0;
+    }
+    
+    .modal-header .btn-close {
+      filter: invert(1);
+    }
+    
+    .modal-body {
+      padding: 1rem;
+    }
+    
+    .form-control-sm, .form-select-sm {
+      font-size: 0.875rem;
+      padding: 0.375rem 0.75rem;
+    }
+    
+    .form-label.small {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #495057;
+    }
+    
+    /* Device selection container */
+    #deviceSelectContainer {
+      background: #f8f9fa;
+      border: 1px solid #dee2e6;
+      border-radius: 6px;
+    }
+    
+    /* Compact form spacing */
+    .row.g-2 > [class*="col-"] {
+      padding: 0.25rem;
+    }
+    
+    /* Modal centering */
+    .modal-dialog-centered {
+      display: flex;
+      align-items: center;
+      min-height: calc(100% - 1rem);
+    }
+    
+    @media (min-width: 576px) {
+      .modal-dialog-centered {
+        min-height: calc(100% - 3.5rem);
+      }
+    }
+    
+    /* Enhanced form controls */
+    .form-control:focus, .form-select:focus {
+      border-color: #667eea;
+      box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    }
+    
+    /* Compact buttons */
+    .btn-sm {
+      padding: 0.375rem 0.75rem;
+      font-size: 0.875rem;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 576px) {
+      .modal-dialog.modal-md {
+        margin: 0.5rem;
+        max-width: calc(100% - 1rem);
+      }
+      
+      .modal-body {
+        padding: 0.75rem;
+      }
+    }
+  </style>
+</head>
+
+<body class="g-sidenav-show rtl bg-gray-100">
+  <div class="min-height-300 bg-dark position-absolute w-100"></div>
+  <div id="sidebar-container"></div>
+  
+  <!-- Load sidebar manager -->
+  <script src="../assets/js/sidebar-manager.js"></script>
+  
+  <main class="main-content position-relative border-radius-lg">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-white" href="javascript:;">صفحات</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">مدیریت کاربران</li>
+          </ol>
+          <h6 class="font-weight-bolder text-white mb-0">مدیریت کاربران</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header pb-0 d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
+                <h6 class="mb-0 me-3">لیست کاربران سیستم</h6>
+                <span class="badge bg-primary" id="userCount">0 کاربر</span>
+              </div>
+              <div class="d-flex gap-2">
+                <button class="btn btn-success btn-sm" onclick="showAddUserModal()">
+                  <i class="fas fa-plus me-1"></i>افزودن کاربر
+                </button>
+                <button class="btn btn-info btn-sm" onclick="syncUsers(event)">
+                  <i class="fas fa-sync me-1"></i>همگام‌سازی
+                </button>
+                <button class="btn btn-warning btn-sm" id="syncPendingBtn" onclick="syncPendingUsers(event)">
+                  <i class="fas fa-exclamation-triangle me-1"></i>
+                  معوق <span id="pendingCount" class="badge bg-danger">0</span>
+                </button>
+              </div>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <!-- Clean Search & Filter Section -->
+              <div class="px-3 py-2 border-bottom bg-light">
+                <div class="row g-2 align-items-center">
+                  <!-- Search Input -->
+                  <div class="col-lg-4 col-md-5">
+                    <div class="input-group input-group-sm shadow-sm">
+                      <span class="input-group-text bg-white border-end-0 shadow-sm">
+                        <i class="fas fa-search text-muted"></i>
+                      </span>
+                      <input type="text" class="form-control border-start-0 shadow-sm" id="searchInput" 
+                             placeholder="جستجو در کاربران..." 
+                             onkeyup="if(event.key === 'Enter') searchUsers()">
+                    </div>
+                  </div>
+                  
+                  <!-- Quick Filter -->
+                  <div class="col-lg-2 col-md-3">
+                    <div class="position-relative shadow-sm">
+                      <select class="form-select form-select-sm pe-4 ps-2 shadow-sm" id="quickFilter" onchange="applyQuickFilter()">
+                        <option value="">همه کاربران</option>
+                        <option value="active">فعال</option>
+                        <option value="admin">مدیران</option>
+                        <option value="personnel">پرسنل</option>
+                      </select>
+                      <i class="fas fa-chevron-down position-absolute text-muted" style="left: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
+                    </div>
+                  </div>
+                  
+                  <!-- Items Per Page -->
+                  <div class="col-lg-2 col-md-2">
+                    <div class="position-relative shadow-sm">
+                      <select class="form-select form-select-sm pe-4 ps-2 shadow-sm" id="itemsPerPageSelect" onchange="changeItemsPerPage(this.value)">
+                        <option value="10">10 در صفحه</option>
+                        <option value="20">20 در صفحه</option>
+                        <option value="50">50 در صفحه</option>
+                      </select>
+                      <i class="fas fa-chevron-down position-absolute text-muted" style="left: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
+                    </div>
+                  </div>
+                  
+                  <!-- Action Buttons -->
+                  <div class="col-lg-4 col-md-2">
+                    <div class="d-flex gap-1 justify-content-end">
+                      <button class="btn btn-sm btn-outline-primary shadow-sm" onclick="searchUsers()" title="جستجو">
+                        <i class="fas fa-search"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-secondary shadow-sm" onclick="clearSearch()" title="پاک کردن">
+                        <i class="fas fa-times"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-info shadow-sm" onclick="toggleAdvancedFilters()" title="فیلترهای پیشرفته">
+                        <i class="fas fa-filter"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Advanced Filters (Collapsible) -->
+                <div class="mt-2" id="advancedFilters" style="display: none;">
+                  <div class="row g-2">
+                    <div class="col-md-3">
+                      <div class="position-relative shadow-sm">
+                        <select class="form-select form-select-sm pe-4 ps-2 shadow-sm" id="departmentFilter">
+                          <option value="">همه دیپارتمنت‌ها</option>
+                        </select>
+                        <i class="fas fa-chevron-down position-absolute text-muted" style="left: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="position-relative shadow-sm">
+                        <select class="form-select form-select-sm pe-4 ps-2 shadow-sm" id="shiftFilter">
+                          <option value="">همه شیفت‌ها</option>
+                        </select>
+                        <i class="fas fa-chevron-down position-absolute text-muted" style="left: 0.75rem; top: 50%; transform: translateY(-50%); pointer-events: none;"></i>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <input type="date" class="form-control form-control-sm shadow-sm" id="hireDateFilter" placeholder="تاریخ استخدام">
+                    </div>
+                    <div class="col-md-3">
+                      <div class="d-flex gap-1">
+                        <button class="btn btn-sm btn-primary shadow-sm" onclick="applyAdvancedFilters()">
+                          <i class="fas fa-check me-1"></i>اعمال
+                        </button>
+                        <button class="btn btn-sm btn-outline-secondary shadow-sm" onclick="clearAdvancedFilters()">
+                          <i class="fas fa-undo me-1"></i>بازنشانی
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">کاربر</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">اطلاعات شغلی</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">وضعیت</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">تاریخ استخدام</th>
+                      <th class="text-secondary opacity-7"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="users-table-body">
+                    <!-- Rows will be populated dynamically -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- Add User Modal (Compact Design) -->
+  <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md">
+      <div class="modal-content">
+        <div class="modal-header py-2">
+          <h6 class="modal-title mb-0" id="addUserModalLabel">ثبت پرسنل جدید</h6>
+          <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-3">
+          <form id="addUserForm">
+            <div class="row g-2">
+              <!-- User Type Selection -->
+              <div class="col-12 mb-2">
+                <label class="form-label small mb-1">نوع ثبت:</label>
+                <div class="d-flex gap-3">
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" name="userType" value="user" id="userTypeUser" checked>
+                    <label class="form-check-label small" for="userTypeUser">کاربر</label>
+                  </div>
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" name="userType" value="personnel" id="userTypePersonnel">
+                    <label class="form-check-label small" for="userTypePersonnel">پرسنل</label>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Basic Information -->
+              <div class="col-md-6">
+                <label class="form-label small mb-1">نام کامل <span class="text-danger">*</span></label>
+                <input type="text" class="form-control form-control-sm" id="addName" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small mb-1">شماره کارت</label>
+                <input type="text" class="form-control form-control-sm" id="addCardNo">
+              </div>
+              
+              <!-- User Fields -->
+              <div class="col-md-6" id="userFields">
+                <label class="form-label small mb-1">رمز عبور</label>
+                <input type="password" class="form-control form-control-sm" id="addPassword">
+              </div>
+              <div class="col-md-6" id="userFields2">
+                <label class="form-label small mb-1">نقش</label>
+                <select class="form-select form-select-sm" id="addRole">
+                  <option value="0">کاربر عادی</option>
+                  <option value="14">مدیر</option>
+                </select>
+              </div>
+              
+              <!-- Personnel Fields -->
+              <div class="col-md-6" id="personnelFields" style="display:none;">
+                <label class="form-label small mb-1">سمت</label>
+                <input type="text" class="form-control form-control-sm" id="addPosition">
+              </div>
+              
+              <!-- Salary -->
+              <div class="col-md-6">
+                <label class="form-label small mb-1">حقوق پایه <span class="text-danger">*</span></label>
+                <input type="number" class="form-control form-control-sm" id="addSalary" required min="0" step="0.01" placeholder="25000">
+              </div>
+              
+              <!-- Department and Shift -->
+              <div class="col-md-6">
+                <label class="form-label small mb-1">دیپارتمنت</label>
+                <input type="text" class="form-control form-control-sm" id="addDepartment">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small mb-1">شیفت کاری</label>
+                <select class="form-select form-select-sm" id="addShift"></select>
+              </div>
+              
+              <!-- Contact Information -->
+              <div class="col-md-6">
+                <label class="form-label small mb-1">شماره تماس</label>
+                <input type="tel" class="form-control form-control-sm" id="addPhone">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small mb-1">ایمیل</label>
+                <input type="email" class="form-control form-control-sm" id="addEmail">
+              </div>
+              
+              <!-- Location -->
+              <div class="col-md-6">
+                <label class="form-label small mb-1">ولایت</label>
+                <input type="text" class="form-control form-control-sm" id="addProvince">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small mb-1">ولسوالی</label>
+                <input type="text" class="form-control form-control-sm" id="addDistrict">
+              </div>
+              
+              <!-- Address and Hire Date -->
+              <div class="col-md-6">
+                <label class="form-label small mb-1">آدرس</label>
+                <textarea class="form-control form-control-sm" id="addAddress" rows="1"></textarea>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small mb-1">تاریخ استخدام</label>
+                <input type="date" class="form-control form-control-sm" id="addHireDate">
+              </div>
+              
+              <!-- Device Selection -->
+              <div class="col-12">
+                <label class="form-label small mb-1">انتخاب دستگاه(ها):</label>
+                <div id="deviceSelectContainer" class="border rounded p-2 bg-light" style="max-height: 80px; overflow-y: auto;"></div>
+              </div>
+            </div>
+            
+            <div class="modal-footer py-2">
+              <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">انصراف</button>
+              <button type="submit" class="btn btn-primary btn-sm">ذخیره پرسنل</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit User Modal (Original Dashboard Style) -->
+  <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editUserModalLabel">ویرایش اطلاعات کاربر</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="editUserForm">
+            <input type="hidden" id="editUserIdHidden">
+            <div class="row">
+              <div class="col-md-6"><div class="form-group"><label>شناسه کاربری (ID)</label><input type="text" class="form-control" id="editUserId" required readonly></div></div>
+              <div class="col-md-6"><div class="form-group"><label>نام کامل</label><input type="text" class="form-control" id="editName" required></div></div>
+            </div>
+            <div class="row">
+              <div class="col-md-6"><div class="form-group"><label>رمز عبور جدید</label><input type="password" class="form-control" id="editPassword" placeholder="برای عدم تغییر، خالی بگذارید"></div></div>
+              <div class="col-md-6"><div class="form-group"><label>نقش</label><select class="form-select" id="editRole"><option value="0">کاربر عادی</option><option value="14">مدیر</option></select></div></div>
+            </div>
+            <div class="row">
+              <div class="col-md-6"><div class="form-group"><label>شماره کارت</label><input type="text" class="form-control" id="editCardNo"></div></div>
+              <div class="col-md-6"><div class="form-group"><label>حقوق پایه <span class="text-danger">*</span></label><input type="number" class="form-control" id="editSalary" required min="0" step="0.01" placeholder="مثال: 25000"></div></div>
+            </div>
+            <hr class="horizontal dark">
+            <div class="row">
+              <div class="col-md-6"><div class="form-group"><label>دیپارتمنت</label><input type="text" class="form-control" id="editDepartment"></div></div>
+              <div class="col-md-6"><div class="form-group"><label>شیفت کاری</label><select class="form-select" id="editShift"></select></div></div>
+            </div>
+            <div class="row">
+              <div class="col-md-6"><div class="form-group"><label>ولایت</label><input type="text" class="form-control" id="editProvince"></div></div>
+              <div class="col-md-6"><div class="form-group"><label>ولسوالی</label><input type="text" class="form-control" id="editDistrict"></div></div>
+            </div>
+            <div class="row">
+              <div class="col-md-6"><div class="form-group"><label>شماره تماس</label><input type="tel" class="form-control" id="editPhone"></div></div>
+              <div class="col-md-6"><div class="form-group"><label>ایمیل</label><input type="email" class="form-control" id="editEmail"></div></div>
+            </div>
+            <div class="form-group"><label>آدرس</label><textarea class="form-control" id="editAddress" rows="3"></textarea></div>
+            <div class="form-group"><label>تاریخ استخدام</label><input type="date" class="form-control" id="editHireDate"></div>
+            <div class="form-group mb-3">
+              <label>انتخاب دستگاه(ها):</label>
+              <div id="editDeviceSelectContainer"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+              <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Core JS Files -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  
+  <!-- دکمه خروج از حساب -->
+  <button id="logoutBtn" class="btn btn-danger" style="position: fixed; top: 20px; left: 20px; z-index: 9999;">خروج</button>
+  <script>
+    // محافظت از صفحه: اگر توکن نبود، به صفحه ورود منتقل شود
+    if (!localStorage.getItem('token')) {
+      window.location.href = 'login.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      fetchUsers();
+      populateShiftsDropdowns();
+      
+      // بررسی اینکه آیا کاربر از صفحه حقوق آمده است
+      const editUserId = localStorage.getItem('editUserId');
+      if (editUserId) {
+        localStorage.removeItem('editUserId'); // حذف از localStorage
+        setTimeout(() => {
+          openEditModal(editUserId);
+        }, 1000); // کمی صبر تا صفحه کاملاً بارگذاری شود
+      }
+    });
+
+    async function populateShiftsDropdowns() {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          window.location.href = 'login.html';
+          return;
+        }
+        
+        const response = await fetch('http://localhost:3001/api/shifts', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!response.ok) throw new Error('Failed to fetch shifts');
+        const result = await response.json();
+        const shifts = result.data || [];
+        
+        const addShiftSelect = document.getElementById('addShift');
+        const editShiftSelect = document.getElementById('editShift');
+
+        addShiftSelect.innerHTML = '<option value="">انتخاب کنید...</option>';
+        editShiftSelect.innerHTML = '<option value="">انتخاب کنید...</option>';
+
+        shifts.forEach(shift => {
+          const option = `<option value="${shift.name}">${shift.name}</option>`;
+          addShiftSelect.innerHTML += option;
+          editShiftSelect.innerHTML += option;
+        });
+      } catch (error) {
+        console.error('Error populating shifts dropdowns:', error);
+        // Optionally notify user
+      }
+    }
+
+    let currentUserCount = 0;
+    let currentPage = 1;
+    let itemsPerPage = 10;
+    let totalUsers = 0;
+    let allUsers = [];
+
+    async function fetchUsers(page = 1, searchTerm = '', quickFilter = '') {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          window.location.href = 'login.html';
+          return;
+        }
+        
+        // Build query parameters
+        const params = new URLSearchParams({
+          page: page,
+          limit: itemsPerPage
+        });
+        
+        if (searchTerm) {
+          params.append('search', searchTerm);
+        }
+        
+        if (quickFilter) {
+          params.append('filter', quickFilter);
+        }
+        
+        // Add advanced filters
+        const departmentFilter = document.getElementById('departmentFilter')?.value;
+        const shiftFilter = document.getElementById('shiftFilter')?.value;
+        const statusFilter = document.getElementById('statusFilter')?.value;
+        const hireDateFilter = document.getElementById('hireDateFilter')?.value;
+        
+        if (departmentFilter) params.append('department', departmentFilter);
+        if (shiftFilter) params.append('shift', shiftFilter);
+        if (statusFilter) params.append('status', statusFilter);
+        if (hireDateFilter) params.append('hire_date', hireDateFilter);
+        
+        const response = await fetch(`http://localhost:3001/api/users?${params}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const result = await response.json();
+        
+        // Handle both paginated and non-paginated responses
+        let users = [];
+        if (result.data && Array.isArray(result.data)) {
+          if (result.pagination) {
+            // Paginated response
+            users = result.data;
+            totalUsers = result.pagination.total || result.data.length;
+            currentPage = result.pagination.page || page;
+          } else {
+            // Non-paginated response - implement client-side pagination
+            allUsers = result.data;
+            totalUsers = allUsers.length;
+            currentPage = page;
+            
+            // Apply search filter if provided
+            if (searchTerm) {
+              allUsers = allUsers.filter(user => 
+                user.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                user.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                user.department?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                user.cardno?.includes(searchTerm)
+              );
+            }
+            
+            // Apply quick filter
+            if (quickFilter) {
+              allUsers = allUsers.filter(user => {
+                switch (quickFilter) {
+                  case 'active':
+                    // Filter active users (not deleted or disabled)
+                    return user.status !== 'inactive' && user.status !== 'deleted';
+                  case 'admin':
+                    // Filter admin users (role 14)
+                    return user.role === 14;
+                  case 'personnel':
+                    // Filter personnel users (role 2)
+                    return user.role === 2;
+                  case 'recent':
+                    // Filter recently added users (last 30 days)
+                    if (!user.hire_date) return false;
+                    const hireDate = new Date(user.hire_date);
+                    const thirtyDaysAgo = new Date();
+                    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+                    return hireDate >= thirtyDaysAgo;
+                  default:
+                    return true;
+                }
+              });
+            }
+            
+            // Apply advanced filters
+            if (departmentFilter) {
+              allUsers = allUsers.filter(user => user.department === departmentFilter);
+            }
+            if (shiftFilter) {
+              allUsers = allUsers.filter(user => user.shift === shiftFilter);
+            }
+            if (statusFilter) {
+              allUsers = allUsers.filter(user => {
+                if (statusFilter === 'active') return user.status !== 'inactive';
+                if (statusFilter === 'inactive') return user.status === 'inactive';
+                return true;
+              });
+            }
+            if (hireDateFilter) {
+              allUsers = allUsers.filter(user => user.hire_date?.startsWith(hireDateFilter));
+            }
+            
+            // Apply pagination
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            users = allUsers.slice(startIndex, endIndex);
+          }
+        } else {
+          users = [];
+          totalUsers = 0;
+        }
+        
+        currentUserCount = totalUsers;
+        const tableBody = document.getElementById('users-table-body');
+        const userCountBadge = document.getElementById('userCount');
+        tableBody.innerHTML = '';
+        
+        // Update user count badge
+        if (userCountBadge) {
+          userCountBadge.textContent = `${totalUsers} کاربر`;
+        }
+        
+        if (users.length === 0) {
+          tableBody.innerHTML = '<tr><td colspan="5" class="text-center py-5 text-muted">هیچ کاربری یافت نشد.</td></tr>';
+          updatePagination();
+          return;
+        }
+
+        users.forEach(user => {
+          const row = `
+            <tr>
+              <td>
+                <div class="d-flex px-3 py-1">
+                  <div><div class="user-avatar">${user.name ? user.name.charAt(0) : '?'}</div></div>
+                  <div class="d-flex flex-column justify-content-center me-3">
+                    <h6 class="mb-0 text-sm">${user.name}</h6>
+                    <p class="text-xs text-secondary mb-0">${user.email || `uid: ${user.userId}`}</p>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <p class="text-xs font-weight-bold mb-0">${user.department || 'نامشخص'}</p>
+                <p class="text-xs text-secondary mb-0">${user.shift || 'نامشخص'}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <span class="badge badge-sm ${user.role === 14 ? 'bg-gradient-warning' : user.role === 2 ? 'bg-gradient-info' : 'bg-gradient-success'}">
+                  ${user.role === 14 ? 'مدیر' : user.role === 2 ? 'پرسنل' : 'کاربر'}
+                </span>
+              </td>
+              <td class="align-middle text-center"><span class="text-secondary text-xs font-weight-bold">${user.hire_date ? new Date(user.hire_date).toLocaleDateString('fa-IR') : 'نامشخص'}</span></td>
+              <td class="align-middle">
+                <button class="btn btn-sm btn-outline-primary mb-0" onclick="openEditModal('${user.userId}')">ویرایش</button>
+                <button class="btn btn-sm btn-outline-danger mb-0 ms-2" onclick="deleteUser('${user.userId}')">حذف</button>
+              </td>
+            </tr>
+          `;
+          tableBody.innerHTML += row;
+        });
+
+        updatePagination();
+
+        // Lock add user button if limit reached
+        const addBtn = document.querySelector('button[onclick="showAddUserModal()"]');
+        if (addBtn) {
+          if (!checkLimit('user', currentUserCount)) {
+            addBtn.disabled = true;
+            addBtn.classList.add('locked-feature');
+            if (!addBtn.querySelector('.fa-lock')) {
+              const lockIcon = document.createElement('i');
+              lockIcon.className = 'fa fa-lock ms-1';
+              addBtn.appendChild(lockIcon);
+            }
+            addBtn.title = 'سقف تعداد کاربران در سطح اشتراک فعلی پر شده است.';
+          } else {
+            addBtn.disabled = false;
+            addBtn.classList.remove('locked-feature');
+            const lock = addBtn.querySelector('.fa-lock');
+            if (lock) lock.remove();
+            addBtn.title = '';
+          }
+        }
+      } catch (error) {
+        console.error('Failed to fetch users:', error);
+        document.getElementById('users-table-body').innerHTML = `<tr><td colspan="5" class="text-center text-danger py-5">خطا در بارگذاری کاربران.</td></tr>`;
+        updatePagination();
+      }
+    }
+
+    function updatePagination() {
+      const totalPages = Math.ceil(totalUsers / itemsPerPage);
+      const paginationContainer = document.getElementById('pagination-container');
+      
+      if (!paginationContainer) {
+        // Create pagination container if it doesn't exist
+        const cardBody = document.querySelector('.card-body');
+        const paginationDiv = document.createElement('div');
+        paginationDiv.id = 'pagination-container';
+        paginationDiv.className = 'pagination-container d-flex justify-content-between align-items-center px-4 py-3 border-top';
+        cardBody.appendChild(paginationDiv);
+      }
+      
+      const container = document.getElementById('pagination-container');
+      
+      if (totalPages <= 1) {
+        container.innerHTML = `
+          <div class="d-flex align-items-center justify-content-center w-100">
+            <div class="badge bg-light text-dark me-2">
+              <i class="fas fa-users me-1"></i>${totalUsers}
+            </div>
+            <span class="text-muted">کاربر یافت شد</span>
+          </div>
+        `;
+        return;
+      }
+      
+      let paginationHTML = `
+        <div class="d-flex align-items-center">
+          <div class="d-flex align-items-center">
+            <div class="badge bg-primary me-2">
+              <i class="fas fa-list me-1"></i>${((currentPage - 1) * itemsPerPage) + 1}-${Math.min(currentPage * itemsPerPage, totalUsers)}
+            </div>
+            <span class="text-muted">از</span>
+            <div class="badge bg-light text-dark mx-1">${totalUsers}</div>
+            <span class="text-muted">کاربر</span>
+          </div>
+        </div>
+        
+        <div class="d-flex justify-content-center flex-grow-1">
+          <div class="btn-group" role="group">
+      `;
+      
+      // Previous button
+      if (currentPage > 1) {
+        paginationHTML += `<button class="btn btn-outline-primary btn-sm" onclick="changePage(${currentPage - 1})" title="صفحه قبلی">
+          <i class="fas fa-chevron-right"></i>
+        </button>`;
+      } else {
+        paginationHTML += `<button class="btn btn-outline-secondary btn-sm" disabled title="صفحه قبلی">
+          <i class="fas fa-chevron-right"></i>
+        </button>`;
+      }
+      
+      // Page numbers
+      const startPage = Math.max(1, currentPage - 2);
+      const endPage = Math.min(totalPages, currentPage + 2);
+      
+      if (startPage > 1) {
+        paginationHTML += `<button class="btn btn-outline-primary btn-sm" onclick="changePage(1)">1</button>`;
+        if (startPage > 2) {
+          paginationHTML += `<button class="btn btn-outline-secondary btn-sm" disabled>...</button>`;
+        }
+      }
+      
+      for (let i = startPage; i <= endPage; i++) {
+        if (i === currentPage) {
+          paginationHTML += `<button class="btn btn-primary btn-sm" disabled>${i}</button>`;
+        } else {
+          paginationHTML += `<button class="btn btn-outline-primary btn-sm" onclick="changePage(${i})">${i}</button>`;
+        }
+      }
+      
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+          paginationHTML += `<button class="btn btn-outline-secondary btn-sm" disabled>...</button>`;
+        }
+        paginationHTML += `<button class="btn btn-outline-primary btn-sm" onclick="changePage(${totalPages})">${totalPages}</button>`;
+      }
+      
+      // Next button
+      if (currentPage < totalPages) {
+        paginationHTML += `<button class="btn btn-outline-primary btn-sm" onclick="changePage(${currentPage + 1})" title="صفحه بعدی">
+          <i class="fas fa-chevron-left"></i>
+        </button>`;
+      } else {
+        paginationHTML += `<button class="btn btn-outline-secondary btn-sm" disabled title="صفحه بعدی">
+          <i class="fas fa-chevron-left"></i>
+        </button>`;
+      }
+      
+      paginationHTML += `
+          </div>
+        </div>
+        
+        <div class="d-flex align-items-center">
+          <div class="d-flex align-items-center">
+            <span class="text-muted me-2">
+              <i class="fas fa-th-list me-1"></i>نمایش:
+            </span>
+            <div class="position-relative">
+              <select class="form-select form-select-sm pe-4 ps-2" style="width: auto; min-width: 80px;" onchange="changeItemsPerPage(this.value)">
+                <option value="5" ${itemsPerPage === 5 ? 'selected' : ''}>5</option>
+                <option value="10" ${itemsPerPage === 10 ? 'selected' : ''}>10</option>
+                <option value="20" ${itemsPerPage === 20 ? 'selected' : ''}>20</option>
+                <option value="50" ${itemsPerPage === 50 ? 'selected' : ''}>50</option>
+              </select>
+              <i class="fas fa-chevron-down position-absolute text-muted" style="left: 0.5rem; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 0.75rem;"></i>
+            </div>
+            <span class="text-muted ms-2">در صفحه</span>
+          </div>
+        </div>
+      `;
+      
+      container.innerHTML = paginationHTML;
+    }
+
+    function changePage(page) {
+      currentPage = page;
+      const searchTerm = document.getElementById('searchInput')?.value || '';
+      const quickFilter = document.getElementById('quickFilter')?.value || '';
+      fetchUsers(page, searchTerm, quickFilter);
+    }
+
+    function changeItemsPerPage(newItemsPerPage) {
+      itemsPerPage = parseInt(newItemsPerPage);
+      currentPage = 1; // Reset to first page
+      const searchTerm = document.getElementById('searchInput')?.value || '';
+      const quickFilter = document.getElementById('quickFilter')?.value || '';
+      fetchUsers(1, searchTerm, quickFilter);
+    }
+
+    function searchUsers() {
+      const searchTerm = document.getElementById('searchInput').value;
+      const quickFilter = document.getElementById('quickFilter')?.value || '';
+      currentPage = 1; // Reset to first page when searching
+      fetchUsers(1, searchTerm, quickFilter);
+    }
+
+    function clearSearch() {
+      document.getElementById('searchInput').value = '';
+      document.getElementById('quickFilter').value = '';
+      document.getElementById('departmentFilter').value = '';
+      document.getElementById('shiftFilter').value = '';
+      document.getElementById('statusFilter').value = '';
+      document.getElementById('hireDateFilter').value = '';
+      currentPage = 1;
+      fetchUsers(1, '', '');
+    }
+
+    function showAddUserModal() {
+      if (!checkLimit('user', currentUserCount)) {
+        alert('سقف تعداد کاربران در سطح اشتراک فعلی پر شده است. برای ارتقا با پشتیبانی تماس بگیرید.');
+        return;
+      }
+      document.getElementById('addUserForm').reset();
+      populateDevicesCheckbox();
+      var myModal = new bootstrap.Modal(document.getElementById('addUserModal'));
+      myModal.show();
+    }
+    
+    document.getElementById('addUserForm').addEventListener('submit', async function(e) {
+      if (!checkLimit('user', currentUserCount)) {
+        alert('سقف تعداد کاربران در سطح اشتراک فعلی پر شده است.');
+        e.preventDefault();
+        return;
+      }
+      e.preventDefault();
+      
+      // اعتبارسنجی حقوق پایه
+      const salary = document.getElementById('addSalary').value;
+      if (!salary || parseFloat(salary) <= 0) {
+        alert('لطفاً حقوق پایه معتبر وارد کنید.');
+        document.getElementById('addSalary').focus();
+        return;
+      }
+      
+      const userType = document.querySelector('input[name="userType"]:checked').value;
+      let userData = {
+        name: document.getElementById('addName').value,
+        cardno: document.getElementById('addCardNo').value,
+        salary: parseFloat(salary),
+        department: document.getElementById('addDepartment').value,
+        shift: document.getElementById('addShift').value,
+        province: document.getElementById('addProvince').value,
+        district: document.getElementById('addDistrict').value,
+        phone: document.getElementById('addPhone').value,
+        email: document.getElementById('addEmail').value,
+        address: document.getElementById('addAddress').value,
+        hire_date: document.getElementById('addHireDate').value,
+      };
+      if (userType === 'user') {
+        userData.password = document.getElementById('addPassword').value;
+        userData.role = parseInt(document.getElementById('addRole').value, 10);
+        if (!userData.password || userData.password.length < 4) {
+          alert('رمز عبور برای کاربر الزامی است و باید حداقل ۴ کاراکتر باشد.');
+          document.getElementById('addPassword').focus();
+          return;
+        }
+      } else {
+        userData.position = document.getElementById('addPosition').value;
+        userData.role = 2; // نقش پرسنل غیرقابل لاگین
+      }
+      // جمع‌آوری device_ids
+      const device_ids = Array.from(document.querySelectorAll('#deviceSelectContainer input[name="device_ids"]:checked')).map(cb => parseInt(cb.value));
+      if (!device_ids.length) {
+        alert('حداقل یک دستگاه را انتخاب کنید.');
+        return;
+      }
+      userData.device_ids = device_ids;
+      await submitUserData(userData);
+    });
+
+    document.getElementById('editUserForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      // اعتبارسنجی حقوق پایه
+      const salary = document.getElementById('editSalary').value;
+      if (!salary || parseFloat(salary) <= 0) {
+        alert('لطفاً حقوق پایه معتبر وارد کنید.');
+        document.getElementById('editSalary').focus();
+        return;
+      }
+      
+      const userData = {
+        userId: document.getElementById('editUserId').value,
+        name: document.getElementById('editName').value,
+        password: document.getElementById('editPassword').value,
+        role: document.getElementById('editRole').value,
+        cardno: document.getElementById('editCardNo').value,
+        salary: parseFloat(salary),
+        department: document.getElementById('editDepartment').value,
+        shift: document.getElementById('editShift').value,
+        province: document.getElementById('editProvince').value,
+        district: document.getElementById('editDistrict').value,
+        phone: document.getElementById('editPhone').value,
+        email: document.getElementById('editEmail').value,
+        address: document.getElementById('editAddress').value,
+        hire_date: document.getElementById('editHireDate').value,
+      };
+
+      if (!userData.password) {
+        delete userData.password;
+      }
+      // جمع‌آوری device_ids
+      const device_ids = Array.from(document.querySelectorAll('#editDeviceSelectContainer input[name="edit_device_ids"]:checked')).map(cb => parseInt(cb.value));
+      if (!device_ids.length) {
+        alert('حداقل یک دستگاه را انتخاب کنید.');
+        return;
+      }
+      userData.device_ids = device_ids;
+      await submitUserData(userData, true);
+    });
+    
+    async function submitUserData(userData, isUpdate = false) {
+        const actionText = isUpdate ? 'به‌روزرسانی' : 'ثبت';
+        try {
+            const token = localStorage.getItem('token');
+            if (!token) {
+              window.location.href = 'login.html';
+              return;
+            }
+            
+            // اضافه کردن console.log برای دیباگ
+            console.log('Sending user data:', userData);
+            console.log('Salary value:', userData.salary, 'Type:', typeof userData.salary);
+            
+            const response = await fetch(`http://localhost:3001/api/zk/user`, {
+                method: 'POST',
+                headers: { 
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(userData)
+            });
+            const result = await response.json();
+            console.log('Server response:', result);
+            
+            if (response.ok && result.success) {
+                if (result.deviceConnected === false) {
+                    alert(`کاربر/پرسنل با موفقیت به صورت معوق ثبت شد و پس از اتصال دستگاه، همگام‌سازی خواهد شد.\nشناسه اختصاص داده شده: ${result.userId || result.user_id}`);
+                } else {
+                    alert(`پرسنل/کاربر با موفقیت ثبت شد. شناسه اختصاص داده شده: ${result.userId || result.user_id}`);
+                }
+                const modalId = isUpdate ? 'editUserModal' : 'addUserModal';
+                bootstrap.Modal.getInstance(document.getElementById(modalId)).hide();
+                fetchUsers();
+            } else {
+                throw new Error(result.error || 'خطای سرور');
+            }
+        } catch (error) {
+            console.error(`${actionText} user failed:`, error);
+            alert(`عملیات ${actionText} کاربر با شکست مواجه شد: ${error.message}`);
+        }
+    }
+
+    async function openEditModal(userId) {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          window.location.href = 'login.html';
+          return;
+        }
+        
+        const response = await fetch(`http://localhost:3001/api/users/${userId}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!response.ok) throw new Error('کاربر یافت نشد یا خطای سرور.');
+        
+        const result = await response.json();
+        if (!result.success) throw new Error(result.error);
+        
+        const user = result.data;
+
+        // استخراج device_ids از فیلد device_user_id (JSON)
+        let selectedDeviceIds = [];
+        try {
+          if (user.device_user_id) {
+            const deviceObj = typeof user.device_user_id === 'string' ? JSON.parse(user.device_user_id) : user.device_user_id;
+            selectedDeviceIds = Object.keys(deviceObj).map(id => parseInt(id));
+          }
+        } catch (e) { selectedDeviceIds = []; }
+        await populateEditDevicesCheckbox(selectedDeviceIds);
+
+        // Populate the edit form
+        document.getElementById('editUserId').value = user.userId;
+        document.getElementById('editName').value = user.name || '';
+        document.getElementById('editPassword').value = '';
+        document.getElementById('editRole').value = user.role !== undefined ? user.role : 0;
+        document.getElementById('editCardNo').value = user.cardno || '';
+        document.getElementById('editSalary').value = user.salary || '';
+        document.getElementById('editDepartment').value = user.department || '';
+        document.getElementById('editShift').value = user.shift || '';
+        document.getElementById('editProvince').value = user.province || '';
+        document.getElementById('editDistrict').value = user.district || '';
+        document.getElementById('editPhone').value = user.phone || '';
+        document.getElementById('editEmail').value = user.email || '';
+        document.getElementById('editAddress').value = user.address || '';
+        document.getElementById('editHireDate').value = user.hire_date ? user.hire_date.split('T')[0] : '';
+        
+        var myModal = new bootstrap.Modal(document.getElementById('editUserModal'));
+        myModal.show();
+      } catch (error) {
+        console.error('Failed to fetch user data for editing:', error);
+        alert(`خطا در دریافت اطلاعات کاربر: ${error.message}`);
+      }
+    }
+
+    async function syncUsers(event) {
+        const btn = event.target;
+        const originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> در حال همگام‌سازی...';
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          window.location.href = 'login.html';
+          return;
+        }
+        
+        const response = await fetch('http://localhost:3001/api/sync-users', { 
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!response.ok) throw new Error(`Server responded with status: ${response.status}`);
+        const result = await response.json();
+        alert(result.message || "همگام سازی انجام شد.");
+        fetchUsers(); // Refresh the list
+      } catch (error) {
+        console.error('Sync users failed:', error);
+        alert('همگام‌سازی کاربران با شکست مواجه شد. از اتصال به دستگاه و سرور اطمینان حاصل کنید.');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    }
+
+    document.getElementById('logoutBtn').onclick = function() {
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+    };
+
+    // توابع ساده جایگزین برای سیستم اشتراک
+    function updateUIForSubscription() {
+      // فعلاً کاری انجام نمی‌دهد
+    }
+
+    function checkLimit(feature, currentCount) {
+      // فعلاً همیشه true برمی‌گرداند (بدون محدودیت)
+      return true;
+    }
+
+    // نمایش/مخفی کردن فیلدها بر اساس نوع انتخاب شده
+    const userTypeRadios = document.querySelectorAll('input[name="userType"]');
+    userTypeRadios.forEach(radio => {
+      radio.addEventListener('change', function() {
+        if (this.value === 'user') {
+          document.getElementById('userFields').style.display = 'flex';
+          document.getElementById('personnelFields').style.display = 'none';
+          document.getElementById('addPassword').required = true;
+          document.getElementById('addRole').disabled = false;
+        } else {
+          document.getElementById('userFields').style.display = 'none';
+          document.getElementById('personnelFields').style.display = 'flex';
+          document.getElementById('addPassword').required = false;
+          document.getElementById('addRole').disabled = true;
+        }
+      });
+    });
+
+    async function fetchPendingCount() {
+      try {
+        const response = await fetch('http://localhost:3001/api/pending-users-count');
+        const result = await response.json();
+        document.getElementById('pendingCount').innerText = result.count || 0;
+      } catch (e) {
+        document.getElementById('pendingCount').innerText = '?';
+      }
+    }
+
+    async function syncPendingUsers(event) {
+      const btn = event.target;
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> در حال همگام‌سازی...';
+      try {
+        const response = await fetch('http://localhost:3001/api/sync-pending-device-users', { method: 'POST' });
+        const result = await response.json();
+        alert(result.message || 'همگام‌سازی کاربران معوق انجام شد.');
+        fetchPendingCount();
+      } catch (e) {
+        alert('خطا در همگام‌سازی کاربران معوق.');
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchPendingCount);
+
+    // دریافت لیست دستگاه‌ها و نمایش در فرم ثبت کاربر
+    async function populateDevicesCheckbox() {
+      try {
+        const response = await fetch('http://localhost:3001/api/devices');
+        const result = await response.json();
+        const devices = result.data || [];
+        const container = document.getElementById('deviceSelectContainer');
+        container.innerHTML = '';
+        devices.forEach(device => {
+          const label = document.createElement('label');
+          label.className = 'me-3';
+          label.innerHTML = `<input type="checkbox" name="device_ids" value="${device.id}"> ${device.name} (${device.ip_address})`;
+          container.appendChild(label);
+        });
+      } catch (e) {
+        document.getElementById('deviceSelectContainer').innerHTML = '<span class="text-danger">خطا در دریافت لیست دستگاه‌ها</span>';
+      }
+    }
+
+    // دریافت لیست دستگاه‌ها و نمایش در فرم ویرایش کاربر
+    async function populateEditDevicesCheckbox(selectedDeviceIds = []) {
+      try {
+        const response = await fetch('http://localhost:3001/api/devices');
+        const result = await response.json();
+        const devices = result.data || [];
+        const container = document.getElementById('editDeviceSelectContainer');
+        container.innerHTML = '';
+        devices.forEach(device => {
+          const checked = selectedDeviceIds.includes(device.id) ? 'checked' : '';
+          const label = document.createElement('label');
+          label.className = 'me-3';
+          label.innerHTML = `<input type="checkbox" name="edit_device_ids" value="${device.id}" ${checked}> ${device.name} (${device.ip_address})`;
+          container.appendChild(label);
+        });
+      } catch (e) {
+        document.getElementById('editDeviceSelectContainer').innerHTML = '<span class="text-danger">خطا در دریافت لیست دستگاه‌ها</span>';
+      }
+    }
+
+    // منطق حذف کاربر
+    async function deleteUser(userId) {
+      if (!confirm('آیا از حذف این کاربر مطمئن هستید؟')) return;
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          window.location.href = 'login.html';
+          return;
+        }
+        const response = await fetch(`http://localhost:3001/api/users/${userId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        const result = await response.json();
+        if (response.ok && result.success) {
+          alert('کاربر با موفقیت حذف شد.');
+          fetchUsers();
+        } else {
+          throw new Error(result.error || 'خطا در حذف کاربر');
+        }
+      } catch (error) {
+        alert('حذف کاربر با خطا مواجه شد: ' + error.message);
+      }
+    }
+
+    function toggleAdvancedFilters() {
+      const advancedFilters = document.getElementById('advancedFilters');
+      const toggleBtn = document.querySelector('button[onclick="toggleAdvancedFilters()"]');
+      const icon = toggleBtn.querySelector('i');
+      
+      if (advancedFilters.style.display === 'none') {
+        advancedFilters.style.display = 'block';
+        icon.className = 'fas fa-cog fa-spin me-1';
+        toggleBtn.title = 'مخفی کردن فیلترهای پیشرفته';
+      } else {
+        advancedFilters.style.display = 'none';
+        icon.className = 'fas fa-cog me-1';
+        toggleBtn.title = 'فیلترهای پیشرفته';
+      }
+    }
+
+    function applyQuickFilter() {
+      const quickFilter = document.getElementById('quickFilter').value;
+      const searchTerm = document.getElementById('searchInput').value;
+      currentPage = 1;
+      
+      // Apply quick filter logic
+      if (quickFilter) {
+        fetchUsers(1, searchTerm, quickFilter);
+      } else {
+        fetchUsers(1, searchTerm);
+      }
+    }
+
+    function exportUsers() {
+      // Implementation for exporting users data
+      alert('قابلیت خروجی در حال توسعه است...');
+    }
+
+    // Populate filter dropdowns
+    async function populateFilterDropdowns() {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+        
+        const response = await fetch('http://localhost:3001/api/users', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        
+        if (response.ok) {
+          const result = await response.json();
+          const users = result.data || [];
+          
+          // Get unique departments
+          const departments = [...new Set(users.map(user => user.department).filter(Boolean))];
+          const departmentSelect = document.getElementById('departmentFilter');
+          if (departmentSelect) {
+            departmentSelect.innerHTML = '<option value="">همه دیپارتمنت‌ها</option>';
+            departments.forEach(dept => {
+              departmentSelect.innerHTML += `<option value="${dept}">${dept}</option>`;
+            });
+          }
+          
+          // Get unique shifts
+          const shifts = [...new Set(users.map(user => user.shift).filter(Boolean))];
+          const shiftSelect = document.getElementById('shiftFilter');
+          if (shiftSelect) {
+            shiftSelect.innerHTML = '<option value="">همه شیفت‌ها</option>';
+            shifts.forEach(shift => {
+              shiftSelect.innerHTML += `<option value="${shift}">${shift}</option>`;
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Error populating filter dropdowns:', error);
+      }
+    }
+
+    // Initialize filters when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      populateFilterDropdowns();
+      fetchPendingCount();
+    });
+
+    function applyAdvancedFilters() {
+      const searchTerm = document.getElementById('searchInput').value;
+      const quickFilter = document.getElementById('quickFilter').value;
+      currentPage = 1;
+      fetchUsers(1, searchTerm, quickFilter);
+    }
+
+    function clearAdvancedFilters() {
+      document.getElementById('departmentFilter').value = '';
+      document.getElementById('shiftFilter').value = '';
+      document.getElementById('statusFilter').value = '';
+      document.getElementById('hireDateFilter').value = '';
+      applyAdvancedFilters();
+    }
+  </script>
+</body>
+</html> 

@@ -1,0 +1,466 @@
+<!--
+=========================================================
+* مدیریت اضافه‌کاری - Argon Dashboard Style
+=========================================================
+-->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>مدیریت اضافه‌کاری</title>
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <link id="pagestyle" href="../assets/css/argon-dashboard.min.css" rel="stylesheet" />
+  <link href="../assets/css/argon-dashboard.custom-sidebar.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Vazirmatn:400,700&display=swap" rel="stylesheet" />
+  <style>
+    body { font-family: 'Vazirmatn', sans-serif; }
+    .card, .modal-content { border-radius: 1rem !important; }
+    .card-header, .modal-header { border-radius: 1rem 1rem 0 0 !important; border-bottom: 1px solid #ececec; padding-top: 1rem; padding-bottom: 1rem; }
+    .card-body, .modal-body { background: #fff; border-radius: 0 0 1rem 1rem !important; padding: 1.5rem; }
+    .btn-primary, .btn-success, .btn-outline-primary, .btn-outline-secondary, .btn-secondary { border-radius: 0.5rem; font-weight: 500; transition: all 0.2s; }
+    .form-control, .form-select { border-radius: 0.5rem; font-size: 1rem; padding: 0.75rem 1rem; }
+    .table { border-radius: 1rem; overflow: hidden; background: #fff; }
+    .table th, .table td { vertical-align: middle; font-size: 0.98rem; }
+    .icon-lg { font-size: 2rem; vertical-align: middle; }
+    .badge-status { font-size: 0.95em; padding: 0.5em 1em; border-radius: 0.5rem; }
+    .progress { height: 0.7rem; border-radius: 0.5rem; }
+    .alert { border-radius: 0.5rem; }
+    @media (max-width: 767px) { .tab-pane { padding-top: 0.5rem; } }
+  </style>
+</head>
+<body class="g-sidenav-show rtl bg-gray-100">
+  <div class="min-height-300 bg-dark position-absolute w-100"></div>
+  <div id="sidebar-container"></div>
+  <script src="../assets/js/sidebar-manager.js"></script>
+  <main class="main-content position-relative border-radius-lg">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 ">
+            <li class="breadcrumb-item text-sm ps-2"><a class="opacity-5 text-white" href="dashboard.html">صفحات</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">اضافه‌کاری</li>
+          </ol>
+          <h6 class="font-weight-bolder text-white mb-0">مدیریت اضافه‌کاری</h6>
+        </nav>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <!-- کنترل‌های فیلتر -->
+      <div class="card mb-4">
+        <div class="card-header pb-0 d-flex align-items-center justify-content-between">
+          <div><i class="fas fa-clock me-2"></i>مدیریت اضافه‌کاری</div>
+          <div>
+            <button class="btn btn-primary btn-sm me-2" data-bs-toggle="modal" data-bs-target="#addOvertimeModal">
+              <i class="fas fa-plus me-2"></i>ثبت اضافه‌کاری
+            </button>
+            <button class="btn btn-info btn-sm" id="exportOvertime"><i class="fas fa-file-excel me-2"></i>خروجی اکسل</button>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row g-3 align-items-end">
+            <div class="col-md-3">
+              <label class="form-label">از تاریخ</label>
+              <input type="date" id="startDate" class="form-control">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">تا تاریخ</label>
+              <input type="date" id="endDate" class="form-control">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">کارمند</label>
+              <select id="employeeSelect" class="form-select">
+                <option value="">همه کارمندان</option>
+              </select>
+            </div>
+            <div class="col-md-3 d-flex gap-2">
+              <button id="loadOvertime" class="btn btn-primary flex-fill"><i class="fas fa-search me-2"></i>بارگذاری</button>
+              <button id="calculateOvertime" class="btn btn-success flex-fill"><i class="fas fa-calculator me-2"></i>محاسبه</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- خلاصه آماری -->
+      <div class="row g-4 mb-4">
+        <div class="col-md-3">
+          <div class="card text-center p-3">
+            <i class="fas fa-clock icon-lg text-primary mb-2"></i>
+            <h6 class="mb-1">کل اضافه‌کاری</h6>
+            <h4 id="totalOvertimeHours">0 ساعت</h4>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center p-3">
+            <i class="fas fa-money-bill-wave icon-lg text-success mb-2"></i>
+            <h6 class="mb-1">حق اضافه‌کاری</h6>
+            <h4 id="totalOvertimePay">0 افغانی</h4>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center p-3">
+            <i class="fas fa-users icon-lg text-warning mb-2"></i>
+            <h6 class="mb-1">کارمندان اضافه‌کار</h6>
+            <h4 id="overtimeEmployees">0 نفر</h4>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card text-center p-3">
+            <i class="fas fa-calendar-day icon-lg text-info mb-2"></i>
+            <h6 class="mb-1">روزهای اضافه‌کار</h6>
+            <h4 id="overtimeDays">0 روز</h4>
+          </div>
+        </div>
+      </div>
+      <!-- جدول اضافه‌کاری -->
+      <div class="card mb-4">
+        <div class="card-header pb-0 d-flex align-items-center justify-content-between">
+          <div><i class="fas fa-list me-2"></i>لیست اضافه‌کاری</div>
+        </div>
+        <div class="card-body px-0 pt-0 pb-2">
+          <div class="table-responsive p-0">
+            <table class="table align-items-center mb-0">
+              <thead>
+                <tr>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">کارمند</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">تاریخ</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ساعت ورود</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ساعت خروج</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ساعت کاری</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">اضافه‌کاری</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">حق اضافه‌کاری</th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">وضعیت</th>
+                </tr>
+              </thead>
+              <tbody id="overtimeTableBody">
+                <!-- داده‌ها اینجا لود می‌شوند -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal ثبت اضافه‌کاری -->
+  <div class="modal fade" id="addOvertimeModal" tabindex="-1" aria-labelledby="addOvertimeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addOvertimeModalLabel">
+            <i class="fas fa-plus me-2"></i>ثبت اضافه‌کاری جدید
+          </h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="overtimeForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">کارمند *</label>
+                <select id="modalEmployeeSelect" class="form-select" required>
+                  <option value="">انتخاب کارمند</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">تاریخ *</label>
+                <input type="date" id="modalDate" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">ساعت اضافه‌کاری</label>
+                <input type="number" id="modalOvertimeHours" class="form-control" min="0" step="0.5" placeholder="0">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">ساعت کم‌کاری</label>
+                <input type="number" id="modalUndertimeHours" class="form-control" min="0" step="0.5" placeholder="0">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+          <button type="button" class="btn btn-primary" id="saveOvertime">
+            <i class="fas fa-save me-2"></i>ذخیره
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+  <script src="../assets/js/subscription-system.js"></script>
+  <script>
+    if (!localStorage.getItem('token')) {
+      window.location.href = 'login.html';
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+      updateUIForSubscription();
+      initializePage();
+    });
+
+    // تنظیم تاریخ‌های پیش‌فرض
+    function initializePage() {
+      const today = new Date();
+      const lastMonth = new Date(today.getFullYear(), today.getMonth() - 1, 1);
+      
+      document.getElementById('startDate').value = lastMonth.toISOString().split('T')[0];
+      document.getElementById('endDate').value = today.toISOString().split('T')[0];
+      document.getElementById('modalDate').value = today.toISOString().split('T')[0];
+      
+      loadEmployees();
+      loadOvertimeData();
+    }
+
+    // بارگذاری لیست کارمندان
+    async function loadEmployees() {
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('/api/users', {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+        
+        const select = document.getElementById('employeeSelect');
+        const modalSelect = document.getElementById('modalEmployeeSelect');
+        
+        // پاک کردن گزینه‌های قبلی
+        select.innerHTML = '<option value="">همه کارمندان</option>';
+        modalSelect.innerHTML = '<option value="">انتخاب کارمند</option>';
+        
+        data.forEach(user => {
+          const option = document.createElement('option');
+          option.value = user.user_id;
+          option.textContent = user.name;
+          select.appendChild(option);
+          
+          const modalOption = document.createElement('option');
+          modalOption.value = user.user_id;
+          modalOption.textContent = user.name;
+          modalSelect.appendChild(modalOption);
+        });
+      } catch (error) {
+        console.error('خطا در بارگذاری کارمندان:', error);
+      }
+    }
+
+    // بارگذاری داده‌های اضافه‌کاری
+    async function loadOvertimeData() {
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+      const employeeId = document.getElementById('employeeSelect').value;
+      
+      try {
+        const token = localStorage.getItem('token');
+        let url = `/api/worktime/overtime?start_date=${startDate}&end_date=${endDate}`;
+        if (employeeId) {
+          url += `&user_id=${employeeId}`;
+        }
+        
+        const response = await fetch(url, {
+          headers: { 'Authorization': `Bearer ${token}` }
+        });
+        const data = await response.json();
+        
+        if (data.data) {
+          displayOvertimeData(data.data);
+          updateOvertimeStatistics(data.data);
+        }
+      } catch (error) {
+        console.error('خطا در بارگذاری اضافه‌کاری:', error);
+        alert('خطا در بارگذاری اضافه‌کاری');
+      }
+    }
+
+    // نمایش داده‌های اضافه‌کاری در جدول
+    function displayOvertimeData(overtimeData) {
+      const tbody = document.getElementById('overtimeTableBody');
+      tbody.innerHTML = '';
+
+      overtimeData.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>
+            <div class="d-flex px-2 py-1">
+              <div class="d-flex flex-column justify-content-center">
+                <h6 class="mb-0 text-sm">${item.name || 'نامشخص'}</h6>
+                <p class="text-xs text-secondary mb-0">${item.department || 'نامشخص'}</p>
+              </div>
+            </div>
+          </td>
+          <td>
+            <p class="text-xs font-weight-bold mb-0">${formatDate(item.date)}</p>
+          </td>
+          <td class="align-middle text-center text-sm">
+            <span class="badge badge-sm bg-gradient-success">${item.entry_time || '-'}</span>
+          </td>
+          <td class="align-middle text-center text-sm">
+            <span class="badge badge-sm bg-gradient-info">${item.exit_time || '-'}</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-secondary text-xs font-weight-bold">${item.work_hours ? item.work_hours.toFixed(2) : 0} ساعت</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-success text-xs font-weight-bold">${item.overtime_hours || 0} ساعت</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="text-primary text-xs font-weight-bold">${formatNumber(item.overtime_pay || 0)} افغانی</span>
+          </td>
+          <td class="align-middle text-center">
+            <span class="badge badge-sm ${item.overtime_hours > 0 ? 'bg-gradient-success' : 'bg-gradient-secondary'}">
+              ${item.overtime_hours > 0 ? 'اضافه‌کار' : 'عادی'}
+            </span>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    // به‌روزرسانی آمار اضافه‌کاری
+    function updateOvertimeStatistics(overtimeData) {
+      let totalOvertimeHours = 0;
+      let totalOvertimePay = 0;
+      let overtimeEmployees = new Set();
+      let overtimeDays = new Set();
+
+      overtimeData.forEach(item => {
+        if (item.overtime_hours > 0) {
+          totalOvertimeHours += item.overtime_hours;
+          totalOvertimePay += item.overtime_pay || 0;
+          overtimeEmployees.add(item.user_id);
+          overtimeDays.add(item.date);
+        }
+      });
+
+      document.getElementById('totalOvertimeHours').textContent = formatNumber(totalOvertimeHours) + ' ساعت';
+      document.getElementById('totalOvertimePay').textContent = formatNumber(totalOvertimePay) + ' افغانی';
+      document.getElementById('overtimeEmployees').textContent = overtimeEmployees.size + ' نفر';
+      document.getElementById('overtimeDays').textContent = overtimeDays.size + ' روز';
+    }
+
+    // تابع فرمت کردن اعداد
+    function formatNumber(num) {
+      if (!num) return '0';
+      return new Intl.NumberFormat('fa-IR').format(num);
+    }
+
+    // تابع فرمت کردن تاریخ
+    function formatDate(dateString) {
+      if (!dateString) return '-';
+      const date = new Date(dateString);
+      return date.toLocaleDateString('fa-IR');
+    }
+
+    // محاسبه اضافه‌کاری
+    async function calculateOvertime() {
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+      
+      if (!confirm('آیا می‌خواهید اضافه‌کاری محاسبه شود؟')) {
+        return;
+      }
+      
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('/api/worktime/overtime/calculate', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify({ start_date: startDate, end_date: endDate })
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          alert(`اضافه‌کاری ${result.totalProcessed} روز محاسبه شد!`);
+          loadOvertimeData();
+        } else {
+          alert('خطا در محاسبه اضافه‌کاری: ' + result.error);
+        }
+      } catch (error) {
+        console.error('خطا در محاسبه اضافه‌کاری:', error);
+        alert('خطا در محاسبه اضافه‌کاری');
+      }
+    }
+
+    // ذخیره اضافه‌کاری دستی
+    async function saveManualOvertime() {
+      const form = document.getElementById('overtimeForm');
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      const formData = {
+        user_id: document.getElementById('modalEmployeeSelect').value,
+        date: document.getElementById('modalDate').value,
+        overtime_hours: parseFloat(document.getElementById('modalOvertimeHours').value) || 0,
+        undertime_hours: parseFloat(document.getElementById('modalUndertimeHours').value) || 0,
+      };
+
+      try {
+        const token = localStorage.getItem('token');
+        const response = await fetch('/api/worktime/overtime/manual', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          alert('اضافه‌کاری با موفقیت ثبت شد!');
+          // بستن modal و پاک کردن فرم
+          const modal = bootstrap.Modal.getInstance(document.getElementById('addOvertimeModal'));
+          modal.hide();
+          form.reset();
+          // بارگذاری مجدد داده‌ها
+          loadOvertimeData();
+        } else {
+          alert('خطا در ثبت اضافه‌کاری: ' + result.error);
+        }
+      } catch (error) {
+        console.error('خطا در ثبت اضافه‌کاری:', error);
+        alert('خطا در ثبت اضافه‌کاری');
+      }
+    }
+
+    // خروجی اکسل
+    function exportOvertime() {
+      const startDate = document.getElementById('startDate').value;
+      const endDate = document.getElementById('endDate').value;
+      const employeeId = document.getElementById('employeeSelect').value;
+      
+      let url = `/api/worktime/overtime/export?start_date=${startDate}&end_date=${endDate}`;
+      if (employeeId) {
+        url += `&user_id=${employeeId}`;
+      }
+      
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `overtime-${startDate}-to-${endDate}.xlsx`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+
+    // Event Listeners
+    document.getElementById('loadOvertime').addEventListener('click', loadOvertimeData);
+    document.getElementById('calculateOvertime').addEventListener('click', calculateOvertime);
+    document.getElementById('exportOvertime').addEventListener('click', exportOvertime);
+    document.getElementById('saveOvertime').addEventListener('click', saveManualOvertime);
+  </script>
+</body>
+</html> 

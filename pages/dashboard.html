@@ -1,0 +1,1383 @@
+<!--
+=========================================================
+* Argon Dashboard 3 - v2.1.0
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/argon-dashboard
+* Copyright 2024 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>داشبورد سیستم حضور و غیاب</title>
+  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <link id="pagestyle" href="../assets/css/argon-dashboard.min.css" rel="stylesheet" />
+ <link href="../assets/css/argon-dashboard.custom-sidebar.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    /* Basic styling for dashboard cards */
+    .container-fluid > .row > .col-xl-3 > .card,
+    .container-fluid > .row > .col-sm-6 > .card,
+    .container-fluid > .row:first-of-type .card {
+      border-radius: 1rem !important;
+      overflow: hidden;
+    }
+  </style>
+  <script>
+    if (!localStorage.getItem('token')) {
+      window.location.href = 'login.html';
+    }
+  </script>
+</head>
+
+<body class="g-sidenav-show rtl bg-gray-100">
+  <!-- تست بارگذاری FontAwesome -->
+  <!-- این باکس تست باید حذف شود -->
+  <!-- <div style="position: fixed; top: 10px; right: 10px; z-index: 9999; background: white; padding: 10px; border-radius: 5px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+    <i class="fas fa-check" style="color: green; font-size: 20px;"></i>
+    <span style="margin-right: 5px; font-size: 12px;">FontAwesome OK</span>
+  </div> -->
+  
+  <div class="min-height-300 bg-dark position-absolute w-100"></div>
+  
+  <div id="sidebar-container"></div>
+  
+  <!-- Load sidebar manager -->
+  <script src="../assets/js/sidebar-manager.js"></script>
+  
+  <main class="main-content position-relative border-radius-lg">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 ">
+            <li class="breadcrumb-item text-sm ps-2"><a class="opacity-5 text-white" href="javascript:;">صفحات</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">داشبورد</li>
+          </ol>
+          <h6 class="font-weight-bolder text-white mb-0">داشبورد</h6>
+        </nav>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container-fluid py-4">
+      <!-- Subscription Info Mini Box -->
+      <div id="subscription-mini-box" style="position: absolute; top: 18px; left: 30px; z-index: 1050; min-width: 0;">
+        <span id="mini-subscription-badge" class="badge bg-primary d-flex align-items-center p-2" style="font-size: 13px; cursor: pointer;">
+          <i id="mini-subscription-icon" class="fas fa-seedling me-1"></i>
+          <span id="mini-subscription-name">پایه</span>
+        </span>
+        <div id="mini-subscription-tooltip" style="display:none; position:absolute; top:110%; left:0; background:#fff; color:#222; border:1px solid #ddd; border-radius:6px; box-shadow:0 2px 8px #0001; padding:6px 12px; font-size:12px; white-space:nowrap; z-index:9999;">
+          اطلاعات سطح اشتراک
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">کل کاربران</p>
+                    <h5 class="font-weight-bolder" id="total-users-card">
+                      0
+                    </h5>
+                  </div>
+                </div>
+                <div class="col-4 text-start">
+                  <div class="icon icon-shape bg-gradient-primary shadow-primary text-center rounded-circle">
+                    <i class="fas fa-users" style="color: #17a2b8 !important; opacity: 1 !important; font-size: 1.5rem !important;"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">ورود امروز</p>
+                    <h5 class="font-weight-bolder" id="today-checkins-card">
+                      0
+                    </h5>
+                  </div>
+                </div>
+                <div class="col-4 text-start">
+                  <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
+                    <i class="fas fa-sign-in-alt" style="color: #28a745 !important; opacity: 1 !important; font-size: 1.5rem !important;"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">خروج امروز</p>
+                    <h5 class="font-weight-bolder" id="today-checkouts-card">
+                      0
+                    </h5>
+                  </div>
+                </div>
+                <div class="col-4 text-start">
+                  <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
+                    <i class="fas fa-sign-out-alt" style="color: #dc3545 !important; opacity: 1 !important; font-size: 1.5rem !important;"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-sm-6">
+          <div class="card">
+            <div class="card-body p-3">
+              <div class="row">
+                <div class="col-8">
+                  <div class="numbers">
+                    <p class="text-sm mb-0 text-uppercase font-weight-bold">وضعیت دستگاه</p>
+                    <h5 class="font-weight-bolder" id="device-status-text">
+                      در حال بررسی...
+                    </h5>
+                  </div>
+                </div>
+                <div class="col-4 text-start">
+                  <div class="icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle" id="device-status-icon">
+                    <i class="fas fa-server" style="color: #ffc107 !important; opacity: 1 !important; font-size: 1.5rem !important;"></i>
+                    <span class="fallback-icon" style="font-size:1.5rem; display: none;">⚙️</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card mb-2">
+            <div class="card-header py-1 px-2">
+              <div class="d-flex flex-wrap gap-1 mt-0 mb-0">
+                <button class="btn btn-primary btn-sm py-1 px-2" onclick="syncUsers(event)"><i class="fas fa-users"></i> همگام‌سازی کاربران</button>
+                <button class="btn btn-success btn-sm py-1 px-2" onclick="syncAttendances(event)"><i class="fas fa-sync-alt"></i> همگام‌سازی ترددها</button>
+                <button class="btn btn-warning btn-sm py-1 px-2" onclick="backupData(event)"><i class="fas fa-database"></i> پشتیبان‌گیری از داده‌ها</button>
+                <button class="btn btn-info btn-sm py-1 px-2" onclick"restoreData(event)"><i class="fas fa-upload"></i> بازیابی داده‌ها</button>
+                <button class="btn btn-secondary btn-sm py-1 px-2" onclick="testDeviceConnection(event)"><i class="fas fa-plug"></i> تست اتصال دستگاه</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-7 mb-lg-0 mb-4">
+          <div class="card z-index-2 h-100">
+            <div class="card-header pb-0 pt-3 bg-transparent">
+              <h6 class="text-capitalize">آمار ورودها</h6>
+              <p class="text-sm mb-0">
+                <i class="fas fa-arrow-up text-success"></i>
+                <span class="font-weight-bold">نمودار ورود ماهانه</span>
+              </p>
+            </div>
+            <div class="card-body p-3">
+              <div class="chart">
+                <canvas id="chart-line" class="chart-canvas" height="300"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="card">
+            <div class="card-body p-0">
+              <img src="../assets/img/q.png" alt="رویداد ویژه" style="width:100%;height:100%;min-height:200px;object-fit:cover;display:block;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-lg-7 mb-lg-0 mb-4">
+          <div class="card">
+            <div class="card-header pb-0 p-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="mb-0">
+                    <i class="ni ni-time-alarm me-2 text-info"></i>
+                    لاگ حضور و غیاب
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-3">
+              <div class="table-responsive">
+                <table class="table align-items-center table-hover">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">کاربر</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">تاریخ و زمان</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">نوع تردد</th>
+                    </tr>
+                  </thead>
+                  <tbody id="attendance-logs-table-body">
+                    <!-- Data will be populated here by script -->
+                  </tbody>
+                </table>
+              </div>
+              <nav aria-label="Page navigation" class="mt-4">
+                <ul class="pagination justify-content-center" id="pagination-controls">
+                  <!-- Pagination controls will be generated here -->
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="card">
+            <div class="card-header pb-0 p-3">
+              <div class="d-flex justify-content-between align-items-center">
+                <div>
+                  <h6 class="mb-0">
+                    <i class="ni ni-single-02 me-2 text-primary"></i>
+                    مدیریت کاربران
+                  </h6>
+                </div>
+              </div>
+            </div>
+            <div class="card-body p-3">
+              <div class="table-responsive">
+                <table class="table align-items-center table-hover">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">کاربر</th>
+                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody id="users-table-body">
+                    <!-- User data will be populated here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>پروژه‌ها</h6>
+              <p class="text-sm">
+                <i class="fas fa-check text-info" aria-hidden="true"></i>
+                <span class="font-weight-bold ms-1">۳۰ پروژه</span> در ماه جاری
+              </p>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+              <div class="table-responsive p-0">
+                <table class="table align-items-center justify-content-center mb-0">
+                  <thead>
+                    <tr>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">پروژه</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">بودجه</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">وضعیت</th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2">تکمیل</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="d-flex px-2">
+                          <div>
+                            <img src="../assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm rounded-circle me-2" alt="spotify">
+                          </div>
+                          <div class="my-auto">
+                            <h6 class="mb-0 text-sm">Spotify</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-sm font-weight-bold mb-0">$2,500</p>
+                      </td>
+                      <td>
+                        <span class="text-xs font-weight-bold">کاری</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <div class="d-flex align-items-center justify-content-center">
+                          <span class="me-2 text-xs font-weight-bold">60%</span>
+                          <div>
+                            <div class="progress">
+                              <div class="progress-bar bg-gradient-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <button class="btn btn-link text-secondary mb-0">
+                          <i class="fa fa-ellipsis-v text-xs"></i>
+                        </button>
+                      </td>
+                    </tr>
+                     <tr>
+                      <td>
+                        <div class="d-flex px-2">
+                          <div>
+                            <img src="../assets/img/small-logos/logo-invision.svg" class="avatar avatar-sm rounded-circle me-2" alt="invision">
+                          </div>
+                          <div class="my-auto">
+                            <h6 class="mb-0 text-sm">Invision</h6>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="text-sm font-weight-bold mb-0">$5,000</p>
+                      </td>
+                      <td>
+                        <span class="text-xs font-weight-bold">انجام شده</span>
+                      </td>
+                      <td class="align-middle text-center">
+                        <div class="d-flex align-items-center justify-content-center">
+                          <span class="me-2 text-xs font-weight-bold">100%</span>
+                          <div>
+                            <div class="progress">
+                              <div class="progress-bar bg-gradient-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td class="align-middle">
+                        <button class="btn btn-link text-secondary mb-0" aria-haspopup="true" aria-expanded="false">
+                          <i class="fa fa-ellipsis-v text-xs"></i>
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add User Modal -->
+      <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addUserModalLabel">ثبت کاربر جدید</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="addUserForm">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="addName">نام کاربر *</label>
+                      <input type="text" class="form-control" id="addName" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="addUserId">شناسه کاربر *</label>
+                      <input type="number" class="form-control" id="addUserId" required>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="addProvince">ولایت</label>
+                      <input type="text" class="form-control" id="addProvince" placeholder="مثال: کابل">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="addDistrict">ولسوالی</label>
+                      <input type="text" class="form-control" id="addDistrict" placeholder="مثال: مرکز کابل">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="addDepartment">دیپارتمنت</label>
+                      <select class="form-control" id="addDepartment">
+                        <option value="">انتخاب کنید</option>
+                        <option value="اداری">اداری</option>
+                        <option value="مالی">مالی</option>
+                        <option value="فنی">فنی</option>
+                        <option value="امنیتی">امنیتی</option>
+                        <option value="پشتیبانی">پشتیبانی</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="addShift">شیفت</label>
+                      <select class="form-control" id="addShift">
+                        <option value="">انتخاب کنید</option>
+                        <option value="صبح">صبح (8 صبح - 4 عصر)</option>
+                        <option value="عصر">عصر (4 عصر - 12 شب)</option>
+                        <option value="شب">شب (12 شب - 8 صبح)</option>
+                        <option value="تمام وقت">تمام وقت</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="addSalary">معاش (افغانی)</label>
+                      <input type="number" class="form-control" id="addSalary" placeholder="مثال: 15000">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="addHireDate">تاریخ استخدام</label>
+                      <input type="date" class="form-control" id="addHireDate">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="addPhone">شماره تماس</label>
+                      <input type="tel" class="form-control" id="addPhone" placeholder="مثال: 0700123456">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="addEmail">ایمیل</label>
+                      <input type="email" class="form-control" id="addEmail" placeholder="مثال: user@example.com">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="addAddress">آدرس</label>
+                  <textarea class="form-control" id="addAddress" rows="2" placeholder="آدرس کامل"></textarea>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="addPassword">رمز عبور</label>
+                      <input type="text" class="form-control" id="addPassword" value="123456">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="addRole">نقش</label>
+                      <select class="form-control" id="addRole">
+                        <option value="0">کاربر عادی</option>
+                        <option value="1">کاربر ویژه</option>
+                        <option value="2">مدیر</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="addCardNo">شماره کارت</label>
+                  <input type="text" class="form-control" id="addCardNo" value="0">
+                </div>
+
+                <div class="d-flex justify-content-end gap-2">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+                  <button type="submit" class="btn btn-primary">ثبت کاربر</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit User Modal -->
+      <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editUserModalLabel">ویرایش کاربر</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form id="editUserForm">
+                <input type="hidden" id="editUserId">
+                
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="editName">نام کاربر *</label>
+                      <input type="text" class="form-control" id="editName" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="editProvince">ولایت</label>
+                      <input type="text" class="form-control" id="editProvince">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="editDistrict">ولسوالی</label>
+                      <input type="text" class="form-control" id="editDistrict">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="editDepartment">دیپارتمنت</label>
+                      <select class="form-control" id="editDepartment">
+                        <option value="">انتخاب کنید</option>
+                        <option value="اداری">اداری</option>
+                        <option value="مالی">مالی</option>
+                        <option value="فنی">فنی</option>
+                        <option value="امنیتی">امنیتی</option>
+                        <option value="پشتیبانی">پشتیبانی</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="editShift">شیفت</label>
+                      <select class="form-control" id="editShift">
+                        <option value="">انتخاب کنید</option>
+                        <option value="صبح">صبح (8 صبح - 4 عصر)</option>
+                        <option value="عصر">عصر (4 عصر - 12 شب)</option>
+                        <option value="شب">شب (12 شب - 8 صبح)</option>
+                        <option value="تمام وقت">تمام وقت</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="editSalary">معاش (افغانی)</label>
+                      <input type="number" class="form-control" id="editSalary">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="editPhone">شماره تماس</label>
+                      <input type="tel" class="form-control" id="editPhone">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="editEmail">ایمیل</label>
+                      <input type="email" class="form-control" id="editEmail">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="editAddress">آدرس</label>
+                  <textarea class="form-control" id="editAddress" rows="2"></textarea>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="editHireDate">تاریخ استخدام</label>
+                      <input type="date" class="form-control" id="editHireDate">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="editPassword">رمز عبور</label>
+                      <input type="text" class="form-control" id="editPassword">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="editRole">نقش</label>
+                      <select class="form-control" id="editRole">
+                        <option value="0">کاربر عادی</option>
+                        <option value="1">کاربر ویژه</option>
+                        <option value="2">مدیر</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group mb-3">
+                      <label for="editCardNo">شماره کارت</label>
+                      <input type="text" class="form-control" id="editCardNo">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="d-flex justify-content-end gap-2">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+                  <button type="submit" class="btn btn-primary">ذخیره تغییرات</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer class="footer pt-3  ">
+        <div class="container-fluid">
+          <div class="row align-items-center justify-content-lg-between">
+            <div class="col-lg-6 mb-lg-0 mb-4">
+              <div class="copyright text-center text-sm text-muted text-lg-end">
+                © <script>
+                  document.write(new Date().getFullYear())
+                </script>,
+                ساخته شده با <i class="fa fa-heart"></i> توسط
+                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
+                برای وب بهتر.
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script>
+    var win = navigator.platform.indexOf('Win') > -1;
+    if (win && document.querySelector('#sidenav-scrollbar')) {
+      var options = {
+        damping: '0.5'
+      }
+      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+    }
+  </script>
+  <!-- Github buttons -->
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/argon-dashboard.js"></script>
+
+  <!-- Custom App Script -->
+  <script>
+    let allUsers = [];
+    let currentPage = 1;
+    const logsPerPage = 10;
+
+    async function fetchAndDisplayData(page = 1) {
+      currentPage = page;
+      try {
+        const response = await fetch(`http://localhost:3001/api/data?page=${page}&limit=${logsPerPage}`, {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          }
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        allUsers = data.users.data || [];
+
+        // Update total users card
+        document.getElementById('total-users-card').innerText = allUsers.length;
+
+        const usersTableBody = document.getElementById('users-table-body');
+        usersTableBody.innerHTML = '';
+        allUsers.forEach(user => {
+          const row = `
+            <tr>
+              <td>
+                <div class="d-flex px-2 py-1">
+                  <div>
+                    <img src="../assets/img/team-2.jpg" class="avatar avatar-sm rounded-circle me-3" alt="user1">
+                  </div>
+                  <div class="d-flex flex-column justify-content-center">
+                    <h6 class="mb-0 text-sm font-weight-bold">${user.name}</h6>
+                    <p class="text-xs text-secondary mb-0">UID: ${user.userId}</p>
+                    <p class="text-xs text-info mb-0">${user.department || 'نامشخص'} | ${user.shift || 'نامشخص'}</p>
+                  </div>
+                </div>
+              </td>
+              <td class="align-middle text-center">
+                <button class="btn btn-sm btn-outline-info" onclick="openEditModal('${user.userId}')">
+                  <i class="ni ni-ruler-pencil me-1"></i>
+                  ویرایش
+                </button>
+              </td>
+            </tr>
+          `;
+          usersTableBody.innerHTML += row;
+        });
+
+        const logsTableBody = document.getElementById('attendance-logs-table-body');
+        logsTableBody.innerHTML = '';
+        const attendanceLogs = data.logs.data || [];
+        const totalLogs = data.logs.total || 0;
+
+        if (attendanceLogs.length === 0 && page === 1) {
+            logsTableBody.innerHTML = '<tr><td colspan="3" class="text-center text-muted py-5">هیچ ترددی برای نمایش وجود ندارد.</td></tr>';
+        } else {
+            attendanceLogs.forEach(log => {
+              const user = allUsers.find(u => u.userId === log.deviceUserId) || {
+                name: `کاربر ${log.deviceUserId}`
+              };
+              const timestamp = new Date(log.recordTime).toLocaleString('fa-IR', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit'
+              });
+              const typeClass = log.type === 'ورود' ? 'bg-gradient-success' : 'bg-gradient-danger';
+              const typeIcon = log.type === 'ورود' ? 'ni-lock-circle-open' : 'ni-lock-circle';
+    
+              const row = `
+                <tr>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                      <div class="d-flex flex-column justify-content-center">
+                        <h6 class="mb-0 text-sm font-weight-bold">${user.name}</h6>
+                        <p class="text-xs text-secondary mb-0">شناسه: ${log.deviceUserId}</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="text-xs font-weight-bold mb-0">${timestamp}</p>
+                  </td>
+                  <td class="align-middle text-center">
+                    <span class="badge badge-sm ${typeClass}">
+                      <i class="ni ${typeIcon} me-1"></i>
+                      ${log.type}
+                    </span>
+                  </td>
+                </tr>
+              `;
+              logsTableBody.innerHTML += row;
+            });
+        }
+
+        renderPagination(totalLogs);
+
+        // Function to update dashboard statistics
+        await updateDashboardStats();
+
+      } catch (error) {
+        console.error('Failed to fetch data:', error);
+        document.getElementById('attendance-logs-table-body').innerHTML = '<tr><td colspan="3" class="text-center text-danger">خطا در بارگذاری اطلاعات. لطفاً از روشن بودن سرور اطمینان حاصل کنید و صفحه را رفرش نمایید.</td></tr>';
+      }
+    }
+
+    function renderPagination(totalLogs) {
+      const paginationControls = document.getElementById('pagination-controls');
+      paginationControls.innerHTML = '';
+      const totalPages = Math.ceil(totalLogs / logsPerPage);
+
+      if (totalPages <= 1) return;
+
+      const prevLi = document.createElement('li');
+      prevLi.className = `page-item ${currentPage === 1 ? 'disabled' : ''}`;
+      const prevA = document.createElement('a');
+      prevA.className = 'page-link';
+      prevA.href = '#';
+      prevA.setAttribute('aria-label', 'Previous');
+      prevA.innerHTML = '<span aria-hidden="true">&laquo;</span>';
+      prevA.onclick = (e) => {
+        e.preventDefault();
+        if (currentPage > 1) fetchAndDisplayData(currentPage - 1);
+      };
+      prevLi.appendChild(prevA);
+      paginationControls.appendChild(prevLi);
+
+      for (let i = 1; i <= totalPages; i++) {
+        const li = document.createElement('li');
+        li.className = `page-item ${i === currentPage ? 'active' : ''}`;
+        const a = document.createElement('a');
+        a.className = 'page-link';
+        a.href = '#';
+        a.innerText = i;
+        a.onclick = (e) => {
+          e.preventDefault();
+          fetchAndDisplayData(i);
+        };
+        li.appendChild(a);
+        paginationControls.appendChild(li);
+      }
+
+      const nextLi = document.createElement('li');
+      nextLi.className = `page-item ${currentPage === totalPages ? 'disabled' : ''}`;
+      const nextA = document.createElement('a');
+      nextA.className = 'page-link';
+      nextA.href = '#';
+      nextA.setAttribute('aria-label', 'Next');
+      nextA.innerHTML = '<span aria-hidden="true">&raquo;</span>';
+      nextA.onclick = (e) => {
+        e.preventDefault();
+        if (currentPage < totalPages) fetchAndDisplayData(currentPage + 1);
+      };
+      nextLi.appendChild(nextA);
+      paginationControls.appendChild(nextLi);
+    }
+
+    async function syncData(url, successMessage, button) {
+        const originalText = button.innerHTML;
+        button.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> در حال همگام‌سازی...';
+        button.disabled = true;
+
+        try {
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                  'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                alert(successMessage + '\n' + result.message);
+                fetchAndDisplayData(1); // Refresh data and go to first page
+            } else {
+                alert('خطا در همگام‌سازی: ' + result.error);
+            }
+        } catch (e) {
+            console.error('Sync failed:', e);
+            alert('عملیات همگام‌سازی با شکست مواجه شد.');
+        } finally {
+            button.innerHTML = originalText;
+            button.disabled = false;
+        }
+    }
+
+    function syncUsers(event) {
+        syncData('http://localhost:3001/api/sync-users', 'کاربران با موفقیت همگام‌سازی شدند.', event.target);
+    }
+
+    function syncAttendances(event) {
+        syncData('http://localhost:3001/api/sync-attendances', 'ترددها با موفقیت همگام‌سازی شدند.', event.target);
+    }
+
+
+    function openEditModal(userId) {
+      const user = allUsers.find(u => u.userId === userId);
+      if (user) {
+        const sanitizedName = user.name.replace(/[^\x20-\x7E\u0600-\u06FF]/g, '');
+        document.getElementById('editUserId').value = user.userId;
+        document.getElementById('editName').value = sanitizedName;
+        document.getElementById('editPassword').value = user.password || '';
+        document.getElementById('editRole').value = user.role || 0;
+        document.getElementById('editCardNo').value = user.cardno || '0';
+        document.getElementById('editProvince').value = user.province || '';
+        document.getElementById('editDistrict').value = user.district || '';
+        document.getElementById('editSalary').value = user.salary || '';
+        document.getElementById('editShift').value = user.shift || '';
+        document.getElementById('editDepartment').value = user.department || '';
+        document.getElementById('editPhone').value = user.phone || '';
+        document.getElementById('editEmail').value = user.email || '';
+        document.getElementById('editAddress').value = user.address || '';
+        document.getElementById('editHireDate').value = user.hire_date || '';
+
+        var myModal = new bootstrap.Modal(document.getElementById('editUserModal'));
+        myModal.show();
+      }
+    }
+
+    document.getElementById('editUserForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const userId = document.getElementById('editUserId').value;
+      const name = document.getElementById('editName').value;
+      const password = document.getElementById('editPassword').value;
+      const role = document.getElementById('editRole').value;
+      const cardno = document.getElementById('editCardNo').value;
+      const province = document.getElementById('editProvince').value;
+      const district = document.getElementById('editDistrict').value;
+      const salary = document.getElementById('editSalary').value;
+      const shift = document.getElementById('editShift').value;
+      const department = document.getElementById('editDepartment').value;
+      const phone = document.getElementById('editPhone').value;
+      const email = document.getElementById('editEmail').value;
+      const address = document.getElementById('editAddress').value;
+      const hire_date = document.getElementById('editHireDate').value;
+
+      try {
+        const response = await fetch('http://localhost:3001/api/zk/user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          },
+          body: JSON.stringify({
+            userId,
+            name,
+            password,
+            role,
+            cardno,
+            province,
+            district,
+            salary,
+            shift,
+            department,
+            phone,
+            email,
+            address,
+            hire_date
+          })
+        });
+        const result = await response.json();
+        if (result.success) {
+          alert('کاربر با موفقیت به‌روزرسانی شد.');
+          var myModal = bootstrap.Modal.getInstance(document.getElementById('editUserModal'));
+          myModal.hide();
+          fetchAndDisplayData(currentPage); // Refresh current page
+        } else {
+          alert('خطا در به‌روزرسانی: ' + result.error);
+        }
+      } catch (error) {
+        console.error('Update failed:', error);
+        alert('عملیات به‌روزرسانی با شکست مواجه شد.');
+      }
+    });
+
+    // Initial data load on page startup
+    document.addEventListener('DOMContentLoaded', async () => {
+      await fetchAndDisplayData(1);
+      checkDeviceStatus(); // Check device connection status
+    });
+
+    function showAddUserModal() {
+      var myModal = new bootstrap.Modal(document.getElementById('addUserModal'));
+      myModal.show();
+    }
+
+    document.getElementById('addUserForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const userId = document.getElementById('addUserId').value;
+      const name = document.getElementById('addName').value;
+      const password = document.getElementById('addPassword').value;
+      const role = document.getElementById('addRole').value;
+      const cardno = document.getElementById('addCardNo').value;
+      const province = document.getElementById('addProvince').value;
+      const district = document.getElementById('addDistrict').value;
+      const salary = document.getElementById('addSalary').value;
+      const shift = document.getElementById('addShift').value;
+      const department = document.getElementById('addDepartment').value;
+      const phone = document.getElementById('addPhone').value;
+      const email = document.getElementById('addEmail').value;
+      const address = document.getElementById('addAddress').value;
+      const hire_date = document.getElementById('addHireDate').value;
+
+      try {
+        const response = await fetch('http://localhost:3001/api/zk/user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          },
+          body: JSON.stringify({
+            userId,
+            name,
+            password,
+            role,
+            cardno,
+            province,
+            district,
+            salary,
+            shift,
+            department,
+            phone,
+            email,
+            address,
+            hire_date
+          })
+        });
+        const result = await response.json();
+        if (result.success) {
+          alert('کاربر با موفقیت ثبت شد.');
+          var myModal = bootstrap.Modal.getInstance(document.getElementById('addUserModal'));
+          myModal.hide();
+          fetchAndDisplayData(1); // Refresh user list
+        } else {
+          alert('خطا در ثبت کاربر: ' + result.error);
+        }
+      } catch (error) {
+        console.error('Add user failed:', error);
+        alert('عملیات ثبت کاربر با شکست مواجه شد.');
+      }
+    });
+
+    async function checkDeviceStatus() {
+      const deviceStatusText = document.getElementById('device-status-text');
+      const deviceStatusIcon = document.getElementById('device-status-icon');
+      
+      // Set loading state
+      deviceStatusText.innerText = 'در حال بررسی...';
+      deviceStatusText.className = 'font-weight-bolder text-warning';
+      deviceStatusIcon.className = 'icon icon-shape bg-gradient-warning shadow-warning text-center rounded-circle';
+      deviceStatusIcon.innerHTML = '<i class="fas fa-server" style="color: #ffc107 !important; opacity: 1 !important; font-size: 1.5rem !important;"></i><span class="fallback-icon" style="font-size:1.5rem;">⚙️</span>';
+      showFallbackIfNeeded();
+      
+      try {
+        const response = await fetch('http://localhost:3001/api/device-status');
+        const data = await response.json();
+        
+        if (data.connected) {
+          // Device is connected
+          deviceStatusText.innerText = 'آنلاین';
+          deviceStatusText.className = 'font-weight-bolder text-success';
+          deviceStatusIcon.className = 'icon icon-shape bg-gradient-success shadow-success text-center rounded-circle';
+          deviceStatusIcon.innerHTML = '<i class="fas fa-check" style="color: white !important; opacity: 1 !important; font-size: 1.5rem !important;"></i><span class="fallback-icon" style="font-size:1.5rem;">✔️</span>';
+        } else {
+          // Device is not connected
+          deviceStatusText.innerText = 'آفلاین';
+          deviceStatusText.className = 'font-weight-bolder text-danger';
+          deviceStatusIcon.className = 'icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle';
+          deviceStatusIcon.innerHTML = '<i class="fas fa-times" style="color: white !important; opacity: 1 !important; font-size: 1.5rem !important;"></i><span class="fallback-icon" style="font-size:1.5rem;">❌</span>';
+        }
+      } catch (error) {
+        console.error('Error checking device status:', error);
+        deviceStatusText.innerText = 'خطا در اتصال';
+        deviceStatusText.className = 'font-weight-bolder text-danger';
+        deviceStatusIcon.className = 'icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle';
+        deviceStatusIcon.innerHTML = '<i class="fas fa-exclamation-triangle" style="color: white !important; opacity: 1 !important; font-size: 1.5rem !important;"></i><span class="fallback-icon" style="font-size:1.5rem;">⚠️</span>';
+      } finally {
+        showFallbackIfNeeded();
+      }
+    }
+
+    let fallbackInterval = null;
+    function showFallbackIfNeeded() {
+      let checks = 0;
+      if (fallbackInterval) clearInterval(fallbackInterval);
+      fallbackInterval = setInterval(function() {
+        const iconContainer = document.getElementById('device-status-icon');
+        if (!iconContainer) return;
+        const faIcon = iconContainer.querySelector('i.fas');
+        const fallback = iconContainer.querySelector('.fallback-icon');
+        if (faIcon && fallback) {
+          const style = window.getComputedStyle(faIcon, '::before');
+          const isLoaded = style.fontFamily.includes('Font Awesome');
+          const hasContent = style.content !== 'none' && style.content !== 'normal';
+          if (isLoaded && hasContent) {
+            faIcon.style.display = 'inline-block';
+            fallback.style.display = 'none';
+            clearInterval(fallbackInterval);
+          } else {
+            faIcon.style.display = 'none';
+            fallback.style.display = 'inline-block';
+            // اگر بعد از 10 بار هنوز لود نشد، تایمر را قطع کن
+            if (++checks > 10) clearInterval(fallbackInterval);
+          }
+        }
+      }, 500);
+    }
+
+    // اگر FontAwesome لود نشد، آیکون متنی جایگزین را نمایش بده
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        document.querySelectorAll('#device-status-icon .fallback-icon').forEach(function(span) {
+          var faIcon = span.previousElementSibling;
+          if (faIcon && window.getComputedStyle(faIcon).display === 'none') {
+            span.style.display = 'inline';
+          }
+        });
+      }, 1000);
+    });
+
+    // Function to update dashboard statistics
+    async function updateDashboardStats() {
+      try {
+        console.log('Fetching dashboard stats...');
+        const response = await fetch('http://localhost:3001/api/dashboard-stats', {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          }
+        });
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const stats = await response.json();
+        console.log('Dashboard stats received:', stats);
+        
+        // Update total users
+        const totalUsersElement = document.getElementById('total-users-card');
+        if (totalUsersElement) {
+          totalUsersElement.textContent = stats.totalUsers || 0;
+          console.log('Updated total users:', stats.totalUsers);
+        }
+
+        // Update today's check-ins
+        const todayCheckinsElement = document.getElementById('today-checkins-card');
+        if (todayCheckinsElement) {
+          todayCheckinsElement.textContent = stats.todayCheckins || 0;
+          console.log('Updated today checkins:', stats.todayCheckins);
+        }
+
+        // Update today's check-outs
+        const todayCheckoutsElement = document.getElementById('today-checkouts-card');
+        if (todayCheckoutsElement) {
+          todayCheckoutsElement.textContent = stats.todayCheckouts || 0;
+          console.log('Updated today checkouts:', stats.todayCheckouts);
+        }
+      } catch (error) {
+        console.error('Failed to update dashboard stats:', error);
+        // Set default values on error
+        const totalUsersElement = document.getElementById('total-users-card');
+        const todayCheckinsElement = document.getElementById('today-checkins-card');
+        const todayCheckoutsElement = document.getElementById('today-checkouts-card');
+        
+        if (totalUsersElement) totalUsersElement.textContent = '0';
+        if (todayCheckinsElement) todayCheckinsElement.textContent = '0';
+        if (todayCheckoutsElement) todayCheckoutsElement.textContent = '0';
+      }
+    }
+
+    // بررسی بارگذاری FontAwesome
+    document.addEventListener('DOMContentLoaded', function() {
+      // تست بارگذاری FontAwesome
+      const testIcon = document.createElement('i');
+      testIcon.className = 'fas fa-check';
+      testIcon.style.position = 'absolute';
+      testIcon.style.left = '-9999px';
+      document.body.appendChild(testIcon);
+      
+      const isFontAwesomeLoaded = window.getComputedStyle(testIcon, ':before').content !== 'none';
+      
+      if (!isFontAwesomeLoaded) {
+        console.warn('FontAwesome not loaded, using fallback icons');
+        // استفاده از آیکون‌های جایگزین
+        const fallbackIcons = {
+          'fas fa-users': '👥',
+          'fas fa-sign-in-alt': '⬇️',
+          'fas fa-sign-out-alt': '⬆️',
+          'fas fa-server': '⚙️',
+          'fas fa-tachometer-alt': '🏠',
+          'fas fa-clock': '⏰',
+          'fas fa-calendar-times': '📅',
+          'fas fa-chart-bar': '📊',
+          'fas fa-bell': '🔔',
+          'fas fa-cog': '⚙️'
+        };
+        
+        // جایگزینی آیکون‌ها
+        document.querySelectorAll('.fas').forEach(icon => {
+          const className = icon.className;
+          if (fallbackIcons[className]) {
+            icon.style.display = 'none';
+            const span = document.createElement('span');
+            span.textContent = fallbackIcons[className];
+            span.style.fontSize = icon.style.fontSize || '1.5rem';
+            span.style.color = icon.style.color || 'white';
+            span.style.opacity = icon.style.opacity || '1';
+            icon.parentNode.appendChild(span);
+          }
+        });
+      }
+      
+      document.body.removeChild(testIcon);
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      // نمودار خطی آبی Argon Dashboard
+      var ctx1 = document.getElementById("chart-line").getContext("2d");
+      var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+      gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
+      gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
+      gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
+      new Chart(ctx1, {
+        type: "line",
+        data: {
+          labels: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر"],
+          datasets: [{
+            label: "ورودها",
+            tension: 0.4,
+            borderWidth: 3,
+            pointRadius: 0,
+            borderColor: "#5e72e4",
+            backgroundColor: gradientStroke1,
+            fill: true,
+            data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+            maxBarThickness: 6
+          }],
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false,
+            }
+          },
+          interaction: {
+            intersect: false,
+            mode: 'index',
+          },
+          scales: {
+            y: {
+              grid: {
+                drawBorder: false,
+                display: true,
+                drawOnChartArea: true,
+                drawTicks: false,
+                borderDash: [5, 5]
+              },
+              ticks: {
+                display: true,
+                padding: 10,
+                color: '#fbfbfb',
+                font: { size: 11, family: "Vazirmatn", style: 'normal', lineHeight: 2 },
+              }
+            },
+            x: {
+              grid: {
+                drawBorder: false,
+                display: false,
+                drawOnChartArea: false,
+                drawTicks: false,
+                borderDash: [5, 5]
+              },
+              ticks: {
+                display: true,
+                color: '#ccc',
+                padding: 20,
+                font: { size: 11, family: "Vazirmatn", style: 'normal', lineHeight: 2 },
+              }
+            },
+          },
+        },
+      });
+    });
+
+    // باکس کوچک سطح اشتراک
+    function renderMiniSubscriptionBox() {
+      const level = localStorage.getItem('subscriptionLevel') || 'basic';
+      const info = {
+        basic: {
+          name: 'پایه',
+          desc: 'حداکثر ۵۰ کاربر، ۲ شیفت، ۱ دستگاه، بدون حقوق و امکانات پایه',
+          icon: 'fa-seedling',
+          color: 'primary'
+        },
+        standard: {
+          name: 'استاندارد',
+          desc: 'حداکثر ۳۰۰ کاربر، ۳ شیفت، ۳ دستگاه، حقوق فعال، امکانات بیشتر',
+          icon: 'fa-star',
+          color: 'warning'
+        },
+        pro: {
+          name: 'حرفه‌ای',
+          desc: 'بدون محدودیت، همه امکانات فعال',
+          icon: 'fa-gem',
+          color: 'success'
+        }
+      };
+      const badge = document.getElementById('mini-subscription-badge');
+      const name = document.getElementById('mini-subscription-name');
+      const icon = document.getElementById('mini-subscription-icon');
+      const tooltip = document.getElementById('mini-subscription-tooltip');
+      if (info[level]) {
+        name.textContent = info[level].name;
+        badge.className = `badge bg-${info[level].color} d-flex align-items-center p-2`;
+        icon.className = `fas ${info[level].icon} me-1`;
+        tooltip.textContent = info[level].desc;
+      } else {
+        name.textContent = 'پایه';
+        badge.className = 'badge bg-primary d-flex align-items-center p-2';
+        icon.className = 'fas fa-seedling me-1';
+        tooltip.textContent = 'اطلاعات سطح یافت نشد.';
+      }
+    }
+    document.addEventListener('DOMContentLoaded', renderMiniSubscriptionBox);
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'subscriptionLevel') renderMiniSubscriptionBox();
+    });
+    // Tooltip hover
+    document.addEventListener('DOMContentLoaded', function() {
+      const badge = document.getElementById('mini-subscription-badge');
+      const tooltip = document.getElementById('mini-subscription-tooltip');
+      badge.addEventListener('mouseenter', function() {
+        tooltip.style.display = 'block';
+      });
+      badge.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+    });
+  </script>
+
+  <script src="../assets/js/subscription-system.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    updateUIForSubscription();
+  });
+  </script>
+
+  <script>
+    function backupData(event) {
+      alert('پشتیبان‌گیری از داده‌ها انجام شد.');
+    }
+    function restoreData(event) {
+      alert('بازیابی داده‌ها انجام شد.');
+    }
+    function testDeviceConnection(event) {
+      alert('اتصال به دستگاه برقرار است.');
+    }
+  
+  </script>
+
+  <!-- اعلان‌های هوشمند -->
+  <div class="row mt-4">
+    <div class="col-lg-6 col-md-8 mx-auto">
+      <div class="card">
+        <div class="card-header pb-0">
+          <h6>اعلان‌های هوشمند</h6>
+        </div>
+        <div class="card-body" id="notifications-list">
+          <div class="text-center text-secondary">در حال بارگذاری...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+  fetch('/api/report/smart-notifications')
+    .then(res => res.json())
+    .then(data => {
+      const list = document.getElementById('notifications-list');
+      if (data.data.length === 0) {
+        list.innerHTML = '<div class="text-success">اعلانی وجود ندارد.</div>';
+        return;
+      }
+      list.innerHTML = data.data.map(n => `
+        <div class="alert alert-${n.type === 'contract_end' ? 'danger' : n.type === 'late_entry' ? 'warning' : 'info'} mb-2">
+          <strong>${n.name}:</strong> ${n.message}
+        </div>
+      `).join('');
+    });
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,737 @@
+<!--
+=========================================================
+* تنظیمات - Argon Dashboard Style
+=========================================================
+-->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>تنظیمات - سیستم حضور و غیاب</title>
+  <link href="https://fonts.googleapis.com/css?family=Vazirmatn:400,700&display=swap" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <link href="../assets/css/argon-dashboard.custom-sidebar.css" rel="stylesheet" />
+  <style>
+    body { font-family: 'Vazirmatn', sans-serif; }
+    .card, .modal-content {
+      border-radius: 1rem !important;
+      box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.08);
+    }
+    .card-header, .modal-header {
+      background: linear-gradient(90deg, #f8fafc 60%, #e9ecef 100%);
+      border-radius: 1rem 1rem 0 0 !important;
+      border-bottom: 1px solid #ececec;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .card-body, .modal-body {
+      background: #fff;
+      border-radius: 0 0 1rem 1rem !important;
+      padding: 1.5rem;
+    }
+    .btn-primary, .btn-success, .btn-outline-primary, .btn-outline-secondary, .btn-secondary {
+      border-radius: 0.5rem;
+      font-weight: 500;
+      box-shadow: 0 2px 8px 0 rgba(94, 114, 228, 0.08);
+      transition: all 0.2s;
+    }
+    .btn-primary:hover, .btn-success:hover, .btn-outline-primary:hover, .btn-outline-secondary:hover, .btn-secondary:hover {
+      filter: brightness(0.95);
+      box-shadow: 0 4px 16px 0 rgba(94, 114, 228, 0.12);
+    }
+    .form-control, .form-select {
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+    }
+    .table {
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 2px 8px 0 rgba(34, 41, 47, 0.04);
+    }
+    .table th, .table td {
+      vertical-align: middle;
+      font-size: 0.98rem;
+    }
+    .modal-header .btn-close {
+      margin: 0;
+      padding: 0.5rem 0.75rem;
+      background: #f8fafc;
+      border-radius: 0.5rem;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .modal-header .btn-close:hover {
+      opacity: 1;
+    }
+    @media (max-width: 768px) {
+      .card-body, .modal-body {
+        padding: 1rem;
+      }
+      .modal-dialog {
+        margin: 1rem auto;
+      }
+    }
+    .sidenav {
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      border: 1px solid #f8f9fa;
+      transition: all 0.2s ease;
+    }
+    .sidenav-header {
+      background: #f8f9fa;
+      border-bottom: 1px solid #e9ecef;
+      padding: 1.25rem 1rem;
+      margin: -1rem -1rem 1rem -1rem;
+    }
+    .sidenav-header .navbar-brand {
+      color: #495057 !important;
+      font-weight: 600;
+    }
+    .nav-item {
+      margin: 0.125rem 0;
+    }
+    .nav-link {
+      border-radius: 0.5rem;
+      margin: 0 0.25rem;
+      padding: 0.75rem 1rem;
+      transition: all 0.2s ease;
+      color: #6c757d !important;
+      font-weight: 500;
+    }
+    .nav-link:hover {
+      background: #f8f9fa;
+      color: #495057 !important;
+      transform: none;
+    }
+    .nav-link.active {
+      background: #e9ecef;
+      color: #212529 !important;
+      font-weight: 600;
+    }
+    .icon-shape {
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 0.375rem;
+      background: #f8f9fa;
+      color: #6c757d;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-link:hover .icon-shape {
+      background: #e9ecef;
+      color: #495057;
+    }
+    .nav-link.active .icon-shape {
+      background: #dee2e6;
+      color: #212529;
+    }
+    .nav-link-text {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .nav-link.active .nav-link-text {
+      font-weight: 600;
+    }
+    /* رنگ‌های آیکون‌ها */
+    .nav-link .icon-shape i.fa-tachometer-alt {
+      color: #17a2b8 !important;
+    }
+    .nav-link .icon-shape i.fa-users {
+      color: #28a745 !important;
+    }
+    .nav-link .icon-shape i.fa-clock {
+      color: #ffc107 !important;
+    }
+    .nav-link .icon-shape i.fa-calendar-times {
+      color: #dc3545 !important;
+    }
+    .nav-link .icon-shape i.fa-chart-bar {
+      color: #6f42c1 !important;
+    }
+    .nav-link .icon-shape i.fa-bell {
+      color: #fd7e14 !important;
+    }
+    .nav-link .icon-shape i.fa-cog {
+      color: #6c757d !important;
+    }
+    /* حالت hover */
+    .nav-link:hover .icon-shape i.fa-tachometer-alt {
+      color: #138496 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-users {
+      color: #1e7e34 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-clock {
+      color: #e0a800 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-calendar-times {
+      color: #c82333 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-chart-bar {
+      color: #5a32a3 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-bell {
+      color: #e8690b !important;
+    }
+    .nav-link:hover .icon-shape i.fa-cog {
+      color: #545b62 !important;
+    }
+    /* حالت active */
+    .nav-link.active .icon-shape i.fa-tachometer-alt {
+      color: #0f6674 !important;
+    }
+    .nav-link.active .icon-shape i.fa-users {
+      color: #155724 !important;
+    }
+    .nav-link.active .icon-shape i.fa-clock {
+      color: #b8860b !important;
+    }
+    .nav-link.active .icon-shape i.fa-calendar-times {
+      color: #a71e2a !important;
+    }
+    .nav-link.active .icon-shape i.fa-chart-bar {
+      color: #4a1d96 !important;
+    }
+    .nav-link.active .icon-shape i.fa-bell {
+      color: #d63384 !important;
+    }
+    .nav-link.active .icon-shape i.fa-cog {
+      color: #495057 !important;
+    }
+  </style>
+</head>
+
+<body class="g-sidenav-show rtl bg-gray-100">
+  <div class="min-height-300 bg-dark position-absolute w-100"></div>
+  <!-- دکمه خروج از حساب -->
+  <button id="logoutBtn" class="btn btn-danger" style="position: fixed; top: 20px; left: 20px; z-index: 9999;">خروج</button>
+  <div id="sidebar-container"></div>
+  
+  <!-- Load sidebar manager -->
+  <script src="../assets/js/sidebar-manager.js"></script>
+  
+  <main class="main-content position-relative border-radius-lg">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 ">
+            <li class="breadcrumb-item text-sm ps-2"><a class="opacity-5 text-white" href="dashboard.html">صفحات</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">تنظیمات</li>
+          </ol>
+          <h6 class="font-weight-bolder text-white mb-0">تنظیمات سیستم</h6>
+        </nav>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>تنظیمات ساعات کاری</h6>
+            </div>
+            <div class="card-body">
+              <form id="workHoursForm">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>ساعت شروع کار صبح</label>
+                      <input type="time" class="form-control" id="morningStart" value="08:00">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>ساعت پایان کار صبح</label>
+                      <input type="time" class="form-control" id="morningEnd" value="12:00">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>ساعت شروع کار عصر</label>
+                      <input type="time" class="form-control" id="afternoonStart" value="13:00">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>ساعت پایان کار عصر</label>
+                      <input type="time" class="form-control" id="afternoonEnd" value="17:00">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mt-3">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>حداکثر تاخیر مجاز (دقیقه)</label>
+                      <input type="number" class="form-control" id="maxLateMinutes" value="15">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>ساعات کاری روزانه</label>
+                      <input type="number" class="form-control" id="dailyWorkHours" value="8" readonly>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">ذخیره تنظیمات</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>تنظیمات تعطیلات رسمی</h6>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>تاریخ تعطیل</label>
+                    <input type="date" class="form-control" id="holidayDate">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>عنوان تعطیل</label>
+                    <input type="text" class="form-control" id="holidayTitle" placeholder="مثال: عید فطر">
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <label>&nbsp;</label>
+                    <button type="button" class="btn btn-success w-100" onclick="addHoliday()">افزودن</button>
+                  </div>
+                </div>
+              </div>
+              <div class="table-responsive mt-3">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>تاریخ</th>
+                      <th>عنوان</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody id="holidaysTable">
+                    <!-- تعطیلات اینجا نمایش داده می‌شوند -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <h6>تنظیمات دستگاه‌ها</h6>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>آدرس IP دستگاه</label>
+                    <input type="text" class="form-control" id="deviceIP" value="192.168.0.50">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>پورت دستگاه</label>
+                    <input type="number" class="form-control" id="devicePort" value="4370">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>نام دستگاه</label>
+                    <input type="text" class="form-control" id="deviceName" value="دستگاه اصلی">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>موقعیت دستگاه</label>
+                    <input type="text" class="form-control" id="deviceLocation" value="ورودی اصلی">
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-primary mt-3" onclick="saveDeviceSettings()">ذخیره تنظیمات دستگاه</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- تنظیمات پویا -->
+      <div class="row mt-4">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="card">
+            <div class="card-header pb-0">
+              <h6>تنظیمات سیستم</h6>
+            </div>
+            <div class="card-body">
+              <form id="settings-form"></form>
+              <div id="settings-msg" class="mt-2"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer pt-3">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6 mb-lg-0 mb-4">
+            <div class="copyright text-center text-sm text-muted text-lg-end">
+              © <script>document.write(new Date().getFullYear())</script>,
+              ساخته شده با <i class="fa fa-heart"></i> برای سیستم حضور و غیاب
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Core JS Files -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+  <script src="../assets/js/subscription-system.js"></script>
+
+  <script>
+    if (!localStorage.getItem('token')) {
+      window.location.href = 'login.html';
+    }
+
+    // Load settings on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      loadSettings();
+      loadHolidays();
+      updateUIForSubscription();
+      updateDeviceLockUI();
+    });
+
+    // Save work hours settings
+    document.getElementById('workHoursForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      saveWorkHours();
+    });
+
+    async function saveWorkHours() {
+      const settings = {
+        morningStart: document.getElementById('morningStart').value,
+        morningEnd: document.getElementById('morningEnd').value,
+        afternoonStart: document.getElementById('afternoonStart').value,
+        afternoonEnd: document.getElementById('afternoonEnd').value,
+        maxLateMinutes: document.getElementById('maxLateMinutes').value
+      };
+
+      try {
+        // Save each setting individually
+        const settingKeys = Object.keys(settings);
+        for (const key of settingKeys) {
+          await fetch('http://localhost:3001/api/settings', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              setting_key: key,
+              setting_value: settings[key],
+              description: `تنظیمات ساعات کاری - ${key}`
+            })
+          });
+        }
+        
+        alert('تنظیمات ساعات کاری با موفقیت ذخیره شد.');
+      } catch (error) {
+        console.error('Error saving work hours settings:', error);
+        alert('خطا در ذخیره تنظیمات');
+      }
+    }
+
+    async function loadSettings() {
+      try {
+        const response = await fetch('http://localhost:3001/api/settings');
+        const data = await response.json();
+        const settings = {};
+        
+        data.data.forEach(setting => {
+          settings[setting.setting_key] = setting.setting_value;
+        });
+        
+        if (settings.morningStart) document.getElementById('morningStart').value = settings.morningStart;
+        if (settings.morningEnd) document.getElementById('morningEnd').value = settings.morningEnd;
+        if (settings.afternoonStart) document.getElementById('afternoonStart').value = settings.afternoonStart;
+        if (settings.afternoonEnd) document.getElementById('afternoonEnd').value = settings.afternoonEnd;
+        if (settings.maxLateMinutes) document.getElementById('maxLateMinutes').value = settings.maxLateMinutes;
+        if (settings.deviceIP) document.getElementById('deviceIP').value = settings.deviceIP;
+        if (settings.devicePort) document.getElementById('devicePort').value = settings.devicePort;
+        if (settings.deviceName) document.getElementById('deviceName').value = settings.deviceName;
+        if (settings.deviceLocation) document.getElementById('deviceLocation').value = settings.deviceLocation;
+      } catch (error) {
+        console.error('Error loading settings:', error);
+        // Fallback to localStorage if API fails
+        const settings = JSON.parse(localStorage.getItem('workHoursSettings') || '{}');
+        if (settings.morningStart) document.getElementById('morningStart').value = settings.morningStart;
+        if (settings.morningEnd) document.getElementById('morningEnd').value = settings.morningEnd;
+        if (settings.afternoonStart) document.getElementById('afternoonStart').value = settings.afternoonStart;
+        if (settings.afternoonEnd) document.getElementById('afternoonEnd').value = settings.afternoonEnd;
+        if (settings.maxLateMinutes) document.getElementById('maxLateMinutes').value = settings.maxLateMinutes;
+      }
+    }
+
+    let currentHolidayCount = 0;
+
+    async function fetchHolidays() {
+      // فرض: API یا منبع داده تعطیلات
+      const response = await fetch('http://localhost:3001/api/holidays');
+      const data = await response.json();
+      const holidays = data.data || [];
+      currentHolidayCount = holidays.length;
+      // ... existing code ...
+      // Lock add holiday button if limit reached
+      const addBtn = document.querySelector('button[onclick="addHoliday()"]');
+      if (addBtn) {
+        if (!checkLimit('holiday', currentHolidayCount)) {
+          addBtn.disabled = true;
+          addBtn.classList.add('locked-feature');
+          if (!addBtn.querySelector('.fa-lock')) {
+            const lockIcon = document.createElement('i');
+            lockIcon.className = 'fa fa-lock ms-1';
+            addBtn.appendChild(lockIcon);
+          }
+          addBtn.title = 'سقف تعداد تعطیلات در سطح فعلی پر شده است.';
+        } else {
+          addBtn.disabled = false;
+          addBtn.classList.remove('locked-feature');
+          const lock = addBtn.querySelector('.fa-lock');
+          if (lock) lock.remove();
+          addBtn.title = '';
+        }
+      }
+    }
+
+    async function addHoliday() {
+      const date = document.getElementById('holidayDate').value;
+      const title = document.getElementById('holidayTitle').value;
+      
+      if (!date || !title) {
+        alert('لطفاً تاریخ و عنوان تعطیل را وارد کنید.');
+        return;
+      }
+
+      try {
+        await fetch('http://localhost:3001/api/settings', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            setting_key: `holiday_${date}`,
+            setting_value: title,
+            description: `تعطیل رسمی - ${date}`
+          })
+        });
+        
+        document.getElementById('holidayDate').value = '';
+        document.getElementById('holidayTitle').value = '';
+        loadHolidays();
+        alert('تعطیل با موفقیت اضافه شد.');
+      } catch (error) {
+        console.error('Error adding holiday:', error);
+        alert('خطا در اضافه کردن تعطیل');
+      }
+    }
+
+    async function loadHolidays() {
+      try {
+        const response = await fetch('http://localhost:3001/api/settings');
+        const data = await response.json();
+        const holidays = [];
+        
+        data.data.forEach(setting => {
+          if (setting.setting_key.startsWith('holiday_')) {
+            const date = setting.setting_key.replace('holiday_', '');
+            holidays.push({ date, title: setting.setting_value });
+          }
+        });
+        
+        const tbody = document.getElementById('holidaysTable');
+        tbody.innerHTML = '';
+        
+        holidays.forEach((holiday, index) => {
+          const row = `
+            <tr>
+              <td>${holiday.date}</td>
+              <td>${holiday.title}</td>
+              <td>
+                <button class="btn btn-sm btn-danger" onclick="removeHoliday('${holiday.date}')">حذف</button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+      } catch (error) {
+        console.error('Error loading holidays:', error);
+        // Fallback to localStorage
+        const holidays = JSON.parse(localStorage.getItem('holidays') || '[]');
+        const tbody = document.getElementById('holidaysTable');
+        tbody.innerHTML = '';
+        
+        holidays.forEach((holiday, index) => {
+          const row = `
+            <tr>
+              <td>${holiday.date}</td>
+              <td>${holiday.title}</td>
+              <td>
+                <button class="btn btn-sm btn-danger" onclick="removeHoliday(${index})">حذف</button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+      }
+    }
+
+    async function removeHoliday(dateOrIndex) {
+      try {
+        if (typeof dateOrIndex === 'string') {
+          // API mode
+          await fetch(`http://localhost:3001/api/settings/holiday_${dateOrIndex}`, {
+            method: 'DELETE'
+          });
+          loadHolidays();
+        } else {
+          // localStorage fallback
+          const holidays = JSON.parse(localStorage.getItem('holidays') || '[]');
+          holidays.splice(dateOrIndex, 1);
+          localStorage.setItem('holidays', JSON.stringify(holidays));
+          loadHolidays();
+        }
+      } catch (error) {
+        console.error('Error removing holiday:', error);
+        alert('خطا در حذف تعطیل');
+      }
+    }
+
+    let currentDeviceCount = 1; // If you add device list, update this dynamically
+
+    function updateDeviceLockUI() {
+      const saveBtn = document.querySelector('button[onclick="saveDeviceSettings()"]');
+      if (saveBtn) {
+        if (!checkLimit('device', currentDeviceCount)) {
+          saveBtn.disabled = true;
+          saveBtn.classList.add('locked-feature');
+          if (!saveBtn.querySelector('.fa-lock')) {
+            const lockIcon = document.createElement('i');
+            lockIcon.className = 'fa fa-lock ms-1';
+            saveBtn.appendChild(lockIcon);
+          }
+          saveBtn.title = 'سقف تعداد دستگاه‌ها در سطح اشتراک فعلی پر شده است.';
+        } else {
+          saveBtn.disabled = false;
+          saveBtn.classList.remove('locked-feature');
+          const lock = saveBtn.querySelector('.fa-lock');
+          if (lock) lock.remove();
+          saveBtn.title = '';
+        }
+      }
+    }
+
+    async function saveDeviceSettings() {
+      if (!checkLimit('device', currentDeviceCount)) {
+        alert('سقف تعداد دستگاه‌ها در سطح اشتراک فعلی پر شده است. برای ارتقا با پشتیبانی تماس بگیرید.');
+        return;
+      }
+      const deviceSettings = {
+        deviceIP: document.getElementById('deviceIP').value,
+        devicePort: document.getElementById('devicePort').value,
+        deviceName: document.getElementById('deviceName').value,
+        deviceLocation: document.getElementById('deviceLocation').value
+      };
+
+      try {
+        // Save each setting individually
+        const settingKeys = Object.keys(deviceSettings);
+        for (const key of settingKeys) {
+          await fetch('http://localhost:3001/api/settings', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              setting_key: key,
+              setting_value: deviceSettings[key],
+              description: `تنظیمات دستگاه - ${key}`
+            })
+          });
+        }
+        
+        alert('تنظیمات دستگاه با موفقیت ذخیره شد.');
+      } catch (error) {
+        console.error('Error saving device settings:', error);
+        alert('خطا در ذخیره تنظیمات دستگاه');
+      }
+    }
+
+    document.getElementById('logoutBtn').onclick = function() {
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+    };
+
+    function loadSettings() {
+      fetch('/api/settings/all')
+        .then(res => res.json())
+        .then(data => {
+          const form = document.getElementById('settings-form');
+          form.innerHTML = Object.entries(data.data).map(([key, value]) => `
+            <div class="mb-3 row">
+              <label class="col-sm-4 col-form-label">${key}</label>
+              <div class="col-sm-6">
+                <input type="text" class="form-control" name="${key}" value="${value}">
+              </div>
+              <div class="col-sm-2">
+                <button type="button" class="btn btn-primary btn-sm" onclick="updateSetting('${key}')">ذخیره</button>
+              </div>
+            </div>
+          `).join('');
+        });
+    }
+
+    function updateSetting(key) {
+      const input = document.querySelector(`input[name='${key}']`);
+      fetch('/api/settings/' + key, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ value: input.value })
+      })
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('settings-msg').innerHTML = data.success ? '<span class="text-success">ذخیره شد</span>' : '<span class="text-danger">خطا</span>';
+        setTimeout(() => document.getElementById('settings-msg').innerHTML = '', 2000);
+      });
+    }
+  </script>
+</body>
+</html>

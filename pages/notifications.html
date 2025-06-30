@@ -1,0 +1,691 @@
+<!--
+=========================================================
+* اعلان‌ها - Argon Dashboard Style
+=========================================================
+-->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>اعلان‌ها - سیستم حضور و غیاب</title>
+  <link href="https://fonts.googleapis.com/css?family=Vazirmatn:400,700&display=swap" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <link href="../assets/css/argon-dashboard.custom-sidebar.css" rel="stylesheet" />
+  <style>
+    body { font-family: 'Vazirmatn', sans-serif; }
+    .notification-item {
+      border-left: 4px solid #5e72e4;
+      transition: all 0.3s ease;
+    }
+    .notification-item:hover {
+      background-color: #f8f9fa;
+    }
+    .notification-item.unread {
+      background-color: #e3f2fd;
+      border-left-color: #2196f3;
+    }
+    .notification-item.urgent {
+      border-left-color: #f44336;
+    }
+    .notification-item.warning {
+      border-left-color: #ff9800;
+    }
+    .notification-item.success {
+      border-left-color: #4caf50;
+    }
+    .card, .modal-content {
+      border-radius: 1rem !important;
+      box-shadow: 0 4px 24px 0 rgba(34, 41, 47, 0.08);
+    }
+    .card-header, .modal-header {
+      background: linear-gradient(90deg, #f8fafc 60%, #e9ecef 100%);
+      border-radius: 1rem 1rem 0 0 !important;
+      border-bottom: 1px solid #ececec;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .card-body, .modal-body {
+      background: #fff;
+      border-radius: 0 0 1rem 1rem !important;
+      padding: 1.5rem;
+    }
+    .btn-primary, .btn-success, .btn-outline-primary, .btn-outline-secondary, .btn-secondary {
+      border-radius: 0.5rem;
+      font-weight: 500;
+      box-shadow: 0 2px 8px 0 rgba(94, 114, 228, 0.08);
+      transition: all 0.2s;
+    }
+    .btn-primary:hover, .btn-success:hover, .btn-outline-primary:hover, .btn-outline-secondary:hover, .btn-secondary:hover {
+      filter: brightness(0.95);
+      box-shadow: 0 4px 16px 0 rgba(94, 114, 228, 0.12);
+    }
+    .form-control, .form-select {
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+    }
+    .table {
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 2px 8px 0 rgba(34, 41, 47, 0.04);
+    }
+    .table th, .table td {
+      vertical-align: middle;
+      font-size: 0.98rem;
+    }
+    .modal-header .btn-close {
+      margin: 0;
+      padding: 0.5rem 0.75rem;
+      background: #f8fafc;
+      border-radius: 0.5rem;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .modal-header .btn-close:hover {
+      opacity: 1;
+    }
+    @media (max-width: 768px) {
+      .card-body, .modal-body {
+        padding: 1rem;
+      }
+      .modal-dialog {
+        margin: 1rem auto;
+      }
+    }
+    .sidenav {
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      border: 1px solid #f8f9fa;
+      transition: all 0.2s ease;
+    }
+    .sidenav-header {
+      background: #f8f9fa;
+      border-bottom: 1px solid #e9ecef;
+      padding: 1.25rem 1rem;
+      margin: -1rem -1rem 1rem -1rem;
+    }
+    .sidenav-header .navbar-brand {
+      color: #495057 !important;
+      font-weight: 600;
+    }
+    .nav-item {
+      margin: 0.125rem 0;
+    }
+    .nav-link {
+      border-radius: 0.5rem;
+      margin: 0 0.25rem;
+      padding: 0.75rem 1rem;
+      transition: all 0.2s ease;
+      color: #6c757d !important;
+      font-weight: 500;
+    }
+    .nav-link:hover {
+      background: #f8f9fa;
+      color: #495057 !important;
+      transform: none;
+    }
+    .nav-link.active {
+      background: #e9ecef;
+      color: #212529 !important;
+      font-weight: 600;
+    }
+    .icon-shape {
+      width: 1.75rem;
+      height: 1.75rem;
+      border-radius: 0.375rem;
+      background: #f8f9fa;
+      color: #6c757d;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-link:hover .icon-shape {
+      background: #e9ecef;
+      color: #495057;
+    }
+    .nav-link.active .icon-shape {
+      background: #dee2e6;
+      color: #212529;
+    }
+    .nav-link-text {
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .nav-link.active .nav-link-text {
+      font-weight: 600;
+    }
+    /* رنگ‌های آیکون‌ها */
+    .nav-link .icon-shape i.fa-tachometer-alt {
+      color: #17a2b8 !important;
+    }
+    .nav-link .icon-shape i.fa-users {
+      color: #28a745 !important;
+    }
+    .nav-link .icon-shape i.fa-clock {
+      color: #ffc107 !important;
+    }
+    .nav-link .icon-shape i.fa-calendar-times {
+      color: #dc3545 !important;
+    }
+    .nav-link .icon-shape i.fa-chart-bar {
+      color: #6f42c1 !important;
+    }
+    .nav-link .icon-shape i.fa-bell {
+      color: #fd7e14 !important;
+    }
+    .nav-link .icon-shape i.fa-cog {
+      color: #6c757d !important;
+    }
+    /* حالت hover */
+    .nav-link:hover .icon-shape i.fa-tachometer-alt {
+      color: #138496 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-users {
+      color: #1e7e34 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-clock {
+      color: #e0a800 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-calendar-times {
+      color: #c82333 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-chart-bar {
+      color: #5a32a3 !important;
+    }
+    .nav-link:hover .icon-shape i.fa-bell {
+      color: #e8690b !important;
+    }
+    .nav-link:hover .icon-shape i.fa-cog {
+      color: #545b62 !important;
+    }
+    /* حالت active */
+    .nav-link.active .icon-shape i.fa-tachometer-alt {
+      color: #0f6674 !important;
+    }
+    .nav-link.active .icon-shape i.fa-users {
+      color: #155724 !important;
+    }
+    .nav-link.active .icon-shape i.fa-clock {
+      color: #b8860b !important;
+    }
+    .nav-link.active .icon-shape i.fa-calendar-times {
+      color: #a71e2a !important;
+    }
+    .nav-link.active .icon-shape i.fa-chart-bar {
+      color: #4a1d96 !important;
+    }
+    .nav-link.active .icon-shape i.fa-bell {
+      color: #d63384 !important;
+    }
+    .nav-link.active .icon-shape i.fa-cog {
+      color: #495057 !important;
+    }
+  </style>
+</head>
+
+<body class="g-sidenav-show rtl bg-gray-100">
+  <div class="min-height-300 bg-dark position-absolute w-100"></div>
+  <div id="sidebar-container"></div>
+  
+  <!-- Load sidebar manager -->
+  <script src="../assets/js/sidebar-manager.js"></script>
+  
+  <main class="main-content position-relative border-radius-lg">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 ">
+            <li class="breadcrumb-item text-sm ps-2"><a class="opacity-5 text-white" href="dashboard.html">صفحات</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">اعلان‌ها</li>
+          </ol>
+          <h6 class="font-weight-bolder text-white mb-0">مدیریت اعلان‌ها</h6>
+        </nav>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <div class="d-flex justify-content-between align-items-center">
+                <h6>اعلان‌های سیستم</h6>
+                <div>
+                  <button class="btn btn-success me-2" onclick="markAllAsRead()">علامت‌گذاری همه به عنوان خوانده شده</button>
+                  <button class="btn btn-primary" onclick="showAddNotificationModal()">ارسال اعلان جدید</button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row mb-3">
+                <div class="col-md-3">
+                  <select class="form-control" id="filterType" onchange="filterNotifications()">
+                    <option value="">همه انواع</option>
+                    <option value="info">اطلاعاتی</option>
+                    <option value="warning">هشدار</option>
+                    <option value="urgent">فوری</option>
+                    <option value="success">موفقیت</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <select class="form-control" id="filterStatus" onchange="filterNotifications()">
+                    <option value="">همه وضعیت‌ها</option>
+                    <option value="unread">خوانده نشده</option>
+                    <option value="read">خوانده شده</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <input type="text" class="form-control" id="searchNotifications" placeholder="جستجو در اعلان‌ها..." onkeyup="filterNotifications()">
+                </div>
+              </div>
+              <div id="notificationsList">
+                <!-- اعلان‌ها اینجا نمایش داده می‌شوند -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Notification Modal -->
+    <div class="modal fade" id="addNotificationModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">ارسال اعلان جدید</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form id="addNotificationForm">
+              <div class="form-group mb-3">
+                <label>عنوان اعلان *</label>
+                <input type="text" class="form-control" id="notificationTitle" required>
+              </div>
+              <div class="form-group mb-3">
+                <label>نوع اعلان *</label>
+                <select class="form-control" id="notificationType" required>
+                  <option value="">انتخاب کنید</option>
+                  <option value="info">اطلاعاتی</option>
+                  <option value="warning">هشدار</option>
+                  <option value="urgent">فوری</option>
+                  <option value="success">موفقیت</option>
+                </select>
+              </div>
+              <div class="form-group mb-3">
+                <label>متن اعلان *</label>
+                <textarea class="form-control" id="notificationMessage" rows="4" required></textarea>
+              </div>
+              <div class="form-group mb-3">
+                <label>گیرندگان</label>
+                <select class="form-control" id="notificationRecipients">
+                  <option value="all">همه کارمندان</option>
+                  <option value="managers">فقط مدیران</option>
+                  <option value="specific">کارمندان خاص</option>
+                </select>
+              </div>
+              <div class="form-group mb-3" id="specificRecipientsDiv" style="display: none;">
+                <label>انتخاب کارمندان خاص</label>
+                <select class="form-control" id="specificRecipients" multiple>
+                  <!-- کارمندان اینجا بارگذاری می‌شوند -->
+                </select>
+              </div>
+              <div class="d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+                <button type="submit" class="btn btn-primary">ارسال اعلان</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer pt-3">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6 mb-lg-0 mb-4">
+            <div class="copyright text-center text-sm text-muted text-lg-end">
+              © <script>document.write(new Date().getFullYear())</script>,
+              ساخته شده با <i class="fa fa-heart"></i> برای سیستم حضور و غیاب
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Core JS Files -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+  <script src="../assets/js/subscription-system.js"></script>
+
+  <script>
+    if (!localStorage.getItem('token')) {
+      window.location.href = 'login.html';
+    }
+
+    let allUsers = [];
+    let allNotifications = [];
+    let currentNotificationCount = 0;
+
+    // Load data on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      loadUsers();
+      loadNotifications();
+      setupNotificationRecipients();
+      updateUIForSubscription();
+    });
+
+    // Add notification form submission
+    document.getElementById('addNotificationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      addNotification();
+    });
+
+    // Setup notification recipients
+    document.getElementById('notificationRecipients').addEventListener('change', function() {
+      const specificDiv = document.getElementById('specificRecipientsDiv');
+      if (this.value === 'specific') {
+        specificDiv.style.display = 'block';
+      } else {
+        specificDiv.style.display = 'none';
+      }
+    });
+
+    function showAddNotificationModal() {
+      var myModal = new bootstrap.Modal(document.getElementById('addNotificationModal'));
+      myModal.show();
+    }
+
+    function setupNotificationRecipients() {
+      const select = document.getElementById('specificRecipients');
+      select.innerHTML = '';
+      
+      allUsers.forEach(user => {
+        const option = document.createElement('option');
+        option.value = user.userId;
+        option.textContent = `${user.name} (${user.userId})`;
+        select.appendChild(option);
+      });
+    }
+
+    function getNotificationTypeText(type) {
+      const types = {
+        'info': 'اطلاعاتی',
+        'warning': 'هشدار',
+        'error': 'خطا',
+        'success': 'موفقیت'
+      };
+      return types[type] || type;
+    }
+
+    function getNotificationTypeIcon(type) {
+      const icons = {
+        'info': 'fas fa-info-circle text-info',
+        'warning': 'fas fa-exclamation-triangle text-warning',
+        'error': 'fas fa-exclamation-circle text-danger',
+        'success': 'fas fa-check-circle text-success'
+      };
+      return icons[type] || 'fas fa-bell';
+    }
+
+    async function addNotification() {
+      const title = document.getElementById('notificationTitle').value;
+      const type = document.getElementById('notificationType').value;
+      const message = document.getElementById('notificationMessage').value;
+      const recipients = document.getElementById('notificationRecipients').value;
+      const specificRecipients = Array.from(document.getElementById('specificRecipients').selectedOptions).map(opt => opt.value);
+
+      if (!title || !type || !message) {
+        alert('لطفاً تمام فیلدهای ضروری را پر کنید.');
+        return;
+      }
+
+      try {
+        // If specific recipients are selected, create notification for each
+        if (recipients === 'specific' && specificRecipients.length > 0) {
+          for (const userId of specificRecipients) {
+            await fetch('http://localhost:3001/api/notifications', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                user_id: userId,
+                title,
+                message,
+                type
+              })
+            });
+          }
+        } else {
+          // Create general notification
+          await fetch('http://localhost:3001/api/notifications', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              user_id: null, // null means general notification
+              title,
+              message,
+              type
+            })
+          });
+        }
+
+        document.getElementById('addNotificationForm').reset();
+        document.getElementById('specificRecipientsDiv').style.display = 'none';
+        var myModal = bootstrap.Modal.getInstance(document.getElementById('addNotificationModal'));
+        myModal.hide();
+        loadNotifications();
+        alert('اعلان با موفقیت ارسال شد.');
+      } catch (error) {
+        console.error('Error adding notification:', error);
+        alert('خطا در ارسال اعلان');
+      }
+    }
+
+    async function loadUsers() {
+      try {
+        const response = await fetch('http://localhost:3001/api/data?page=1&limit=1000');
+        const data = await response.json();
+        allUsers = data.users.data || [];
+        setupNotificationRecipients();
+      } catch (error) {
+        console.error('Failed to load users:', error);
+      }
+    }
+
+    async function loadNotifications() {
+      try {
+        const response = await fetch('http://localhost:3001/api/notifications');
+        const data = await response.json();
+        allNotifications = data.data || [];
+        currentNotificationCount = allNotifications.length;
+        displayNotifications(allNotifications);
+        // Lock add notification button if limit reached
+        const addBtn = document.querySelector('button[onclick="showAddNotificationModal()"]');
+        if (addBtn) {
+          if (!checkLimit('notification', currentNotificationCount)) {
+            addBtn.disabled = true;
+            addBtn.classList.add('locked-feature');
+            if (!addBtn.querySelector('.fa-lock')) {
+              const lockIcon = document.createElement('i');
+              lockIcon.className = 'fa fa-lock ms-1';
+              addBtn.appendChild(lockIcon);
+            }
+            addBtn.title = 'سقف تعداد اعلان‌ها در سطح فعلی پر شده است.';
+          } else {
+            addBtn.disabled = false;
+            addBtn.classList.remove('locked-feature');
+            const lock = addBtn.querySelector('.fa-lock');
+            if (lock) lock.remove();
+            addBtn.title = '';
+          }
+        }
+      } catch (error) {
+        console.error('Failed to load notifications:', error);
+        alert('خطا در بارگذاری اعلان‌ها');
+      }
+    }
+
+    function displayNotifications(notifications) {
+      const container = document.getElementById('notificationsList');
+      
+      if (notifications.length === 0) {
+        container.innerHTML = '<div class="text-center text-muted py-4">هیچ اعلانی یافت نشد.</div>';
+        return;
+      }
+
+      container.innerHTML = '';
+      notifications.forEach(notification => {
+        const isUnread = !notification.is_read;
+        const notificationDiv = document.createElement('div');
+        notificationDiv.className = `notification-item p-3 mb-3 border rounded ${isUnread ? 'unread' : ''} ${notification.type}`;
+        notificationDiv.innerHTML = `
+          <div class="d-flex justify-content-between align-items-start">
+            <div class="d-flex align-items-start">
+              <i class="${getNotificationTypeIcon(notification.type)} me-3 mt-1" style="font-size: 1.2rem;"></i>
+              <div>
+                <h6 class="mb-1">${notification.title}</h6>
+                <p class="mb-2 text-muted">${notification.message}</p>
+                <div class="d-flex align-items-center text-sm text-muted">
+                  <span class="me-3">
+                    <i class="fas fa-tag me-1"></i>
+                    ${getNotificationTypeText(notification.type)}
+                  </span>
+                  <span class="me-3">
+                    <i class="fas fa-users me-1"></i>
+                    ${notification.user_id ? 'کارمند خاص' : 'همه کارمندان'}
+                  </span>
+                  <span>
+                    <i class="fas fa-clock me-1"></i>
+                    ${formatDate(notification.created_at)}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex gap-2">
+              ${isUnread ? 
+                `<button class="btn btn-sm btn-outline-primary" onclick="markAsRead(${notification.id})">علامت‌گذاری به عنوان خوانده شده</button>` : 
+                `<span class="badge bg-success">خوانده شده</span>`
+              }
+              <button class="btn btn-sm btn-danger" onclick="deleteNotification(${notification.id})">حذف</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(notificationDiv);
+      });
+    }
+
+    function getRecipientsText(recipients, specificRecipients) {
+      if (recipients === 'specific') {
+        return `${specificRecipients.length} کارمند انتخاب شده`;
+      } else if (recipients === 'all') {
+        return 'همه کارمندان';
+      } else {
+        return 'نامشخص';
+      }
+    }
+
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('fa-IR') + ' ' + date.toLocaleTimeString('fa-IR');
+    }
+
+    async function markAsRead(notificationId) {
+      try {
+        const response = await fetch(`http://localhost:3001/api/notifications/${notificationId}/read`, {
+          method: 'PUT'
+        });
+        
+        if (response.ok) {
+          loadNotifications();
+        } else {
+          alert('خطا در علامت‌گذاری اعلان');
+        }
+      } catch (error) {
+        console.error('Error marking notification as read:', error);
+        alert('خطا در ارتباط با سرور');
+      }
+    }
+
+    async function deleteNotification(notificationId) {
+      if (confirm('آیا از حذف این اعلان اطمینان دارید؟')) {
+        try {
+          const response = await fetch(`http://localhost:3001/api/notifications/${notificationId}`, {
+            method: 'DELETE'
+          });
+          
+          if (response.ok) {
+            loadNotifications();
+            alert('اعلان با موفقیت حذف شد.');
+          } else {
+            alert('خطا در حذف اعلان');
+          }
+        } catch (error) {
+          console.error('Error deleting notification:', error);
+          alert('خطا در ارتباط با سرور');
+        }
+      }
+    }
+
+    function markAllAsRead() {
+      const notifications = JSON.parse(localStorage.getItem('notifications') || '[]');
+      notifications.forEach(notification => {
+        if (notification.readBy.length === 0) {
+          notification.readBy.push('admin');
+        }
+      });
+      localStorage.setItem('notifications', JSON.stringify(notifications));
+      loadNotifications();
+      alert('همه اعلان‌ها به عنوان خوانده شده علامت‌گذاری شدند.');
+    }
+
+    function filterNotifications() {
+      const typeFilter = document.getElementById('filterType').value;
+      const statusFilter = document.getElementById('filterStatus').value;
+      const searchTerm = document.getElementById('searchNotifications').value.toLowerCase();
+
+      let filteredNotifications = allNotifications;
+
+      // Filter by type
+      if (typeFilter) {
+        filteredNotifications = filteredNotifications.filter(n => n.type === typeFilter);
+      }
+
+      // Filter by status
+      if (statusFilter) {
+        if (statusFilter === 'unread') {
+          filteredNotifications = filteredNotifications.filter(n => n.readBy.length === 0);
+        } else if (statusFilter === 'read') {
+          filteredNotifications = filteredNotifications.filter(n => n.readBy.length > 0);
+        }
+      }
+
+      // Filter by search term
+      if (searchTerm) {
+        filteredNotifications = filteredNotifications.filter(n => 
+          n.title.toLowerCase().includes(searchTerm) || 
+          n.message.toLowerCase().includes(searchTerm)
+        );
+      }
+
+      displayNotifications(filteredNotifications);
+    }
+  </script>
+</body>
+</html>

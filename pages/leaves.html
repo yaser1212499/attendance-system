@@ -1,0 +1,620 @@
+<!--
+=========================================================
+* مرخصی‌ها - Argon Dashboard Style
+=========================================================
+-->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <title>مرخصی‌ها - سیستم حضور و غیاب</title>
+  <link href="https://fonts.googleapis.com/css?family=Vazirmatn:400,700&display=swap" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="https://demos.creative-tim.com/argon-dashboard-pro/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" />
+  <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.1.0" rel="stylesheet" />
+  <link href="../assets/css/argon-dashboard.custom-sidebar.css" rel="stylesheet" />
+  <style>
+    body { font-family: 'Vazirmatn', sans-serif; }
+    .status-pending { color: #f39c12; }
+    .status-approved { color: #27ae60; }
+    .status-rejected { color: #e74c3c; }
+    .card, .modal-content {
+      border-radius: 1rem !important;
+    }
+    .card-header, .modal-header {
+      border-radius: 1rem 1rem 0 0 !important;
+      border-bottom: 1px solid #ececec;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+    .card-body, .modal-body {
+      background: #fff;
+      border-radius: 0 0 1rem 1rem !important;
+      padding: 0.7rem;
+    }
+    .btn-primary, .btn-success, .btn-outline-primary, .btn-outline-secondary, .btn-secondary {
+      border-radius: 0.5rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover, .btn-success:hover, .btn-outline-primary:hover, .btn-outline-secondary:hover, .btn-secondary:hover {
+      filter: brightness(0.95);
+    }
+    .form-control, .form-select {
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+    }
+    .table {
+      border-radius: 1rem;
+      overflow: hidden;
+      background: #fff;
+    }
+    .table th, .table td {
+      vertical-align: middle;
+      font-size: 0.9rem;
+      padding: 0.25rem 0.3rem;
+    }
+    .modal-header .btn-close {
+      margin: 0;
+      padding: 0.5rem 0.75rem;
+      background: #f8fafc;
+      border-radius: 0.5rem;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .modal-header .btn-close:hover {
+      opacity: 1;
+    }
+    @media (max-width: 768px) {
+      .card-body, .modal-body {
+        padding: 1rem;
+      }
+      .modal-dialog {
+        margin: 1rem auto;
+      }
+    }
+    .main-fixed-container {
+      max-width: 850px;
+      margin: 0 0 0 auto;
+      padding: 0 4px;
+      width: 100%;
+      margin-right: 260px;
+    }
+    .table-responsive { overflow-x: auto; }
+    body, html { overflow-x: hidden !important; }
+    .container-fluid, .row { margin: 0 !important; padding: 0 !important; }
+    .btn, .btn-primary, .btn-success, .btn-outline-primary, .btn-outline-secondary, .btn-secondary { font-size: 0.92rem; padding: 0.25rem 0.7rem; }
+  </style>
+</head>
+
+<body class="g-sidenav-show rtl bg-gray-100">
+  <div class="min-height-300 bg-dark position-absolute w-100"></div>
+  <div id="sidebar-container"></div>
+  
+  <!-- Load sidebar manager -->
+  <script src="../assets/js/sidebar-manager.js"></script>
+  
+  <main class="main-content position-relative border-radius-lg">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl " id="navbarBlur" data-scroll="false">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 ">
+            <li class="breadcrumb-item text-sm ps-2"><a class="opacity-5 text-white" href="dashboard.html">صفحات</a></li>
+            <li class="breadcrumb-item text-sm text-white active" aria-current="page">مرخصی‌ها</li>
+          </ol>
+          <h6 class="font-weight-bolder text-white mb-0">مدیریت مرخصی‌ها</h6>
+        </nav>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+
+    <div class="container-fluid py-4">
+      <div class="row">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0">
+              <div class="d-flex justify-content-between align-items-center">
+                <h6>درخواست مرخصی جدید</h6>
+                <button class="btn btn-primary" onclick="showAddLeaveModal()">درخواست مرخصی</button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th>نام کارمند</th>
+                      <th>نوع مرخصی</th>
+                      <th>تاریخ شروع</th>
+                      <th>تاریخ پایان</th>
+                      <th>تعداد روزها</th>
+                      <th>دلیل</th>
+                      <th>وضعیت</th>
+                      <th>عملیات</th>
+                    </tr>
+                  </thead>
+                  <tbody id="leavesTable">
+                    <!-- مرخصی‌ها اینجا نمایش داده می‌شوند -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Leave Modal -->
+    <div class="modal fade" id="addLeaveModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">درخواست مرخصی جدید</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form id="leaveForm">
+              <div class="mb-3">
+                <label class="form-label">کاربر</label>
+                <select class="form-select" id="user_id" required></select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">نوع مرخصی</label>
+                <select class="form-select" id="type" required>
+                  <option value="annual">استحقاقی</option>
+                  <option value="sick">بیماری</option>
+                  <option value="emergency">اضطراری</option>
+                  <option value="maternity">زایمان</option>
+                  <option value="other">سایر</option>
+                </select>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">تاریخ شروع</label>
+                  <input type="date" class="form-control" id="start_date" required />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">تاریخ پایان</label>
+                  <input type="date" class="form-control" id="end_date" required />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">ساعت شروع (اختیاری)</label>
+                  <input type="time" class="form-control" id="hour_from" />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label">ساعت پایان (اختیاری)</label>
+                  <input type="time" class="form-control" id="hour_to" />
+                </div>
+
+              </div>
+              <div class="mb-3">
+                <label class="form-label">توضیح</label>
+                <textarea class="form-control" id="reason" rows="2"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">ثبت مرخصی</button>
+              <div id="formMsg" class="mt-2"></div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review Leave Modal -->
+    <div class="modal fade" id="reviewLeaveModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">بررسی درخواست مرخصی</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div id="reviewLeaveDetails">
+              <!-- جزئیات مرخصی اینجا نمایش داده می‌شود -->
+            </div>
+            <hr>
+            <div class="form-group mb-3">
+              <label>نظر مدیر</label>
+              <textarea class="form-control" id="managerComment" rows="3" placeholder="نظر خود را بنویسید..."></textarea>
+            </div>
+            <div class="d-flex justify-content-end gap-2">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+              <button type="button" class="btn btn-danger" onclick="rejectLeave()">رد درخواست</button>
+              <button type="button" class="btn btn-success" onclick="approveLeave()">تایید درخواست</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer pt-3">
+      <div class="container-fluid">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6 mb-lg-0 mb-4">
+            <div class="copyright text-center text-sm text-muted text-lg-end">
+              © <script>document.write(new Date().getFullYear())</script>,
+              ساخته شده با <i class="fa fa-heart"></i> برای سیستم حضور و غیاب
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Core JS Files -->
+  <script src="../assets/js/core/popper.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+  <script src="../assets/js/subscription-system.js"></script>
+  <script>
+    if (!localStorage.getItem('token')) {
+      window.location.href = 'login.html';
+    }
+
+    // حذف اسکرول سایدبار در صفحه مرخصی‌ها
+    document.addEventListener('DOMContentLoaded', function() {
+      const sidenav = document.querySelector('.sidenav');
+      if (sidenav) {
+        sidenav.style.overflowY = 'hidden';
+      }
+    });
+
+    let allUsers = [];
+    let allLeaves = [];
+    let currentLeaveId = null;
+    let currentLeaveCount = 0;
+
+    // Load data on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      loadUsers();
+      loadLeaves();
+      updateUIForSubscription();
+    });
+
+    function showAddLeaveModal() {
+      populateEmployeeSelect();
+      var myModal = new bootstrap.Modal(document.getElementById('addLeaveModal'));
+      myModal.show();
+    }
+
+    function showReviewLeaveModal(leaveId) {
+      currentLeaveId = leaveId;
+      const leave = allLeaves.find(l => l.id === leaveId);
+      
+      if (!leave) return;
+      
+      const user = allUsers.find(u => u.userId === leave.user_id);
+      
+      document.getElementById('reviewLeaveDetails').innerHTML = `
+        <div class="row">
+          <div class="col-md-6">
+            <strong>کارمند:</strong> ${user ? user.name : 'نامشخص'}
+          </div>
+          <div class="col-md-6">
+            <strong>نوع مرخصی:</strong> ${getLeaveTypeText(leave.type)}
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <strong>تاریخ شروع:</strong> ${leave.start_date}
+          </div>
+          <div class="col-md-6">
+            <strong>تاریخ پایان:</strong> ${leave.end_date}
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <strong>تعداد روزها:</strong> ${leave.days} روز
+          </div>
+          <div class="col-md-6">
+            <strong>وضعیت:</strong> ${getStatusText(leave.status)}
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-12">
+            <strong>دلیل:</strong> ${leave.reason || 'توضیحی ارائه نشده'}
+          </div>
+        </div>
+      `;
+      
+      var myModal = new bootstrap.Modal(document.getElementById('reviewLeaveModal'));
+      myModal.show();
+    }
+
+    function getLeaveTypeText(type) {
+      const types = {
+        'annual': 'مرخصی سالانه',
+        'sick': 'مرخصی استعلاجی',
+        'emergency': 'مرخصی اضطراری',
+        'maternity': 'مرخصی زایمان',
+        'other': 'سایر'
+      };
+      return types[type] || type;
+    }
+
+    function getStatusText(status) {
+      const statuses = {
+        'pending': 'در انتظار بررسی',
+        'approved': 'تایید شده',
+        'rejected': 'رد شده'
+      };
+      return statuses[status] || status;
+    }
+
+    function getStatusBadge(status) {
+      const badges = {
+        'pending': '<span class="badge bg-warning status-pending">در انتظار</span>',
+        'approved': '<span class="badge bg-success status-approved">تایید شده</span>',
+        'rejected': '<span class="badge bg-danger status-rejected">رد شده</span>'
+      };
+      return badges[status] || status;
+    }
+
+    async function addLeave() {
+      const userId = document.getElementById('user_id').value;
+      const type = document.getElementById('type').value;
+      const startDate = document.getElementById('start_date').value;
+      const endDate = document.getElementById('end_date').value;
+      const hourFrom = document.getElementById('hour_from').value;
+      const hourTo = document.getElementById('hour_to').value;
+      const reason = document.getElementById('reason').value;
+
+      if (!userId || !type || !startDate || !endDate) {
+        alert('لطفاً تمام فیلدهای ضروری را پر کنید.');
+        return;
+      }
+
+      if (new Date(startDate) > new Date(endDate)) {
+        alert('تاریخ شروع نمی‌تواند بعد از تاریخ پایان باشد.');
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:3001/api/leaves', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            user_id: userId,
+            type,
+            start_date: startDate,
+            end_date: endDate,
+            hour_from: hourFrom,
+            hour_to: hourTo,
+            reason
+          })
+        });
+
+        const result = await response.json();
+        
+        if (result.success) {
+          document.getElementById('leaveForm').reset();
+          var myModal = bootstrap.Modal.getInstance(document.getElementById('addLeaveModal'));
+          myModal.hide();
+          loadLeaves();
+          alert(result.message);
+        } else {
+          alert('خطا در ثبت درخواست مرخصی: ' + result.error);
+        }
+      } catch (error) {
+        console.error('Error adding leave:', error);
+        alert('خطا در ارتباط با سرور');
+      }
+    }
+
+    function calculateDays(startDate, endDate) {
+      const start = new Date(startDate);
+      const end = new Date(endDate);
+      const diffTime = Math.abs(end - start);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays + 1; // شامل روز شروع
+    }
+
+    async function loadUsers() {
+      try {
+        const response = await fetch('http://localhost:3001/api/data?page=1&limit=1000');
+        const data = await response.json();
+        allUsers = data.users.data || [];
+      } catch (error) {
+        console.error('Failed to load users:', error);
+      }
+    }
+
+    function populateEmployeeSelect() {
+      const select = document.getElementById('user_id');
+      select.innerHTML = '<option value="">انتخاب کنید</option>';
+      
+      allUsers.forEach(user => {
+        const option = document.createElement('option');
+        option.value = user.userId;
+        option.textContent = `${user.name} (${user.userId})`;
+        select.appendChild(option);
+      });
+    }
+
+    async function loadLeaves() {
+      try {
+        const response = await fetch('http://localhost:3001/api/leaves');
+        const data = await response.json();
+        allLeaves = data.data || [];
+        
+        const tbody = document.getElementById('leavesTable');
+        tbody.innerHTML = '';
+
+        if (allLeaves.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">هیچ درخواست مرخصی ثبت نشده است.</td></tr>';
+          return;
+        }
+
+        allLeaves.forEach((leave) => {
+          const row = `
+            <tr>
+              <td>${leave.user_name || 'نامشخص'}</td>
+              <td>${getLeaveTypeText(leave.type)}</td>
+              <td>${leave.start_date}</td>
+              <td>${leave.end_date}</td>
+              <td>${leave.hour_from || '-'}</td>
+              <td>${leave.hour_to || '-'}</td>
+              <td>${leave.days} روز</td>
+              <td>${getStatusBadge(leave.status)}</td>
+              <td>
+                ${leave.status === 'pending' ? 
+                  `<button class="btn btn-sm btn-primary" onclick="showReviewLeaveModal(${leave.id})">بررسی</button>` : 
+                  `<button class="btn btn-sm btn-info" onclick="showReviewLeaveModal(${leave.id})">مشاهده</button>`
+                }
+                <button class="btn btn-sm btn-danger" onclick="deleteLeave(${leave.id})">حذف</button>
+              </td>
+            </tr>
+          `;
+          tbody.innerHTML += row;
+        });
+      } catch (error) {
+        console.error('Failed to load leaves:', error);
+        alert('خطا در بارگذاری درخواست‌های مرخصی');
+      }
+    }
+
+    async function approveLeave() {
+      const comment = document.getElementById('managerComment').value;
+      
+      try {
+        const response = await fetch(`http://localhost:3001/api/leaves/${currentLeaveId}/review`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            status: 'approved',
+            manager_comment: comment
+          })
+        });
+
+        const result = await response.json();
+        
+        if (result.success) {
+          var myModal = bootstrap.Modal.getInstance(document.getElementById('reviewLeaveModal'));
+          myModal.hide();
+          loadLeaves();
+          alert(result.message);
+        } else {
+          alert('خطا در تایید درخواست: ' + result.error);
+        }
+      } catch (error) {
+        console.error('Error approving leave:', error);
+        alert('خطا در ارتباط با سرور');
+      }
+    }
+
+    async function rejectLeave() {
+      const comment = document.getElementById('managerComment').value;
+      
+      try {
+        const response = await fetch(`http://localhost:3001/api/leaves/${currentLeaveId}/review`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            status: 'rejected',
+            manager_comment: comment
+          })
+        });
+
+        const result = await response.json();
+        
+        if (result.success) {
+          var myModal = bootstrap.Modal.getInstance(document.getElementById('reviewLeaveModal'));
+          myModal.hide();
+          loadLeaves();
+          alert(result.message);
+        } else {
+          alert('خطا در رد درخواست: ' + result.error);
+        }
+      } catch (error) {
+        console.error('Error rejecting leave:', error);
+        alert('خطا در ارتباط با سرور');
+      }
+    }
+
+    async function deleteLeave(leaveId) {
+      if (confirm('آیا از حذف این درخواست مرخصی اطمینان دارید؟')) {
+        try {
+          const response = await fetch(`http://localhost:3001/api/leaves/${leaveId}`, {
+            method: 'DELETE'
+          });
+          
+          if (response.ok) {
+            loadLeaves();
+            alert('درخواست مرخصی با موفقیت حذف شد.');
+          } else {
+            alert('خطا در حذف درخواست مرخصی');
+          }
+        } catch (error) {
+          console.error('Error deleting leave:', error);
+          alert('خطا در ارتباط با سرور');
+        }
+      }
+    }
+
+    // افزودن event listener برای فرم ثبت مرخصی
+    document.getElementById('leaveForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      addLeave();
+    });
+
+    async function fetchLeaves() {
+      // فرض: API یا منبع داده مرخصی‌ها
+      const response = await fetch('http://localhost:3001/api/leaves');
+      const data = await response.json();
+      const leaves = data.data || [];
+      currentLeaveCount = leaves.length;
+      // ... existing code ...
+      // Lock add leave button if limit reached
+      const addBtn = document.querySelector('button[onclick="showAddLeaveModal()"]');
+      if (addBtn) {
+        if (!checkLimit('leave', currentLeaveCount)) {
+          addBtn.disabled = true;
+          addBtn.classList.add('locked-feature');
+          if (!addBtn.querySelector('.fa-lock')) {
+            const lockIcon = document.createElement('i');
+            lockIcon.className = 'fa fa-lock ms-1';
+            addBtn.appendChild(lockIcon);
+          }
+          addBtn.title = 'سقف تعداد مرخصی‌ها در سطح فعلی پر شده است.';
+        } else {
+          addBtn.disabled = false;
+          addBtn.classList.remove('locked-feature');
+          const lock = addBtn.querySelector('.fa-lock');
+          if (lock) lock.remove();
+          addBtn.title = '';
+        }
+      }
+    }
+
+    // فراخوانی fetchLeaves در بارگذاری صفحه
+    if (typeof window !== 'undefined') {
+      if (document.readyState === 'loading') {
+        window.addEventListener('DOMContentLoaded', fetchLeaves);
+      } else {
+        fetchLeaves();
+      }
+    }
+
+    document.getElementById('logoutBtn').onclick = function() {
+      localStorage.removeItem('token');
+      window.location.href = 'login.html';
+    };
+  </script>
+</body>
+</html> 
